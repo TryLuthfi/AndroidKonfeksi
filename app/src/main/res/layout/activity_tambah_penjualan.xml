@@ -94,7 +94,15 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -119,7 +127,16 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -151,7 +168,17 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:text="TUNAI"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -176,7 +203,16 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -207,7 +243,16 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -233,7 +278,16 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -264,7 +318,16 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -289,7 +352,16 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="13sp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -313,7 +385,17 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="10sp"
                     android:layout_weight="1"
-                    android:background="@drawable/formshape"></LinearLayout>
+                    android:background="@drawable/formshape">
+
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="15sp"
+                        android:text="Cash"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -334,7 +416,17 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="10sp"
                     android:layout_weight="1"
-                    android:background="@drawable/formshape"></LinearLayout>
+                    android:background="@drawable/formshape">
+
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="15sp"
+                        android:text="Cash dan Debit"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -361,10 +453,10 @@
                 android:background="@drawable/formshape">
 
                 <TextView
-                    android:layout_marginLeft="20sp"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:text="Search"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_vertical"
                     android:textSize="19sp"
                     android:textColor="#685F5F"
                     android:layout_height="wrap_content" />
