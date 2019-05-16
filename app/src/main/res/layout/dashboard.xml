@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         android:background="#4E4848">
 
 
@@ -35,6 +35,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/penjualan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
