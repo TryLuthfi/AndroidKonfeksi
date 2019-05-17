@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 public class DashBoard extends AppCompatActivity {
     private LinearLayout penjualan;
+    private LinearLayout pembelian;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +16,18 @@ public class DashBoard extends AppCompatActivity {
         setContentView(R.layout.dashboard);
 
         penjualan = findViewById(R.id.penjualan);
+        pembelian = findViewById(R.id.pembelian);
         penjualan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TambahPenjualan.class);
+                startActivity(intent);
+            }
+        });
+        pembelian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TambahPembelian.class);
                 startActivity(intent);
             }
         });
