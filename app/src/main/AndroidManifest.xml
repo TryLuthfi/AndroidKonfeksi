@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TambahPembelian"></activity>
+        <activity android:name=".notakecil"></activity>
+        <activity android:name=".TambahPembelian" />
         <activity android:name=".TambahPenjualan" />
         <activity android:name=".DashBoard">
             <intent-filter>
