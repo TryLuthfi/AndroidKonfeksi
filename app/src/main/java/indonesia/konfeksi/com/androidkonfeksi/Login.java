@@ -77,6 +77,7 @@ public class Login extends AppCompatActivity {
 
                         } else {
                             hideDialog();
+                            hideDialog();
                             //Displaying an error message on toast
                             Toast.makeText(context, "Invalid username or password", Toast.LENGTH_LONG).show();
                         }
