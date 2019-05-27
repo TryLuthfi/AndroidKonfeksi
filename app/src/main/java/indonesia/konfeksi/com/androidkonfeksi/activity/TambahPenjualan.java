@@ -1,4 +1,4 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -11,9 +11,10 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.Objects;
+
+import indonesia.konfeksi.com.androidkonfeksi.R;
 
 public class TambahPenjualan extends AppCompatActivity {
     private Spinner ttoopp;
