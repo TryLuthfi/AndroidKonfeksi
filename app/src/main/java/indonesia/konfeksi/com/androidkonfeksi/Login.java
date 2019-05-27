@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+import indonesia.konfeksi.com.androidkonfeksi.activity.DashBoard;
+
 public class Login extends AppCompatActivity {
 
     private EditText username, password;
@@ -61,14 +63,14 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Login Process...");
         showDialog();
         //Creating a string request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.LOGIN_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, indonesia.konfeksi.com.androidkonfeksi.konfigurasi.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Log.e("idpelangan",response.toString());
                         //If we are getting success from server
-                        if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
+                        if (response.contains(indonesia.konfeksi.com.androidkonfeksi.konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
                             String id_user = response.toString();
                             Log.e("iniidpelanggan", id_user);
@@ -96,8 +98,8 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 //Adding parameters to request
-                params.put(konfigurasi.KEY_USERNAME, usernamee);
-                params.put(konfigurasi.KEY_PASSWORD, passwordd);
+                params.put(indonesia.konfeksi.com.androidkonfeksi.konfigurasi.KEY_USERNAME, usernamee);
+                params.put(indonesia.konfeksi.com.androidkonfeksi.konfigurasi.KEY_PASSWORD, passwordd);
 
                 //returning parameter
                 return params;
