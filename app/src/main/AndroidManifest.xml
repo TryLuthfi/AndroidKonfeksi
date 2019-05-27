@@ -14,10 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotaBesar"></activity>
-        <activity android:name=".TambahPembelian" />
-        <activity android:name=".TambahPenjualan" />
-        <activity android:name=".DashBoard">
+        <activity android:name=".activity.NotaBesar"></activity>
+        <activity android:name=".activity.TambahPembelian" />
+        <activity android:name=".activity.TambahPenjualan" />
+        <activity android:name=".activity.DashBoard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

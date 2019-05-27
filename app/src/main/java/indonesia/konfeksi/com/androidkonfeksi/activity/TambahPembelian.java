@@ -1,7 +1,9 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import indonesia.konfeksi.com.androidkonfeksi.R;
 
 public class TambahPembelian extends AppCompatActivity {
 

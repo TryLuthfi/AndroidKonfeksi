@@ -1,10 +1,12 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import indonesia.konfeksi.com.androidkonfeksi.R;
 
 public class DashBoard extends AppCompatActivity {
     private LinearLayout penjualan;
