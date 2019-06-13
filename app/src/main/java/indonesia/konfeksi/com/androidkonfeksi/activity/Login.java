@@ -1,10 +1,9 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +22,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import indonesia.konfeksi.com.androidkonfeksi.activity.DashBoard;
+import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class Login extends AppCompatActivity {
 
@@ -63,24 +63,21 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Login Process...");
         showDialog();
         //Creating a string request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, indonesia.konfeksi.com.androidkonfeksi.konfigurasi.LOGIN_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("idpelangan",response.toString());
-                        //If we are getting success from server
-                        if (response.contains(indonesia.konfeksi.com.androidkonfeksi.konfigurasi.LOGIN_SUCCESS)) {
+                        Log.e("id_karyawan",response.toString());
+                        if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
                             String id_user = response.toString();
-                            Log.e("iniidpelanggan", id_user);
+                            Log.e("ididid_karyawan", id_user);
                             setPreference(id_user);
                             gotoCourseActivity();
 
                         } else {
                             hideDialog();
-                            hideDialog();
-                            //Displaying an error message on toast
                             Toast.makeText(context, "Invalid username or password", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -97,16 +94,15 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                //Adding parameters to request
-                params.put(indonesia.konfeksi.com.androidkonfeksi.konfigurasi.KEY_USERNAME, usernamee);
-                params.put(indonesia.konfeksi.com.androidkonfeksi.konfigurasi.KEY_PASSWORD, passwordd);
 
-                //returning parameter
+                params.put(konfigurasi.KEY_USERNAME, usernamee);
+                params.put(konfigurasi.KEY_PASSWORD, passwordd);
+
                 return params;
             }
         };
 
-        //Adding the string request to the queue
+
         Volley.newRequestQueue(this).add(stringRequest);
 
     }
@@ -130,12 +126,12 @@ public class Login extends AppCompatActivity {
     void setPreference(String id_user){
         SharedPreferences mSettings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString("id_user", id_user);
+        editor.putString("id_karyawan", id_user);
         editor.apply();
     }
     private String getIdUser(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String id_user = preferences.getString("id_user", "null");
+        String id_user = preferences.getString("id_karyawan", "null");
         return id_user;
     }
 }
