@@ -3,72 +3,104 @@ package indonesia.konfeksi.com.androidkonfeksi.activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import indonesia.konfeksi.com.androidkonfeksi.Product;
+import indonesia.konfeksi.com.androidkonfeksi.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.RequestHandler;
+import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class TambahPenjualan extends AppCompatActivity {
-    private Spinner ttoopp;
-    private Spinner metode_pembayaran;
-    private Spinner berapa_kali_pembayaran;
-    private EditText search_top;
-    private EditText customer;
-    private EditText no_faktur;
-    private EditText pegawai;
-    private EditText no_order;
-    private EditText staff;
-    private EditText diskon_persen;
-    private EditText diskon_rp;
-    private EditText search_bot;
-    private LinearLayout tambah_order;
-    private LinearLayout hold;
+    private RecyclerView recyclerView;
+    List<Product> productList;
+    private String JSON_STRING, kode_barang, kode_barcode, nama_barang, harga_barang;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_penjualan);
 
-        ttoopp = findViewById(R.id.ttoopp);
-        metode_pembayaran = findViewById(R.id.ttoopp);
-        berapa_kali_pembayaran = findViewById(R.id.ttoopp);
-        search_top = findViewById(R.id.search_top);
-        customer = findViewById(R.id.customer);
-        no_faktur = findViewById(R.id.no_faktur);
-        pegawai = findViewById(R.id.pegawai);
-        no_order = findViewById(R.id.no_order);
-        staff = findViewById(R.id.staff);
-        diskon_persen = findViewById(R.id.diskon_persen);
-        diskon_rp = findViewById(R.id.diskon_rp);
-        search_bot = findViewById(R.id.search_bot);
-        tambah_order = findViewById(R.id.tambah_order);
-        hold = findViewById(R.id.hold);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        tambah_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(TambahPenjualan.this);
-                dialog.setCancelable(true);
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.setContentView(R.layout.tambahpenjualan_popup_tambahorder);
-                LinearLayout scan_barcode = dialog.findViewById(R.id.scan_barcode);
-                LinearLayout tambah = dialog.findViewById(R.id.tambah);
-                Spinner nama_barang = dialog.findViewById(R.id.nama_barang);
-                Spinner satuan = dialog.findViewById(R.id.satuan);
-                EditText jumlah = dialog.findViewById(R.id.jumlah);
-                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-                Window window = dialog.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            }
-        });
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+        productList = new ArrayList<>();
+        loadProducts();
+    }
+
+    private void loadProducts() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_BARANG,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            //converting the string to json array object
+                            JSONArray array = new JSONArray(response);
+
+                            //traversing through all the object
+                            for (int i = 0; i < array.length(); i++) {
+
+                                //getting product object from json array
+                                JSONObject product = array.getJSONObject(i);
+
+                                //adding the product to product list
+                                productList.add(new Product(
+                                        product.getString("kode_barang"),
+                                        product.getString("kode_barcode")
+                                ));
+                            }
+
+                            //creating adapter object and setting it to recyclerview
+                            ProductsAdapter adapter = new ProductsAdapter(TambahPenjualan.this, productList);
+                            recyclerView.setAdapter(adapter);
+
+                            progressBar.setVisibility(View.INVISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        //adding our stringrequest to queue
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 }

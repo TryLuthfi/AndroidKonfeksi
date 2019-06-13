@@ -65,7 +65,14 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_supplier"
+                            android:layout_width="match_parent"
+                            android:textSize="11sp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -90,7 +97,14 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_fakturbeli"
+                            android:layout_width="match_parent"
+                            android:textSize="11sp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -122,7 +136,13 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+                        <EditText
+                            android:id="@+id/id_top"
+                            android:layout_width="match_parent"
+                            android:textSize="11sp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -147,63 +167,13 @@
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10sp"
                         android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Diskon %"
-                        android:textColor="#31708f"
-                        android:textSize="13sp" />
-
-                    <LinearLayout
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="10sp"
-                        android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Diskon Rp"
-                        android:textColor="#31708f"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="10sp"
-                        android:layout_weight="1"
-                        android:background="@drawable/formshape"></LinearLayout>
+                        android:background="@drawable/formshape">
+                        <EditText
+                            android:id="@+id/id_nonota"
+                            android:layout_width="match_parent"
+                            android:textSize="11sp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -224,7 +194,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_weight="1"
-                    android:background="@drawable/formshape"></LinearLayout>
+                    android:background="@drawable/formshape">
+                    <EditText
+                        android:id="@+id/id_nonotasupplier"
+                        android:layout_width="match_parent"
+                        android:textSize="11sp"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -244,7 +220,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_weight="1"
-                    android:background="@drawable/formshape"></LinearLayout>
+                    android:gravity="center_vertical"
+                    android:background="@drawable/formshape">
+
+                    <TextView
+                        android:id="@+id/tanggal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Tanggal"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -264,7 +249,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_weight="1"
-                    android:background="@drawable/formshape"></LinearLayout>
+                    android:background="@drawable/formshape">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:textSize="11sp"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -274,6 +264,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/id_keterangan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#31708f"
@@ -284,17 +275,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_weight="1"
-                    android:background="@drawable/formshape"></LinearLayout>
+                    android:background="@drawable/formshape">
+                    <EditText
+                        android:id="@+id/pengeluarantambahan"
+                        android:layout_width="match_parent"
+                        android:textSize="11sp"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
             </LinearLayout>
-
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:textColor="#fff"
-                android:layout_gravity="right"
-                android:background="#30a5ff"
-                android:text="Lampirkan Foto"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -303,106 +291,6 @@
                 android:background="#30a5ff"
                 android:text="Tambah Barang Pembelian"
                 android:textColor="#fff" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:hint="Search"
-                    android:paddingLeft="10dp"
-                    android:background="@drawable/formshape"></EditText>
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/formshape">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/formshape"
-                        android:gravity="center_vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="No."
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/formshape"
-                        android:gravity="center_vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Kode"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/formshape"
-                        android:gravity="center_vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Barang"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/formshape"
-                        android:gravity="center_vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Lokasi"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/formshape"
-                        android:gravity="center_vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Satuan"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </HorizontalScrollView>
 
         </LinearLayout>
     </LinearLayout>

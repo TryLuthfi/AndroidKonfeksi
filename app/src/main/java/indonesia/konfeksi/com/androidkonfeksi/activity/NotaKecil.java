@@ -1,9 +1,11 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class notakecil extends AppCompatActivity {
+import indonesia.konfeksi.com.androidkonfeksi.R;
+
+public class NotaKecil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
