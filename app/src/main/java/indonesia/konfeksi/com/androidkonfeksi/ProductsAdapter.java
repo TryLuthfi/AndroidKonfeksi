@@ -36,9 +36,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         final Product product = productList.get(position);
 
         holder.kodebarang.setText(product.getKode_barang());
+        holder.namabarang.setText(product.getNama_barang());
         holder.kodebarcode.setText(product.getKode_barcode());
-//        holder.namabarang.setText(product.getNama_barang());
-//        holder.hargabarang.setText(product.getHarga_barang());
+        holder.hargabarang.setText(product.getHarga_barang());
     }
 
     @Override
