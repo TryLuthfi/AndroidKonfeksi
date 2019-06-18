@@ -76,8 +76,11 @@ public class TambahPenjualan extends AppCompatActivity {
 
                                 //adding the product to product list
                                 productList.add(new Product(
+                                        product.getString("id_barang"),
                                         product.getString("kode_barang"),
-                                        product.getString("kode_barcode")
+                                        product.getString("kode_barcode"),
+                                        product.getString("nama_barang"),
+                                        product.getString("harga_barang")
                                 ));
                             }
 

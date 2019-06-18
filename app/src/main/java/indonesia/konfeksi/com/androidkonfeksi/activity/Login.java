@@ -38,8 +38,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         context = Login.this;
 
-        String id_user = getIdUser();
-        if (id_user != "null") {
+        String id_karyawan = getId_Karyawan();
+        if (id_karyawan != "null") {
             gotoCourseActivity();
         }
 
@@ -71,9 +71,9 @@ public class Login extends AppCompatActivity {
                         Log.e("id_karyawan",response.toString());
                         if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
-                            String id_user = response.toString();
-                            Log.e("ididid_karyawan", id_user);
-                            setPreference(id_user);
+                            String id_karyawan = response.toString();
+                            Log.e("ididid_karyawan", id_karyawan);
+                            setPreference(id_karyawan);
                             gotoCourseActivity();
 
                         } else {
@@ -123,15 +123,15 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    void setPreference(String id_user){
+    void setPreference(String id_karyawan){
         SharedPreferences mSettings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString("id_karyawan", id_user);
+        editor.putString("id_karyawan", id_karyawan);
         editor.apply();
     }
-    private String getIdUser(){
+    private String getId_Karyawan(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String id_user = preferences.getString("id_karyawan", "null");
-        return id_user;
+        String id_karyawan = preferences.getString("id_karyawan", "null");
+        return id_karyawan;
     }
 }
