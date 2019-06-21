@@ -62,18 +62,38 @@ public class Login extends AppCompatActivity {
         final String passwordd = password.getText().toString().trim();
         progressDialog.setMessage("Login Process...");
         showDialog();
-        //Creating a string request
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("id_karyawan",response.toString());
+                        Log.e("keterangan",response.toString());
                         if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
-                            String id_karyawan = response.toString();
-                            Log.e("ididid_karyawan", id_karyawan);
-                            setPreference(id_karyawan);
+                            String id_karyawan = response.toString().split(";")[1];
+                            String kode_karyawan = response.toString().split(";")[2];
+                            String nama = response.toString().split(";")[3];
+                            String alamat = response.toString().split(";")[4];
+                            String kota = response.toString().split(";")[5];
+                            String negara = response.toString().split(";")[6];
+                            String kode_pos = response.toString().split(";")[7];
+                            String no_telp = response.toString().split(";")[8];
+                            String email = response.toString().split(";")[9];
+                            String status = response.toString().split(";")[10];
+
+                            Log.e("id_karyawan", id_karyawan);
+                            Log.e("kode_karyawan", kode_karyawan);
+                            Log.e("nama", nama);
+                            Log.e("alamat", alamat);
+                            Log.e("kota", kota);
+                            Log.e("negara", negara);
+                            Log.e("kode_pos", kode_pos);
+                            Log.e("no_telp", no_telp);
+                            Log.e("email", email);
+                            Log.e("status", status);
+
+                            setPreference(id_karyawan, kode_karyawan, nama, alamat, kota, negara, kode_pos, no_telp, email, status);
                             gotoCourseActivity();
 
                         } else {
@@ -123,10 +143,23 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    void setPreference(String id_karyawan){
+    void setPreference(String id_karyawan,String kode_karyawan,String nama,String alamat,String kota,
+                       String negara,String kode_pos,String no_telp,String email,String status){
+
         SharedPreferences mSettings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
+
         editor.putString("id_karyawan", id_karyawan);
+        editor.putString("kode_karyawan", kode_karyawan);
+        editor.putString("nama", nama);
+        editor.putString("alamat", alamat);
+        editor.putString("kota", kota);
+        editor.putString("negara", negara);
+        editor.putString("kode_pos", kode_pos);
+        editor.putString("no_telp", no_telp);
+        editor.putString("email", email);
+        editor.putString("status", status);
+
         editor.apply();
     }
     private String getId_Karyawan(){

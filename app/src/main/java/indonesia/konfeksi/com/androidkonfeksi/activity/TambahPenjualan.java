@@ -1,20 +1,11 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,12 +19,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import indonesia.konfeksi.com.androidkonfeksi.Product;
-import indonesia.konfeksi.com.androidkonfeksi.ProductsAdapter;
+import indonesia.konfeksi.com.androidkonfeksi.json.Product;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.R;
-import indonesia.konfeksi.com.androidkonfeksi.RequestHandler;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class TambahPenjualan extends AppCompatActivity {
