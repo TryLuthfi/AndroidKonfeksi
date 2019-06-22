@@ -1,6 +1,7 @@
 package indonesia.konfeksi.com.androidkonfeksi;
 
 public class Product {
+
     private String id_barang;
     private String kode_barang;
     private String kode_barcode;
@@ -34,4 +35,6 @@ public class Product {
     public String getHarga_barang() {
         return harga_barang;
     }
+
+
 }

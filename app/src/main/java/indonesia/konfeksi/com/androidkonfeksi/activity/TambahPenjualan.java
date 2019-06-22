@@ -84,7 +84,7 @@ public class TambahPenjualan extends AppCompatActivity {
                                 ));
                             }
 
-                            //creating adapter object and setting it to recyclerview
+                            //creating adapter object and Xsetting it to recyclerview
                             ProductsAdapter adapter = new ProductsAdapter(TambahPenjualan.this, productList);
                             recyclerView.setAdapter(adapter);
 
