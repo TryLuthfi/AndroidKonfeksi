@@ -1,4 +1,4 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.request;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

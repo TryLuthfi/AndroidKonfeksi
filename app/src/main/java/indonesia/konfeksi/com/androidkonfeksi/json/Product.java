@@ -1,4 +1,4 @@
-package indonesia.konfeksi.com.androidkonfeksi;
+package indonesia.konfeksi.com.androidkonfeksi.json;
 
 public class Product {
 
