@@ -19,17 +19,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
+import indonesia.konfeksi.com.androidkonfeksi.request.encryptmd5;
 
 public class Login extends AppCompatActivity {
 
     private EditText username, password;
     private Button login;
     private Context context;
+    private String hasilmd5;
     private ProgressDialog progressDialog;
 
     @Override
@@ -51,7 +54,8 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginclass();
+                btnMD5();
+//                loginclass();
             }
         });
     }
@@ -152,15 +156,7 @@ public class Login extends AppCompatActivity {
         editor.putString("id_karyawan", id_karyawan);
         editor.putString("kode_karyawan", kode_karyawan);
         editor.putString("nama", nama);
-        editor.putString("alamat", alamat);
-        editor.putString("kota", kota);
-        editor.putString("negara", negara);
-        editor.putString("kode_pos", kode_pos);
-        editor.putString("no_telp", no_telp);
-        editor.putString("email", email);
-        editor.putString("status", status);
-
-        editor.apply();
+        editor.putString("alamat", alamat);;
     }
     private String getId_Karyawan(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
@@ -220,5 +216,25 @@ public class Login extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String status = preferences.getString("status", "null");
         return status;
+    }
+
+    public void btnMD5(){
+        byte[] md5input = password.getText().toString().getBytes();
+        BigInteger md5Data = null;
+
+        try{
+            md5Data =new BigInteger(1, encryptmd5.encryptMD5(md5input));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String md5Str = md5Data.toString(16);
+        if(md5Str.length() < 32){
+            md5Str = 0 + md5Str;
+        }
+
+        hasilmd5 = md5Str;
+        Toast.makeText(this, hasilmd5, Toast.LENGTH_SHORT).show();
+
     }
 }
