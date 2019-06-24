@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btnMD5();
-//                loginclass();
+                loginclass();
             }
         });
     }
@@ -120,7 +120,7 @@ public class Login extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 params.put(konfigurasi.KEY_USERNAME, usernamee);
-                params.put(konfigurasi.KEY_PASSWORD, passwordd);
+                params.put(konfigurasi.KEY_PASSWORD, hasilmd5);
 
                 return params;
             }
