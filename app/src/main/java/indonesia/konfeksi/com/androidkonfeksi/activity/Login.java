@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
 
         String id_karyawan = getId_Karyawan();
         if (id_karyawan != "null") {
-            gotoCourseActivity();
+            Toast.makeText(Login.this, id_karyawan, Toast.LENGTH_SHORT).show();
         }
 
         progressDialog = new ProgressDialog(context);
@@ -156,7 +156,13 @@ public class Login extends AppCompatActivity {
         editor.putString("id_karyawan", id_karyawan);
         editor.putString("kode_karyawan", kode_karyawan);
         editor.putString("nama", nama);
-        editor.putString("alamat", alamat);;
+        editor.putString("alamat", alamat);
+        editor.putString("kota", alamat);
+        editor.putString("negara", alamat);
+        editor.putString("kode_pos", alamat);
+        editor.putString("no_telp", alamat);
+        editor.putString("email", alamat);
+        editor.putString("status", alamat);
     }
     private String getId_Karyawan(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
@@ -234,7 +240,7 @@ public class Login extends AppCompatActivity {
         }
 
         hasilmd5 = md5Str;
-        Toast.makeText(this, hasilmd5, Toast.LENGTH_SHORT).show();
+        loginclass();
 
     }
 }
