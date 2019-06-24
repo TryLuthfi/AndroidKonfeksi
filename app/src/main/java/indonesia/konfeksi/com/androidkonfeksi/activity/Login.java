@@ -167,4 +167,58 @@ public class Login extends AppCompatActivity {
         String id_karyawan = preferences.getString("id_karyawan", "null");
         return id_karyawan;
     }
+
+    private String getKode_Karyawan(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String kode_karyawan = preferences.getString("kode_karyawan", "null");
+        return kode_karyawan;
+    }
+
+    private String getNama(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String nama = preferences.getString("nama", "null");
+        return nama;
+    }
+
+    private String getAlamat(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String alamat = preferences.getString("alamat", "null");
+        return alamat;
+    }
+
+    private String getKota(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String kota = preferences.getString("kota", "null");
+        return kota;
+    }
+
+    private String getNegara(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String negara = preferences.getString("negara", "null");
+        return negara;
+    }
+
+    private String getKode_Pos(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String id_karyawan = preferences.getString("id_karyawan", "null");
+        return id_karyawan;
+    }
+
+    private String getNo_Telp(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String no_telp = preferences.getString("no_telp", "null");
+        return no_telp;
+    }
+
+    private String getEmail(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String email = preferences.getString("email", "null");
+        return email;
+    }
+
+    private String getStatus(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String status = preferences.getString("status", "null");
+        return status;
+    }
 }
