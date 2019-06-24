@@ -107,7 +107,7 @@
                     android:textSize="20sp" />
 
                 <LinearLayout
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="14.5dp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
