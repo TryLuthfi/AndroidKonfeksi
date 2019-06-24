@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".activity.DashBoard">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
@@ -127,6 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginVertical="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -216,5 +225,7 @@
         </LinearLayout>
 
     </LinearLayout>
+    </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
