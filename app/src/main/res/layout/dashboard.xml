@@ -22,10 +22,10 @@
         android:layout_marginBottom="5dp">
 
         <TextView
+            android:id="@+id/textt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="DASHBOARD"
             android:textColor="#fff"
             android:textSize="25sp" />
     </LinearLayout>
