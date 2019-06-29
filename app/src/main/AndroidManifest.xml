@@ -14,18 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.IsiBarang"></activity>
-        <activity android:name=".activity.Login">
+        <activity android:name=".activity.Kasir"></activity>
+        <activity android:name=".activity.Return" />
+        <activity
+            android:name=".activity.Penjualan"
+            android:label="@string/title_activity_penjualan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.IsiBarang" />
+        <activity android:name=".activity.Login" />
+        <activity android:name=".activity.NotaKecil" />
+        <activity android:name=".activity.TambahPembelian" />
+        <activity android:name=".activity.Produk" />
+        <activity android:name=".activity.DashBoard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.NotaKecil" />
-        <activity android:name=".activity.TambahPembelian" />
-        <activity android:name=".activity.TambahPenjualan" />
-        <activity android:name=".activity.DashBoard">
         </activity>
     </application>
 

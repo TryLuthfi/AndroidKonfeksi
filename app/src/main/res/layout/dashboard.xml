@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:text="Nama Karyawan"
             android:textColor="#fff"
             android:textSize="25sp" />
     </LinearLayout>
@@ -45,7 +46,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/penjualan"
+                android:id="@+id/produk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,6 +73,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/ic_penjualan" />
                 </LinearLayout>
 
@@ -79,12 +81,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="Lorem Ipsum Dolor asmed lorem ipsum dolor asmed"
                     android:textColor="#000"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -106,6 +109,18 @@
                     android:textColor="#000"
                     android:textSize="20sp" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:text="Lorem Ipsum Dolor asmed lorem ipsum dolor asmed"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:visibility="gone" />
+
                 <LinearLayout
                     android:layout_marginTop="14.5dp"
                     android:gravity="center"
@@ -115,19 +130,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/ic_pembelian" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
-                    android:paddingHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Lorem Ipsum Dolor asmed lorem ipsum dolor asmed"
-                    android:textColor="#000"
-                    android:textSize="17sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -141,10 +147,11 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/kasir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/borderdashboard"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -154,19 +161,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Konfirmasi Kasir"
+                    android:text="Kasir"
                     android:textColor="#000"
                     android:textSize="20sp" />
 
                 <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/ic_kasir" />
                 </LinearLayout>
 
@@ -174,20 +182,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="Lorem Ipsum Dolor asmed lorem ipsum dolor asmed"
                     android:textColor="#000"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/return1"
+                android:id="@+id/penjualan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/borderdashboard"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -210,6 +219,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/ic_return" />
                 </LinearLayout>
 
@@ -222,7 +232,8 @@
                     android:paddingHorizontal="10dp"
                     android:text="Lorem Ipsum Dolor asmed lorem ipsum dolor asmed"
                     android:textColor="#000"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 
@@ -235,10 +246,11 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/returnBarang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/borderdashboard"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -246,6 +258,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="Return"
                     android:textColor="#000"
@@ -259,6 +272,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/ic_return" />
                 </LinearLayout>
 
@@ -270,7 +284,8 @@
                     android:paddingHorizontal="10dp"
                     android:text="Lorem Ipsum Dolor asmed lorem ipsum dolor asmed"
                     android:textColor="#000"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:visibility="gone" />
 
 
             </LinearLayout>
