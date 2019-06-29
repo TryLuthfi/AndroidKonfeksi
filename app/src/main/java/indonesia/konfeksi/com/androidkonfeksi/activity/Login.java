@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ import indonesia.konfeksi.com.androidkonfeksi.request.encryptmd5;
 
 public class Login extends AppCompatActivity {
 
+    private ActionMode actionMode;
     private EditText username, password;
     private Button login;
     private Context context;
@@ -43,7 +45,7 @@ public class Login extends AppCompatActivity {
 
         String id_karyawan = getId_Karyawan();
         if (id_karyawan != "null") {
-            Toast.makeText(Login.this, id_karyawan, Toast.LENGTH_SHORT).show();
+            gotoCourseActivity();
         }
 
         progressDialog = new ProgressDialog(context);
@@ -55,7 +57,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btnMD5();
-                loginclass();
             }
         });
     }
@@ -157,12 +158,13 @@ public class Login extends AppCompatActivity {
         editor.putString("kode_karyawan", kode_karyawan);
         editor.putString("nama", nama);
         editor.putString("alamat", alamat);
-        editor.putString("kota", alamat);
-        editor.putString("negara", alamat);
-        editor.putString("kode_pos", alamat);
-        editor.putString("no_telp", alamat);
-        editor.putString("email", alamat);
-        editor.putString("status", alamat);
+        editor.putString("kota", kota);
+        editor.putString("negara", negara);
+        editor.putString("kode_pos", kode_pos);
+        editor.putString("no_telp", no_telp);
+        editor.putString("email", email);
+        editor.putString("status", status);
+        editor.apply();
     }
     private String getId_Karyawan(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -15,17 +14,17 @@ import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.activity.IsiBarang;
-import indonesia.konfeksi.com.androidkonfeksi.json.Product;
+import indonesia.konfeksi.com.androidkonfeksi.json.VProduct;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
+public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.ProductViewHolder> {
 
     private Activity mCtx;
-    private List<Product> productList;
+    private List<VProduct> productList;
     private NumberFormat formatRupiah;
 
 
 
-    public ProductsAdapter(Activity mCtx, List<Product> productList) {
+    public VProductsAdapter(Activity mCtx, List<VProduct> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
     }
@@ -44,23 +43,23 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        final Product product = productList.get(position);
+        final VProduct vproduct = productList.get(position);
 
-        holder.kodebarang.setText(product.getKode_barang());
-        holder.kodebarcode.setText(product.getKode_barcode());
-        holder.namabarang.setText(product.getNama_barang());
-        double hargabarang = Double.parseDouble(product.getHarga_barang());
+        holder.kodebarang.setText(vproduct.getKode_barang());
+        holder.kodebarcode.setText(vproduct.getKode_barcode());
+        holder.namabarang.setText(vproduct.getNama_barang());
+        double hargabarang = Double.parseDouble(vproduct.getHarga_barang());
         holder.hargabarang.setText(formatRupiah.format((double)hargabarang));
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mCtx.getApplicationContext(), IsiBarang.class);
-                intent.putExtra("id_barang", product.getId_barang());
-                intent.putExtra("kode_barang", product.getKode_barang());
-                intent.putExtra("kode_barcode", product.getKode_barcode());
-                intent.putExtra("nama_barang", product.getNama_barang());
-                intent.putExtra("diskon_rupiah", product.getDiskon_rupiah());
-                intent.putExtra("harga_barang", product.getHarga_barang());
+                intent.putExtra("id_barang", vproduct.getId_barang());
+                intent.putExtra("kode_barang", vproduct.getKode_barang());
+                intent.putExtra("kode_barcode", vproduct.getKode_barcode());
+                intent.putExtra("nama_barang", vproduct.getNama_barang());
+                intent.putExtra("diskon_rupiah", vproduct.getDiskon_rupiah());
+                intent.putExtra("harga_barang",vproduct.getHarga_barang());
                 mCtx.startActivity(intent);
             }
         });

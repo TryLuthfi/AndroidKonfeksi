@@ -1,6 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.json;
 
-public class Product {
+public class VProduct {
 
     private String id_barang;
     private String kode_barang;
@@ -68,7 +68,7 @@ public class Product {
         return harga_barang;
     }
 
-    public Product(String id_barang, String kode_barang, String kode_barcode, String nama_barang, String diskon_persen, String diskon_rupiah, String ukuran, String meter, String warna, String stok_jual, String date_input, String date_edit, String harga_barang) {
+    public VProduct(String id_barang, String kode_barang, String kode_barcode, String nama_barang, String diskon_persen, String diskon_rupiah, String ukuran, String meter, String warna, String stok_jual, String date_input, String date_edit, String harga_barang) {
         this.id_barang = id_barang;
         this.kode_barang = kode_barang;
         this.kode_barcode = kode_barcode;
