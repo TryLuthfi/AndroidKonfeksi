@@ -31,7 +31,7 @@ public class DashBoard extends AppCompatActivity {
         return1 = findViewById(R.id.return1);
         text = findViewById(R.id.textt);
         if (id_karyawan != "null") {
-            text.setText(""+nama);
+            text.setText("Selamat Datang "+nama);
         }
 
         penjualan.setOnClickListener(new View.OnClickListener() {

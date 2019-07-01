@@ -46,7 +46,7 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
         final VProduct vproduct = productList.get(position);
 
         holder.kodebarang.setText(vproduct.getKode_barang());
-        holder.kodebarcode.setText(vproduct.getKode_barcode());
+        holder.stokjual.setText(vproduct.getStok_jual());
         holder.namabarang.setText(vproduct.getNama_barang());
         double hargabarang = Double.parseDouble(vproduct.getHarga_barang());
         holder.hargabarang.setText(formatRupiah.format((double)hargabarang));
@@ -74,7 +74,7 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
         TextView kodebarang;
-        TextView kodebarcode;
+        TextView stokjual;
         TextView namabarang;
         TextView hargabarang;
         View view;
@@ -84,7 +84,7 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
             view = itemView;
 
             kodebarang = itemView.findViewById(R.id.kode_barang);
-            kodebarcode = itemView.findViewById(R.id.kode_barcode);
+            stokjual = itemView.findViewById(R.id.stok_jual);
             namabarang = itemView.findViewById(R.id.nama_barang);
             hargabarang = itemView.findViewById(R.id.harga_barang);
         }
