@@ -25,6 +25,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     testImplementation 'junit:junit:4.12'
