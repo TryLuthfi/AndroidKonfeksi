@@ -20,8 +20,8 @@ public class TambahPembelian extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_pembelian);
 
-        tgl = findViewById(R.id.tanggal);
-        setDate();
+//        tgl = findViewById(R.id.tanggal);
+//        setDate();
     }
 
     public void setDate() {
@@ -29,7 +29,7 @@ public class TambahPembelian extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         date = formatter.format(today);
 
-        tgl.setText(date);
+//        tgl.setText(date);
     }
 
 
