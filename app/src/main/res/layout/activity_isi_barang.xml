@@ -139,7 +139,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/barcode"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

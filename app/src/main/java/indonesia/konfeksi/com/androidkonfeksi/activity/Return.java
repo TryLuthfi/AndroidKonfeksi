@@ -13,14 +13,14 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 
-public class returnn extends AppCompatActivity {
+public class Return extends AppCompatActivity {
 
     private ImageView gmbr_barcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_returnn);
+        setContentView(R.layout.activity_return);
 
         gmbr_barcode = findViewById(R.id.gmbr_barcode);
 

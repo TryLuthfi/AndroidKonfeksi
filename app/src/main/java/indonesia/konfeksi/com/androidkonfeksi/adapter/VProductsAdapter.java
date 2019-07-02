@@ -32,7 +32,7 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.listproduct, parent, false);
+        View view = inflater.inflate(R.layout.listvproduct, parent, false);
 
         Locale localeID = new Locale("in", "ID");
 
@@ -45,24 +45,12 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         final VProduct vproduct = productList.get(position);
 
-        holder.kodebarang.setText(vproduct.getKode_barang());
-        holder.stokjual.setText(vproduct.getStok_jual());
-        holder.namabarang.setText(vproduct.getNama_barang());
-        double hargabarang = Double.parseDouble(vproduct.getHarga_barang());
-        holder.hargabarang.setText(formatRupiah.format((double)hargabarang));
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mCtx.getApplicationContext(), IsiBarang.class);
-                intent.putExtra("id_barang", vproduct.getId_barang());
-                intent.putExtra("kode_barang", vproduct.getKode_barang());
-                intent.putExtra("kode_barcode", vproduct.getKode_barcode());
-                intent.putExtra("nama_barang", vproduct.getNama_barang());
-                intent.putExtra("diskon_rupiah", vproduct.getDiskon_rupiah());
-                intent.putExtra("harga_barang",vproduct.getHarga_barang());
-                mCtx.startActivity(intent);
-            }
-        });
+        holder.satuan.setText(vproduct.getUkuran());
+        holder.date_input.setText(vproduct.getDate_input());
+        holder.warna.setText(vproduct.getWarna());
+        holder.jumlah.setText(vproduct.getMeter());
+        holder.stok_jual.setText(vproduct.getStok_jual());
+        holder.harga.setText(vproduct.getHarga_barang());
 
     }
 
@@ -73,20 +61,24 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView kodebarang;
-        TextView stokjual;
-        TextView namabarang;
-        TextView hargabarang;
+        TextView satuan;
+        TextView date_input;
+        TextView warna;
+        TextView jumlah;
+        TextView stok_jual;
+        TextView harga;
         View view;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
             view = itemView;
 
-            kodebarang = itemView.findViewById(R.id.kode_barang);
-            stokjual = itemView.findViewById(R.id.stok_jual);
-            namabarang = itemView.findViewById(R.id.nama_barang);
-            hargabarang = itemView.findViewById(R.id.harga_barang);
+            satuan = itemView.findViewById(R.id.satuan);
+            date_input = itemView.findViewById(R.id.date_input);
+            warna = itemView.findViewById(R.id.warna);
+            jumlah = itemView.findViewById(R.id.jumlah);
+            stok_jual = itemView.findViewById(R.id.stok_jual);
+            harga = itemView.findViewById(R.id.harga);
         }
     }
 }
