@@ -15,6 +15,7 @@ import indonesia.konfeksi.com.androidkonfeksi.R;
 public class DashBoard extends AppCompatActivity {
     private LinearLayout penjualan;
     private LinearLayout pembelian;
+    private LinearLayout barcode;
     private LinearLayout return1;
     private TextView text;
     private TextView profile;
@@ -29,6 +30,7 @@ public class DashBoard extends AppCompatActivity {
         penjualan = findViewById(R.id.penjualan);
         pembelian = findViewById(R.id.pembelian);
         return1 = findViewById(R.id.return1);
+        barcode = findViewById(R.id.barcode);
         text = findViewById(R.id.textt);
         if (id_karyawan != "null") {
             text.setText(""+nama);
@@ -52,6 +54,14 @@ public class DashBoard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        barcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), returnn.class);
+                startActivity(intent);
             }
         });
 

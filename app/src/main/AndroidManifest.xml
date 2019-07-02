@@ -14,18 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.IsiBarang"></activity>
-        <activity android:name=".activity.Login">
+        <activity android:name=".activity.returnn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.IsiBarang" />
+        <activity android:name=".activity.Login">
+        </activity>
         <activity android:name=".activity.NotaKecil" />
         <activity android:name=".activity.TambahPembelian" />
         <activity android:name=".activity.TambahPenjualan" />
-        <activity android:name=".activity.DashBoard"></activity>
+        <activity android:name=".activity.DashBoard" />
     </application>
 
 </manifest>
