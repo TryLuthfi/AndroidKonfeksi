@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="55dp"
         android:background="#304ffe">
 
         <TextView
@@ -18,7 +18,7 @@
             android:gravity="center"
             android:text="LARIS 32 KONVEKSI"
             android:textColor="#ffffff"
-            android:textSize="23sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -35,7 +35,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp">
 
                 <TextView
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="Detail Barang"
                     android:textColor="#383434"
-                    android:textSize="23sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:text="Kode Barang"
                     android:textColor="#383434"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:paddingLeft="20sp"
+                        android:paddingLeft="18sp"
                         android:text="BKANGPTH"
                         android:textSize="17sp" />
                 </LinearLayout>
@@ -82,7 +82,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Nama Barang"
                     android:textColor="#383434"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:paddingLeft="20sp"
+                        android:paddingLeft="18sp"
                         android:text="B. karung angsa"
                         android:textSize="17sp" />
                 </LinearLayout>
@@ -106,7 +106,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Diskon Rp."
                     android:textColor="#383434"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="20sp"
                         android:text="Rp. 0,-"
-                        android:textSize="17sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <TextView
@@ -130,7 +130,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Kode Barcode"
                     android:textColor="#383434"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:id="@+id/kode_barcode"
@@ -138,15 +138,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/barcode"
-                    android:orientation="vertical">
-
-                </LinearLayout>
+                    android:orientation="vertical"></LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="20dp">
 
                 <TextView
@@ -159,7 +157,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
