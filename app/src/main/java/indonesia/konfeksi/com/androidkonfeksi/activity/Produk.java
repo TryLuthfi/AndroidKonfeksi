@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,29 +27,43 @@ import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
-public class TambahPenjualan extends AppCompatActivity {
+public class Produk extends AppCompatActivity {
     private RecyclerView recyclerView;
     List<Product> productList;
     private String JSON_STRING, kode_barang, kode_barcode, nama_barang, harga_barang;
     private ProgressBar progressBar;
+    private TextView txErr;
+    private Button cobaLagi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tambah_penjualan);
+        setContentView(R.layout.activity_produk);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        txErr = findViewById(R.id.err_ap);
+        cobaLagi = findViewById(R.id.reload_ap);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         progressBar.setVisibility(View.VISIBLE);
+        txErr.setVisibility(View.INVISIBLE);
+        cobaLagi.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
 
         productList = new ArrayList<>();
         loadProducts();
     }
 
+    public void reload(View v){
+        progressBar.setVisibility(View.VISIBLE);
+        txErr.setVisibility(View.INVISIBLE);
+        cobaLagi.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+        loadProducts();
+    }
     private void loadProducts() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_BARANG,
                 new Response.Listener<String>() {
@@ -59,11 +75,7 @@ public class TambahPenjualan extends AppCompatActivity {
 
                             //traversing through all the object
                             for (int i = 0; i < array.length(); i++) {
-
-//                                1UUT RVXG K6ZK MSM1 QRCX
-                                //getting product object from json array
                                 JSONObject product = array.getJSONObject(i);
-
                                 //adding the product to product list
                                 int harga = Integer.parseInt(product.getString("harga_barang"));
                                 if(harga > 10000)
@@ -85,7 +97,7 @@ public class TambahPenjualan extends AppCompatActivity {
                             }
 
                             //creating adapter object and Xsetting it to recyclerview
-                            ProductsAdapter adapter = new ProductsAdapter(TambahPenjualan.this, productList);
+                            ProductsAdapter adapter = new ProductsAdapter(Produk.this, productList);
                             recyclerView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);
@@ -93,17 +105,24 @@ public class TambahPenjualan extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            txErr.setVisibility(View.VISIBLE);
+                            cobaLagi.setVisibility(View.VISIBLE);
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        progressBar.setVisibility(View.INVISIBLE);
+                        txErr.setVisibility(View.VISIBLE);
+                        cobaLagi.setVisibility(View.VISIBLE);
                     }
                 });
 
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+
 }

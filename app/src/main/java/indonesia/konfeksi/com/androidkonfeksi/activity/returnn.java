@@ -27,7 +27,7 @@ public class returnn extends AppCompatActivity {
         String text="apa";
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.EAN_13,200,100);
+            BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.DATA_MATRIX,1200,1200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             gmbr_barcode.setImageBitmap(bitmap);

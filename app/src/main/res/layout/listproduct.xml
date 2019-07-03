@@ -65,13 +65,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kode Barcode : "/>
+                        android:text="Stok Jual : "/>
 
                     <TextView
-                        android:id="@+id/kode_barcode"
+                        android:id="@+id/stok_jual"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kode Barcode"/>
+                        android:text="Stok Jual"/>
                 </LinearLayout>
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Harga Barang"
-                    android:textColor="#000"
+                    android:textColor="#000 "
                     android:textSize="16dp"/>
 
             </LinearLayout>

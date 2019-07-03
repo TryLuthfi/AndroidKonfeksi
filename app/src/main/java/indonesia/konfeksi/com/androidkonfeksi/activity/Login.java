@@ -65,70 +65,77 @@ public class Login extends AppCompatActivity {
         //Getting values from edit texts
         final String usernamee = username.getText().toString().trim();
         final String passwordd = password.getText().toString().trim();
-        progressDialog.setMessage("Login Process...");
-        showDialog();
+        if(usernamee.isEmpty()){
+            Toast.makeText(Login.this, "Harap Isi Username", Toast.LENGTH_SHORT).show();
+        } else if (hasilmd5.isEmpty()){
+            Toast.makeText(this, "Harap Isi Password", Toast.LENGTH_SHORT).show();
+        }else {
+            progressDialog.setMessage("Login Process...");
+            showDialog();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.LOGIN_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.LOGIN_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-                        Log.e("keterangan",response.toString());
-                        if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
-                            hideDialog();
-                            String id_karyawan = response.toString().split(";")[1];
-                            String kode_karyawan = response.toString().split(";")[2];
-                            String nama = response.toString().split(";")[3];
-                            String alamat = response.toString().split(";")[4];
-                            String kota = response.toString().split(";")[5];
-                            String negara = response.toString().split(";")[6];
-                            String kode_pos = response.toString().split(";")[7];
-                            String no_telp = response.toString().split(";")[8];
-                            String email = response.toString().split(";")[9];
-                            String status = response.toString().split(";")[10];
+                            Log.e("keterangan",response.toString());
+                            if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
+                                hideDialog();
+                                String id_karyawan = response.toString().split(";")[1];
+                                String kode_karyawan = response.toString().split(";")[2];
+                                String nama = response.toString().split(";")[3];
+                                String alamat = response.toString().split(";")[4];
+                                String kota = response.toString().split(";")[5];
+                                String negara = response.toString().split(";")[6];
+                                String kode_pos = response.toString().split(";")[7];
+                                String no_telp = response.toString().split(";")[8];
+                                String email = response.toString().split(";")[9];
+                                String status = response.toString().split(";")[10];
 
-                            Log.e("id_karyawan", id_karyawan);
-                            Log.e("kode_karyawan", kode_karyawan);
-                            Log.e("nama", nama);
-                            Log.e("alamat", alamat);
-                            Log.e("kota", kota);
-                            Log.e("negara", negara);
-                            Log.e("kode_pos", kode_pos);
-                            Log.e("no_telp", no_telp);
-                            Log.e("email", email);
-                            Log.e("status", status);
+                                Log.e("id_karyawan", id_karyawan);
+                                Log.e("kode_karyawan", kode_karyawan);
+                                Log.e("nama", nama);
+                                Log.e("alamat", alamat);
+                                Log.e("kota", kota);
+                                Log.e("negara", negara);
+                                Log.e("kode_pos", kode_pos);
+                                Log.e("no_telp", no_telp);
+                                Log.e("email", email);
+                                Log.e("status", status);
 
-                            setPreference(id_karyawan, kode_karyawan, nama, alamat, kota, negara, kode_pos, no_telp, email, status);
-                            gotoCourseActivity();
+                                setPreference(id_karyawan, kode_karyawan, nama, alamat, kota, negara, kode_pos, no_telp, email, status);
+                                gotoCourseActivity();
 
-                        } else {
-                            hideDialog();
-                            Toast.makeText(context, "Invalid username or password", Toast.LENGTH_LONG).show();
+                            } else {
+                                hideDialog();
+                                Toast.makeText(context, "Username atau Password Salah", Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //You can handle error here if you want
-                        hideDialog();
-                        Toast.makeText(context, "The server unreachable", Toast.LENGTH_LONG).show();
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //You can handle error here if you want
+                            hideDialog();
+                            Toast.makeText(context, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
 
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
 
-                params.put(konfigurasi.KEY_USERNAME, usernamee);
-                params.put(konfigurasi.KEY_PASSWORD, hasilmd5);
+                    params.put(konfigurasi.KEY_USERNAME, usernamee);
+                    params.put(konfigurasi.KEY_PASSWORD, hasilmd5);
 
-                return params;
-            }
-        };
+                    return params;
+                }
+            };
 
 
-        Volley.newRequestQueue(this).add(stringRequest);
+            Volley.newRequestQueue(this).add(stringRequest);
+        }
+
 
     }
 

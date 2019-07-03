@@ -8,15 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 
 public class DashBoard extends AppCompatActivity {
-    private LinearLayout penjualan;
-    private LinearLayout pembelian;
-    private LinearLayout barcode;
-    private LinearLayout return1;
+    private LinearLayout produkButton;
+    private LinearLayout pembelianButton;
+    private LinearLayout kasirButton;
+    private LinearLayout penjualanButton;
+    private LinearLayout returnButton;
     private TextView text;
     private TextView profile;
 
@@ -27,40 +27,54 @@ public class DashBoard extends AppCompatActivity {
         final String id_karyawan = getId_Karyawan();
         final String nama = getNama();
 
-        penjualan = findViewById(R.id.penjualan);
-        pembelian = findViewById(R.id.pembelian);
-        return1 = findViewById(R.id.return1);
-        barcode = findViewById(R.id.barcode);
+        produkButton = findViewById(R.id.produk);
+        pembelianButton = findViewById(R.id.pembelian);
+        penjualanButton = findViewById(R.id.penjualan);
+        kasirButton = findViewById(R.id.kasir);
+        returnButton = findViewById(R.id.returnBarang);
         text = findViewById(R.id.textt);
-        if (id_karyawan != "null") {
-            text.setText(""+nama);
+        if (id_karyawan != null) {
+            text.setText("" + nama);
         }
 
-        penjualan.setOnClickListener(new View.OnClickListener() {
+        produkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TambahPenjualan.class);
+                Intent intent = new Intent(getApplicationContext(), Produk.class);
                 startActivity(intent);
             }
         });
-        pembelian.setOnClickListener(new View.OnClickListener() {
+        pembelianButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TambahPembelian.class);
                 startActivity(intent);
             }
         });
-        return1.setOnClickListener(new View.OnClickListener() {
+
+        kasirButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Kasir.class);
+                startActivity(intent);
             }
         });
 
-        barcode.setOnClickListener(new View.OnClickListener() {
+        penjualanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), returnn.class);
+                //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Penjualan.class);
+                startActivity(intent);
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Return.class);
                 startActivity(intent);
             }
         });
@@ -70,13 +84,11 @@ public class DashBoard extends AppCompatActivity {
 
     private String getId_Karyawan(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String id_karyawan = preferences.getString("id_karyawan", "null");
-        return id_karyawan;
+        return preferences.getString("id_karyawan", "null");
     }
 
     private String getNama(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String nama = preferences.getString("nama", "null");
-        return nama;
+        return preferences.getString("nama", "Nama Karyawan");
     }
 }
