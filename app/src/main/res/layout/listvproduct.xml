@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1 LUSIN"
-                    android:textColor="#000000"
+                    android:textColor="#000"
                     android:textSize="17dp" />
 
                 <TextView
