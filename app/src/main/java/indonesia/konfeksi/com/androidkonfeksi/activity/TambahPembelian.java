@@ -20,16 +20,6 @@ public class TambahPembelian extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_pembelian);
 
-//        tgl = findViewById(R.id.tanggal);
-//        setDate();
-    }
-
-    public void setDate() {
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        date = formatter.format(today);
-
-//        tgl.setText(date);
     }
 
 

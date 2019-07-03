@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_penjualan" />
+                        android:src="@drawable/ic_produk" />
                 </LinearLayout>
 
                 <TextView
@@ -220,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_return" />
+                        android:src="@drawable/ic_penjualan" />
                 </LinearLayout>
 
                 <TextView

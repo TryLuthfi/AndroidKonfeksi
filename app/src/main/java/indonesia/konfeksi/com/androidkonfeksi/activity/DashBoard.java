@@ -30,8 +30,8 @@ public class DashBoard extends AppCompatActivity {
         produkButton = findViewById(R.id.produk);
         pembelianButton = findViewById(R.id.pembelian);
         penjualanButton = findViewById(R.id.penjualan);
-        kasirButton = findViewById(R.id.kasir);
         returnButton = findViewById(R.id.returnBarang);
+        kasirButton = findViewById(R.id.kasir);
         text = findViewById(R.id.textt);
         if (id_karyawan != null) {
             text.setText("" + nama);
