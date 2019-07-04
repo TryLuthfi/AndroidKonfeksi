@@ -22,7 +22,37 @@
         android:background="#4E4848"
         android:layout_marginBottom="5dp">
 
+        <TextView
+            android:textColor="#C4FFFFFF"
+            android:textSize="25sp"
+            android:layout_marginLeft="25dp"
+            android:layout_above="@id/tengah"
+            android:layout_width="wrap_content"
+            android:text="SELAMAT DATANG"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/nama"
+            android:textColor="#C4FFFFFF"
+            android:textSize="23sp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/tengah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama karyawan" />
+
         <LinearLayout
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:id="@+id/tengah"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#000000"></LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:background="@drawable/btn_logout"
             android:padding="5dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
@@ -30,46 +60,13 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:padding="3dp"
                 android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:text="LOGOUT"
                 android:textColor="#A4FFFFFF"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
-        <RelativeLayout
-            android:paddingTop="20dp"
-            android:paddingLeft="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:background="#000000"
-                android:orientation="vertical"
-                android:id="@+id/tengah"
-                android:layout_width="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_height="10dp"></LinearLayout>
-
-            <TextView
-                android:below="@id/tengah"
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="SELAMAT DATANG"
-                android:textColor="#fff"
-                android:textSize="22sp" />
-
-            <TextView
-                android:layout_below="@id/tengah"
-                android:id="@+id/textt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Nama Karyawan"
-                android:textColor="#fff"
-                android:textSize="22sp" />
-
-        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout
