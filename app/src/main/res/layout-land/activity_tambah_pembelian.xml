@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="#f1f4f7"
+    android:orientation="horizontal"
     tools:context=".activity.TambahPembelian">
 
 
@@ -300,7 +300,6 @@
                 android:layout_width="317dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/l4"
-                android:layout_marginTop="18dp"
                 android:gravity="fill_horizontal"
                 android:orientation="horizontal">
 
@@ -337,7 +336,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-
                 android:background="#30a5ff"
                 android:text="Tambah Barang Pembelian"
                 android:textColor="#fff" />
