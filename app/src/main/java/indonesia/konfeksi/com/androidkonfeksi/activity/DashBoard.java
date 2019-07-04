@@ -17,6 +17,7 @@ public class DashBoard extends AppCompatActivity {
     private LinearLayout kasirButton;
     private LinearLayout penjualanButton;
     private LinearLayout returnButton;
+    private LinearLayout logoutButton;
     private TextView text;
     private TextView profile;
 
@@ -32,6 +33,7 @@ public class DashBoard extends AppCompatActivity {
         penjualanButton = findViewById(R.id.penjualan);
         returnButton = findViewById(R.id.returnBarang);
         kasirButton = findViewById(R.id.kasir);
+        logoutButton = findViewById(R.id.btn_logout);
         text = findViewById(R.id.nama);
         if (id_karyawan != null) {
             text.setText("" + nama);
@@ -76,6 +78,19 @@ public class DashBoard extends AppCompatActivity {
                 //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Return.class);
                 startActivity(intent);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                startActivity(new Intent(getApplicationContext(), Login.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                editor.clear();
+                editor.apply();
+                finish();
             }
         });
 
