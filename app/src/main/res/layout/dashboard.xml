@@ -19,7 +19,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="#4E4848"
+        android:background="#304ffe"
         android:layout_marginBottom="5dp">
 
         <TextView
@@ -51,21 +51,22 @@
             android:background="#000000"></LinearLayout>
 
         <LinearLayout
-            android:layout_margin="5dp"
-            android:background="@drawable/btn_logout"
+            android:id="@+id/btn_logout"
+            android:layout_margin="15dp"
             android:padding="5dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <ImageView
+                android:background="@drawable/ic_logout"
                 android:padding="3dp"
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:text="LOGOUT"
                 android:textColor="#A4FFFFFF"
-                android:layout_height="wrap_content" />
+                android:layout_height="30dp" />
         </LinearLayout>
     </RelativeLayout>
 
