@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/barcode" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                             android:text="Stok Jual" />
                     </LinearLayout>
                     <TextView
-                        android:paddingRight="20dp"
+                        android:paddingRight="10dp"
                         android:gravity="right"
                         android:id="@+id/harga_barang"
                         android:layout_width="match_parent"
