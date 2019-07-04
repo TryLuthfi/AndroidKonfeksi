@@ -50,7 +50,8 @@ public class VProductsAdapter extends RecyclerView.Adapter<VProductsAdapter.Prod
         holder.warna.setText(vproduct.getWarna());
         holder.jumlah.setText(vproduct.getMeter());
         holder.stok_jual.setText(vproduct.getStok_jual());
-        holder.harga.setText(vproduct.getHarga_barang());
+        double hargabarang = Double.parseDouble(vproduct.getHarga_barang());
+        holder.harga.setText(formatRupiah.format((double)hargabarang));
 
     }
 

@@ -44,11 +44,16 @@ public class IsiBarang extends AppCompatActivity {
     private String mPostNamaBarang = null;
     private String mPostDiskonRupiah = null;
     private String mPostHargaBarang = null;
+    private NumberFormat formatRupiah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isi_barang);
+
+        Locale localeID = new Locale("in", "ID");
+
+        formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         kode_barang  = findViewById(R.id.kode_barang);
         nama_barang  = findViewById(R.id.nama_barang);
@@ -61,9 +66,11 @@ public class IsiBarang extends AppCompatActivity {
         mPostDiskonRupiah = getIntent().getExtras().getString("diskon_rupiah");
         mPostHargaBarang = getIntent().getExtras().getString("harga_barang");
 
+        double hargabarang = Double.parseDouble(mPostDiskonRupiah);
+
         kode_barang.setText(mPostKodeBarang);
         nama_barang.setText(mPostNamaBarang);
-        diskon_rp.setText(mPostDiskonRupiah);
+        diskon_rp.setText(formatRupiah.format((double)hargabarang));
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

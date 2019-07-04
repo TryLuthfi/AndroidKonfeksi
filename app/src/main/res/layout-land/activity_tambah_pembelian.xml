@@ -5,300 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f1f4f7"
+    android:orientation="horizontal"
     tools:context=".activity.TambahPembelian">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:background="#fff"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="10dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Nama Supplier"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_namasupplier"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Nama Barang"
-                    android:textColor="#31708f" />
-                m
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_namabarang"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Jumlah (Coly)"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_jumlah"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Keterangan"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_keterangan"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Status"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/id_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Tanggal" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Nama Gudang"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_namagudang"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Metode Pembayaran"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_metodepembayaran"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Biaya"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_biaya"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Total Harga"
-                    android:textColor="#31708f" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/formshape">
-
-                    <EditText
-                        android:id="@+id/id_totalharga"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="#30a5ff"
-                android:text="Tambah Barang Pembelian"
-                android:textColor="#fff" />
-
-        </LinearLayout>
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:background="#fff"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="10dp"
                 android:background="#d9edf7"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:gravity="center"
                     android:text="tambah pembelian"
                     android:textAllCaps="true"
                     android:textColor="#31708f"
@@ -306,82 +41,307 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/l1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="fill_horizontal"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="No Nota"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="178dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/formshape"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="No Nota"
-                            android:textColor="#31708f" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/formshape">
-
-                            <EditText
-                                android:id="@+id/id_nonota"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="11sp" />
-                        </LinearLayout>
+                        <EditText
+                            android:id="@+id/id_nonota"
+                            android:layout_width="313dp"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="367dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Nama Supplier"
+                        android:textColor="#31708f" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:orientation="vertical">
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="No. Faktur"
-                            android:textColor="#31708f" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/formshape">
-
-                            <EditText
-                                android:id="@+id/id_nofaktur"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="11sp" />
-                        </LinearLayout>
+                        <EditText
+                            android:id="@+id/id_namasupplier"
+                            android:layout_width="373dp"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
+
+
             </LinearLayout>
-        </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/l2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/l1"
+                android:gravity="fill_horizontal">
+
+                <LinearLayout
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Nama Barang"
+                        android:textColor="#31708f" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_namabarang"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="367dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Jumlah (Coly)"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_jumlah"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/l2"
+                android:gravity="fill_horizontal">
+
+                <LinearLayout
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Keterangan"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_keterangan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="363dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Status"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/id_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Tanggal" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l4"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/l3"
+                android:gravity="fill_horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="No. Faktur"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_nofaktur"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="365dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Nama Gudang"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_namagudang"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l5"
+                android:layout_width="317dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/l4"
+                android:gravity="fill_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Total Harga"
+                        android:textColor="#31708f" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/formshape">
+
+                        <EditText
+                            android:id="@+id/id_totalharga"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#30a5ff"
+                android:text="Tambah Barang Pembelian"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>
