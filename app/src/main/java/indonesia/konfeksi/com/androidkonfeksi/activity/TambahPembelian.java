@@ -71,8 +71,8 @@ public class TambahPembelian extends AppCompatActivity {
                             Log.d(TAG, "onResponse: " + supplierName + "   " + namasupplier);
                         }
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, supplierName);
-
+                        ArrayAdapter<String> adapterSpinnerSupplier = new ArrayAdapter<String>(TambahPembelian.this, android.R.layout.simple_spinner_item, supplierName);
+                        namaSupplier.setAdapter(adapterSpinnerSupplier);
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.d(TAG, "onResponse: " + e);
