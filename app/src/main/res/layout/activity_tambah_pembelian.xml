@@ -118,11 +118,12 @@ m
                         android:layout_height="45dp"
                         android:layout_weight="1"
                         android:background="@drawable/formshape">
-                        <EditText
+
+                        <Spinner
                             android:id="@+id/id_namabarang"
                             android:layout_width="match_parent"
-                            android:textSize="11sp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:spinnerMode="dialog" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -196,12 +197,10 @@ m
                         android:gravity="center_vertical"
                         android:background="@drawable/formshape">
 
-                        <TextView
+                        <Spinner
                             android:id="@+id/id_status"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Tanggal"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -283,10 +282,10 @@ m
                         android:layout_height="45dp"
                         android:layout_weight="1"
                         android:background="@drawable/formshape">
-                        <EditText
+
+                        <Spinner
                             android:id="@+id/id_metodepembayaran"
                             android:layout_width="match_parent"
-                            android:textSize="11sp"
                             android:layout_height="match_parent" />
                     </LinearLayout>
                 </LinearLayout>

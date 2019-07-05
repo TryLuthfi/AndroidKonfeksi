@@ -131,6 +131,20 @@
                             <!--android:id="@+id/id_namasupplier"-->
                             <!--android:layout_width="match_parent"-->
                             <!--android:layout_height="match_parent"-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             <!--android:textSize="14sp" />-->
                             <Spinner
                                 android:id="@+id/id_namasupplier"
