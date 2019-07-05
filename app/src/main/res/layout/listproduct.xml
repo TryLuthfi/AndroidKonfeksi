@@ -15,6 +15,15 @@
         app:cardUseCompatPadding="true">
 
         <LinearLayout
+            android:layout_margin="15dp"
+            android:layout_gravity="right"
+            android:background="@drawable/threedots"
+            android:layout_width="20dp"
+            android:layout_height="20dp">
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

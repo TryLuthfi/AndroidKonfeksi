@@ -150,7 +150,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void gotoCourseActivity() {
-        Intent intent = new Intent(context, DashBoard.class);
+        Intent intent = new Intent(getApplicationContext(), DashBoard.class);
         startActivity(intent);
         finish();
     }

@@ -57,7 +57,6 @@ public class DashBoard extends AppCompatActivity {
         kasirButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Kasir.class);
                 startActivity(intent);
             }
@@ -66,7 +65,6 @@ public class DashBoard extends AppCompatActivity {
         penjualanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Penjualan.class);
                 startActivity(intent);
             }
@@ -75,7 +73,6 @@ public class DashBoard extends AppCompatActivity {
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Return.class);
                 startActivity(intent);
             }
