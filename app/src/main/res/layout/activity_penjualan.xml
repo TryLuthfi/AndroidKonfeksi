@@ -107,12 +107,11 @@
                 android:layout_marginHorizontal="15sp"
                 android:orientation="vertical">
 
-                <EditText
+                <Spinner
                     android:id="@+id/input_nama_pelanngan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:hint="Nama Pelanggan"/>
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dialog" />
 
                 <EditText
                     android:id="@+id/input_no_hp"

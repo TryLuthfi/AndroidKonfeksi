@@ -68,6 +68,7 @@ public class DashBoard extends AppCompatActivity {
             public void onClick(View v) {
                 //Toast.makeText(DashBoard.this, id_karyawan, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Penjualan.class);
+                intent.putExtra("NamaKaryawan", nama);
                 startActivity(intent);
             }
         });
@@ -104,6 +105,6 @@ public class DashBoard extends AppCompatActivity {
 
     private String getNama(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        return preferences.getString("nama", "Nama Karyawan");
+        return preferences.getString("nama", "Null");
     }
 }
