@@ -67,7 +67,7 @@ public class Penjualan extends AppCompatActivity {
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
 
         setDate();
-        setTime();
+        settime();
 
         input_tgl_nota.setText(date);
         input_waktu.setText(time);
@@ -148,7 +148,7 @@ public class Penjualan extends AppCompatActivity {
         date = formatter.format(today);
     }
 
-    public void setTime(){
+    public void settime(){
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");
         time = formatter.format(today);
