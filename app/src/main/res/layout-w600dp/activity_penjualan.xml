@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".activity.Penjualan">
 
 
@@ -13,20 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/layer1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/c_l_header_ap"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:background="@color/colorAccent"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tx_h_penjualan"
@@ -44,38 +42,34 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_conversion_absoluteHeight="19dp"
                     tools:layout_conversion_absoluteWidth="145dp" />
-            </android.support.constraint.ConstraintLayout>
+            </RelativeLayout>
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/c_info_nota"
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:id="@+id/c_transaksi_penjualan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="10dp"
                 android:elevation="2dp"
-                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/c_info_pelanggan"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/c_l_header_ap">
+                android:layout_below="@id/layer1">
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/c_h_info_nota"
+                <LinearLayout
+                    android:id="@+id/c_h_transaksi_penjualan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#304ffe"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:orientation="vertical"
+
+                    >
 
                     <TextView
-                        android:id="@+id/tx_kiri"
+                        android:id="@+id/tx_tengah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:text="Info Nota"
+                        android:text="Transakasi Penjualan"
                         android:textColor="#fff"
                         android:textSize="24sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,150 +78,336 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_conversion_absoluteHeight="19dp"
                         tools:layout_conversion_absoluteWidth="145dp" />
-                </android.support.constraint.ConstraintLayout>
+                </LinearLayout>
 
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/c_h_info_nota">
-
-                    <EditText
-                        android:id="@+id/input_no_nota"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="No Nota"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/input_tgl_nota"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:hint="Tanggal"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/input_no_nota" />
-
-                    <EditText
-                        android:id="@+id/input_waktu"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:hint="Waktu"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/input_tgl_nota" />
-
-                    <EditText
-                        android:id="@+id/input_kasir"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:hint="Kasir"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/input_waktu" />
-                </android.support.constraint.ConstraintLayout>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/c_info_pelanggan"
-                android:layout_width="0dp"
+                <LinearLayout
+                android:id="@+id/layouttext"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/c_info_nota"
-                app:layout_constraintTop_toBottomOf="@id/c_l_header_ap">
+                android:orientation="horizontal"
+                android:layout_below="@id/c_h_transaksi_penjualan">
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/c_h_info_pelanggan"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="#"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="127dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="Kode Barang"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="137dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="Nama Barang"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="112dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="Harga"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="98dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="Qty"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+                <TextView
+                    android:layout_width="137dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="Subtotal"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#304fff"
+                    android:text="a"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+
+            </LinearLayout>
+
+                <LinearLayout
+                android:id="@+id/layoutinput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/layouttext">
+
+                <EditText
+                    android:id="@+id/nomor"
+                    android:layout_width="52dp"
                     android:layout_height="match_parent"
-                    android:background="#304ffe"
+                    android:hint="no"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/input_Kode"
+                    android:layout_width="127dp"
+                    android:layout_height="match_parent"
+                    android:hint="Kode Barang"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/input_nama"
+                    android:layout_width="138dp"
+                    android:layout_height="match_parent"
+                    android:hint="Nama Barang"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/input_harga"
+                    android:layout_width="112dp"
+                    android:layout_height="match_parent"
+                    android:hint="Harga Barang"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/input_qty"
+                    android:layout_width="97dp"
+                    android:layout_height="match_parent"
+                    android:hint="Jumlah"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/input_total"
+                    android:layout_width="138dp"
+                    android:layout_height="match_parent"
+                    android:hint="Total"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/delete"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:hint="X"
+                    android:textSize="12sp"
+                    android:background="#FF0000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layouttotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_below="@id/layoutinput"
+                    android:layout_marginTop="18dp"
+                    android:background="#F0F8FF"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/tambah_baris"
+                        android:layout_width="104dp"
+                        android:layout_height="20dp"
+                        android:layout_alignBottom="@+id/layouttotal"
+                        android:background="#32CD32"
+                        android:hint="+ Baris Baru"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tx_kanan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="Info Pelanggan"
-                        android:textColor="#fff"
-                        android:textSize="24sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_conversion_absoluteHeight="19dp"
-                        tools:layout_conversion_absoluteWidth="145dp" />
-                </android.support.constraint.ConstraintLayout>
+                        android:layout_width="183dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/layouttotal"
+                        android:layout_marginLeft="200dp"
+                        android:text="Harga Total :"
+                        android:textColor="#0000CD"
+                        android:textSize="30dp" />
 
-                <android.support.constraint.ConstraintLayout
+                    <TextView
+                        android:layout_width="196dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/layouttotal"
+                        android:text="xxx"
+                        android:textColor="#0000CD"
+                        android:textSize="30dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutbayar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/c_h_info_pelanggan">
+                    android:layout_height="90dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/layouttotal">
 
                     <EditText
-                        android:id="@+id/input_nama_pelanngan"
-                        android:layout_width="match_parent"
+                        android:id="@+id/catatan"
+                        android:layout_width="199dp"
                         android:layout_height="match_parent"
-                        android:hint="Nama Pelanggan"
+                        android:background="@drawable/custom_txtbox"
+                        android:hint="Catatan Transaksi(Jika Ada)"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/input_no_hp"
+                    <LinearLayout
+                        android:id="@+id/layout_form_bayar"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:hint="No Telp / Hp"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/input_nama_pelanngan" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="200dp"
+                        >
 
-                    <EditText
-                        android:id="@+id/input_alamat"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:hint="Alamat"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/input_no_hp" />
+                        <LinearLayout
+                            android:id="@+id/layout_form_bayar_b1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
 
-                    <EditText
-                        android:id="@+id/input_info_lain"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:hint="Info Lain"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/input_alamat" />
-                </android.support.constraint.ConstraintLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/layouttotal"
+                                android:text="Metode bayar "
+                                android:textColor="#000000"
+                                android:textSize="15dp"
+                                android:gravity="center"/>
 
-            </android.support.constraint.ConstraintLayout>
-        </android.support.constraint.ConstraintLayout>
+                            <EditText
+
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/layouttotal"
+                                android:hint="Metode bayar"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_form_bayar_b2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                            <TextView
+                                android:layout_width="95dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/layouttotal"
+                                android:gravity="center"
+                                android:text="Bayar"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+
+                            <EditText
+
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/layouttotal"
+                                android:hint="Bayar"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_form_bayar_b3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                            <TextView
+                                android:layout_width="95dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/layouttotal"
+                                android:gravity="center"
+                                android:text="Kembali"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+
+                            <EditText
+
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/layouttotal"
+                                android:hint="Kembali"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_form_bayar_b4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                            <Button
+                                android:id="@+id/simpan"
+                                android:layout_width="47dp"
+                                android:layout_height="match_parent"
+                                android:hint="Simpan"
+                                android:textSize="15sp"
+                                android:background="#304fff"
+                                />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
     </ScrollView>
 
-</LinearLayout>
+
+</RelativeLayout>

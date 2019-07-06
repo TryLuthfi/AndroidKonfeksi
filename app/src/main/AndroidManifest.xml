@@ -19,14 +19,16 @@
         <activity
             android:name=".activity.Penjualan"
             android:label="@string/title_activity_penjualan"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
         <activity android:name=".activity.IsiBarang" />
         <activity android:name=".activity.Login" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.NotaKecil" />
         <activity android:name=".activity.TambahPembelian" />
