@@ -12,8 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        >
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,8 +65,8 @@
                         android:id="@+id/layouttext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        >
 
                         <TextView
                             android:layout_width="52dp"
@@ -75,6 +74,7 @@
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
                             android:text="#"
+                            android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -84,6 +84,7 @@
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
                             android:text="Kode Barang"
+                            android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -93,6 +94,7 @@
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
                             android:text="Nama Barang"
+                            android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -102,6 +104,7 @@
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
                             android:text="Harga"
+                            android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -111,6 +114,7 @@
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
                             android:text="Qty"
+                            android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -121,6 +125,7 @@
                             android:background="#304fff"
                             android:text="Subtotal"
                             android:textColor="#fff"
+                            android:gravity="center"
                             android:textSize="20dp" />
 
                         <TextView
@@ -129,6 +134,7 @@
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
                             android:text="a"
+                            android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -147,7 +153,9 @@
                             android:layout_width="52dp"
                             android:layout_height="match_parent"
                             android:hint="no"
+                            android:background="@drawable/border_biru"
                             android:textSize="12sp"
+                            android:gravity="center"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -158,6 +166,8 @@
                             android:layout_height="match_parent"
                             android:hint="Kode Barang"
                             android:textSize="12sp"
+                            android:gravity="center"
+                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -168,6 +178,8 @@
                             android:layout_height="match_parent"
                             android:hint="Nama Barang"
                             android:textSize="12sp"
+                            android:gravity="center"
+                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -178,6 +190,8 @@
                             android:layout_height="match_parent"
                             android:hint="Harga Barang"
                             android:textSize="12sp"
+                            android:gravity="center"
+                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -188,6 +202,8 @@
                             android:layout_height="match_parent"
                             android:hint="Jumlah"
                             android:textSize="12sp"
+                            android:gravity="center"
+                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -198,9 +214,12 @@
                             android:layout_height="match_parent"
                             android:hint="Total"
                             android:textSize="12sp"
+                            android:gravity="center"
+                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
 
                         <Button
                             android:id="@+id/delete"
@@ -252,131 +271,7 @@
                             android:textSize="30dp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/layoutbayar"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_below="@id/layouttotal"
-                        android:layout_marginTop="15dp"
-                        android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/catatan"
-                            android:layout_width="199dp"
-                            android:layout_height="150dp"
-                            android:background="@drawable/custom_txtbox"
-                            android:hint="Catatan Transaksi(Jika Ada)"
-                            android:textSize="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <LinearLayout
-                            android:id="@+id/layout_form_bayar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="200dp"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:id="@+id/layout_form_bayar_b1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignTop="@+id/layouttotal"
-                                    android:gravity="center"
-                                    android:text="Metode bayar "
-                                    android:textColor="#000000"
-                                    android:textSize="15dp" />
-
-                                <EditText
-
-                                    android:layout_width="150dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignTop="@+id/layouttotal"
-                                    android:hint="Metode bayar"
-                                    android:textSize="15sp" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_form_bayar_b2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="95dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignTop="@+id/layouttotal"
-                                    android:gravity="center"
-                                    android:text="Bayar"
-                                    android:textColor="#000000"
-                                    android:textSize="15dp" />
-
-                                <EditText
-
-                                    android:layout_width="150dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignTop="@+id/layouttotal"
-                                    android:hint="Bayar"
-                                    android:textSize="15sp" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_form_bayar_b3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="95dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignTop="@+id/layouttotal"
-                                    android:gravity="center"
-                                    android:text="Kembali"
-                                    android:textColor="#000000"
-                                    android:textSize="15dp" />
-
-                                <EditText
-
-                                    android:layout_width="150dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignTop="@+id/layouttotal"
-                                    android:hint="Kembali"
-                                    android:textSize="15sp" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_form_bayar_b4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <Button
-                                    android:id="@+id/simpan"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:background="#304fff"
-                                    android:hint="Simpan"
-                                    android:textSize="15sp" />
-
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -388,7 +283,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="10dp"
                     android:elevation="2dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center">
 
 
                     <LinearLayout
