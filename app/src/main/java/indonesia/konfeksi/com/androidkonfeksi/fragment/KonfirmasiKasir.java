@@ -1,10 +1,13 @@
-package indonesia.konfeksi.com.androidkonfeksi.activity;
+package indonesia.konfeksi.com.androidkonfeksi.fragment;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,48 +25,43 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import indonesia.konfeksi.com.androidkonfeksi.json.Product;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.activity.Produk;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
+import indonesia.konfeksi.com.androidkonfeksi.json.Product;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
-public class Produk extends AppCompatActivity {
+public class KonfirmasiKasir extends Fragment {
     private RecyclerView recyclerView;
     List<Product> productList;
     private String JSON_STRING, kode_barang, kode_barcode, nama_barang, harga_barang;
     private ProgressBar progressBar;
     private TextView txErr;
     private Button cobaLagi;
+    private View view;
+
+
+    public KonfirmasiKasir() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produk);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view =  inflater.inflate(R.layout.fragment_konfirmasi_kasir, container, false);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        txErr = findViewById(R.id.err_ap);
-        cobaLagi = findViewById(R.id.reload_ap);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        progressBar.setVisibility(View.VISIBLE);
-        txErr.setVisibility(View.INVISIBLE);
-        cobaLagi.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.INVISIBLE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         productList = new ArrayList<>();
         loadProducts();
+        return view;
     }
 
-    public void reload(View v){
-        progressBar.setVisibility(View.VISIBLE);
-        txErr.setVisibility(View.INVISIBLE);
-        cobaLagi.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.INVISIBLE);
-
-        loadProducts();
-    }
     private void loadProducts() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_BARANG,
                 new Response.Listener<String>() {
@@ -78,7 +76,7 @@ public class Produk extends AppCompatActivity {
                                 JSONObject product = array.getJSONObject(i);
                                 //adding the product to product list
                                 int harga = Integer.parseInt(product.getString("harga_barang"));
-                                if(harga > 10000) {
+                                if(harga > 10000)
                                     productList.add(new Product(
                                             product.getString("id_barang"),
                                             product.getString("kode_barang"),
@@ -94,11 +92,10 @@ public class Produk extends AppCompatActivity {
                                             product.getString("date_edit"),
                                             product.getString("harga_barang")
                                     ));
-                                }
                             }
 
                             //creating adapter object and Xsetting it to recyclerview
-                            ProductsAdapter adapter = new ProductsAdapter(Produk.this, productList);
+                            ProductsAdapter adapter = new ProductsAdapter(getActivity(), productList);
                             recyclerView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);
@@ -122,8 +119,7 @@ public class Produk extends AppCompatActivity {
                 });
 
         //adding our stringrequest to queue
-        Volley.newRequestQueue(this).add(stringRequest);
+        Volley.newRequestQueue(getActivity()).add(stringRequest);
     }
-
 
 }

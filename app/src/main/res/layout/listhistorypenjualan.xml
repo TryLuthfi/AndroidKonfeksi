@@ -14,25 +14,34 @@
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 
+        <!--<LinearLayout-->
+            <!--android:layout_margin="15dp"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:background="@drawable/threedots"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp">-->
+
+        <!--</LinearLayout>-->
+
         <LinearLayout
             android:layout_margin="15dp"
             android:layout_gravity="right"
-            android:background="@drawable/threedots"
-            android:layout_width="20dp"
-            android:layout_height="20dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingRight="10dp"
+                android:id="@+id/date_input"
+                android:layout_width="wrap_content"
+                android:text="asdasdasdasd"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/barcode" />
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,7 +51,7 @@
                 android:paddingLeft="10dp">
 
                 <TextView
-                    android:id="@+id/nama_barang"
+                    android:id="@+id/no_nota"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nama Barang"
@@ -50,6 +59,7 @@
                     android:textSize="16sp" />
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -57,13 +67,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kode Barang : " />
+                        android:text="Pelanggan : " />
 
                     <TextView
-                        android:id="@+id/kode_barang"
+                        android:id="@+id/nama"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kode Barang" />
+                        android:text="Nama" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -79,21 +89,21 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Stok Jual : " />
+                            android:text="Kasir : " />
 
                         <TextView
-                            android:id="@+id/stok_jual"
+                            android:id="@+id/kasir"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Stok Jual" />
+                            android:text="Kasir" />
                     </LinearLayout>
                     <TextView
-                        android:paddingRight="10dp"
+                        android:paddingRight="20dp"
                         android:gravity="right"
-                        android:id="@+id/harga_barang"
+                        android:id="@+id/grand_total"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Harga Barang"
+                        android:text="Grand Total"
                         android:textColor="#000 "
                         android:textSize="16dp"/>
                 </LinearLayout>

@@ -7,6 +7,8 @@ public class konfigurasi {
     public static final String LOGIN_SUCCESS = "success";
 
     public static final String URL_GET_BARANG = "https://laris23.premiumcookieslimo.com/api/databarang.php";
+    public static final String URL_GET_HISTORYPENJUALAN = "http://laris23.premiumcookieslimo.com/api/historypenjualan";
+    public static final String URL_GET_HISTORYPEMBELIAN = "http://laris23.premiumcookieslimo.com/api/historypembelian";
     public static final String URL_GET_NONOTA = "https://laris23.premiumcookieslimo.com/api/nonota";
     public static final String URL_GET_NONOTAPENJUALAN = "https://laris23.premiumcookieslimo.com/api/nonotapenjualan";
 }
