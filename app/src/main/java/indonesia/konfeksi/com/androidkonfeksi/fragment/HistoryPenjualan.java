@@ -28,8 +28,6 @@ import java.util.List;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.HistoryPenjualanAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.json.Product;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
