@@ -1,5 +1,7 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,7 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
@@ -32,16 +38,21 @@ public class TambahPembelian extends AppCompatActivity {
     private TextView tgl;
 
     private TextView nonota;
-    private TextView nofaktur;
     private Spinner namaSupplier;
     private Spinner metodeBayar;
     private Spinner namaBarang;
     private EditText jumlahColi;
     private EditText keterangan;
     private Spinner status;
+    private TextView nofaktur;
+    private EditText namaGudang;
+    private EditText biaya;
+    private EditText totalHarga;
 
     String idSupplierPilih;
     String idBarangPilih;
+    int idStatusPilih;
+    int idPembayaranPilih;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +60,17 @@ public class TambahPembelian extends AppCompatActivity {
         setContentView(R.layout.activity_tambah_pembelian);
 
         nonota = findViewById(R.id.id_nonota);
-        nofaktur = findViewById(R.id.id_nofaktur);
         namaSupplier = findViewById(R.id.id_namasupplier);
         metodeBayar = findViewById(R.id.id_metodepembayaran);
         namaBarang = findViewById(R.id.id_namabarang);
         jumlahColi = findViewById(R.id.id_jumlah);
         keterangan = findViewById(R.id.id_keterangan);
         status = findViewById(R.id.id_status);
+        nofaktur = findViewById(R.id.id_nofaktur);
+        namaGudang = findViewById(R.id.id_namagudang);
+        biaya = findViewById(R.id.id_biaya);
+        totalHarga = findViewById(R.id.id_totalharga);
+
 
 
         List<String> metodepembayaran = new ArrayList<String>();
@@ -67,8 +82,8 @@ public class TambahPembelian extends AppCompatActivity {
         metodeBayar.setAdapter(adapterBayarSupplier);
 
         List<String> statusbarang = new ArrayList<String>();
-        metodepembayaran.add("Tampilkan");
-        metodepembayaran.add("Sembunyikan");
+        statusbarang.add("Tampilkan");
+        statusbarang.add("Sembunyikan");
         ArrayAdapter<String> adapterStatusBarang = new ArrayAdapter<String>(
                 TambahPembelian.this,
                 android.R.layout.simple_spinner_dropdown_item, statusbarang);
@@ -96,6 +111,34 @@ public class TambahPembelian extends AppCompatActivity {
                 StringWithTag barang = (StringWithTag) parent.getItemAtPosition(position);
                 Log.d(TAG, "onItemSelected: " + barang.id + ", " + barang.string);
                 idBarangPilih = (String) barang.id;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    idStatusPilih = 1;
+                }else{
+                    idStatusPilih = 0;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        metodeBayar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idPembayaranPilih = position;
             }
 
             @Override
@@ -165,18 +208,86 @@ public class TambahPembelian extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void tambahBarangPembelian(){
-        String noNotaKirim = nonota.getText().toString();
-        String namaSupplierKirim = idSupplierPilih;
-        String namaBarangKirim = idBarangPilih;
-        String jumlahColiKirim = jumlahColi.getText().toString();
-        String keteranganKirim = keterangan.getText().toString();
+    public void tambahBarangPembelian(View view){
 
+//        String noNotaKirim = nonota.getText().toString();
+//        String namaSupplierKirim = idSupplierPilih;
+//        String namaBarangKirim = idBarangPilih;
+//        String jumlahColiKirim = jumlahColi.getText().toString();
+//        String keteranganKirim = keterangan.getText().toString();
+//        int statusKirim = idStatusPilih;
+//
+//        String noFakturKirim = nofaktur.getText().toString();
+//        String namaGudangKirim = namaGudang.getText().toString();
+//        int metodeBayarKirim = idPembayaranPilih;
+//        String biayaKirim = biaya.getText().toString();
+//        String totalHargaKirim = totalHarga.getText().toString();
+
+        if(getId_Karyawan() == "null"){
+            Log.d(TAG, "tambahBarangPembelian: " + getId_Karyawan());
+            Toast.makeText(TambahPembelian.this, "Id Karyawan tidak tersedia", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.URL_TAMBAH_PEMBELIAN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject resObj = new JSONObject(response);
+                            Log.d(TAG, "onResponse: " + resObj.toString());
+                            if(resObj.getString("success").equals("true")){
+                                Log.d(TAG, "onResponse: " + resObj.toString());
+
+                            }else{
+                                Log.d(TAG, "onResponse false: " + resObj.toString());
+                                Toast.makeText(TambahPembelian.this, resObj.getString("message"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + response + "\"");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error);
+                        Toast.makeText(TambahPembelian.this, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("no_faktur", nofaktur.getText().toString());
+                params.put("no_nota", nonota.getText().toString());
+                params.put("metode_pembayaran", String.valueOf(idPembayaranPilih));
+                params.put("total_harga", totalHarga.getText().toString());
+                params.put("biaya", biaya.getText().toString());
+                params.put("id_karyawan", getId_Karyawan());
+                params.put("id_supplier", idSupplierPilih);
+                params.put("coly", jumlahColi.getText().toString());
+                params.put("status", String.valueOf(idStatusPilih));
+                params.put("id_barang", idBarangPilih);
+                params.put("ket", keterangan.getText().toString());
+                params.put("nama_gudang", namaGudang.getText().toString());
+                Log.d(TAG, "getParams: " + params.toString());
+                return params;
+            }
+        };
+
+
+        Volley.newRequestQueue(this).add(stringRequest);
 
 
     }
 
-
+    private String getId_Karyawan(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String id_karyawan = preferences.getString("id_karyawan", "null");
+        return id_karyawan;
+    }
 
 
 
