@@ -48,7 +48,9 @@ public class Kasir extends AppCompatActivity {
 
         tab = (TabLayout) findViewById(R.id.tab);
         tab.setupWithViewPager(pager);
+        
     }
+
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
