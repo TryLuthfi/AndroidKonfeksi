@@ -47,7 +47,30 @@ public class Kasir extends AppCompatActivity {
 
         tab = (TabLayout) findViewById(R.id.tab);
         tab.setupWithViewPager(pager);
+
+        ////////////////
+        pager = (ViewPager) findViewById(R.id.pager1);
+        setupViewPager1(pager);
+
+        pager = (ViewPager) findViewById(R.id.pager2);
+        setupViewPager2(pager);
+        /////////////
     }
+
+    //coba
+    private void setupViewPager1(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new HistoryPenjualan(), "History Pembelian");
+        viewPager.setAdapter(adapter);
+    }
+
+    private void setupViewPager2(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new KonfirmasiKasir(), "Konfirmasi Kasir");//isitulisan jika ingin
+        viewPager.setAdapter(adapter);
+    }
+
+    //
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
