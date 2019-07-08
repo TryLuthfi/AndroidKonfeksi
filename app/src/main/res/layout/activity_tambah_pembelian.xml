@@ -340,6 +340,31 @@ m
                             android:textSize="11sp"
                             android:layout_height="match_parent" />
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/buktiImage"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_marginTop="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/picture" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:id="@+id/teksbukti"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_marginLeft="5dp"
+                        android:text="Tekan gambar disamping untuk melampirkan bukti pembayaran"/>
+
                 </LinearLayout>
 
                 <Button

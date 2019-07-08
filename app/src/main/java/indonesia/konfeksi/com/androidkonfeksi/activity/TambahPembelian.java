@@ -5,8 +5,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,10 +38,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
@@ -46,6 +59,7 @@ public class TambahPembelian extends AppCompatActivity {
     private Button tambah;
 
     private TextView nonota;
+    private TextView teksbukti;
     private Spinner namaSupplier;
     private Spinner metodeBayar;
     private Spinner namaBarang;
@@ -56,6 +70,15 @@ public class TambahPembelian extends AppCompatActivity {
     private EditText namaGudang;
     private EditText biaya;
     private EditText totalHarga;
+
+    private File f;
+    private ImageView buktiImage;
+    private Bitmap imageUri;
+    private Uri contentUri;
+    private static final int PICK_IMAGE = 100;
+    private ByteArrayOutputStream byteArrayOutputStream;
+    private byte[] byteArray;
+    private String ConvertImage;
 
     String idSupplierPilih;
     String idBarangPilih;
@@ -79,6 +102,9 @@ public class TambahPembelian extends AppCompatActivity {
         biaya = findViewById(R.id.id_biaya);
         totalHarga = findViewById(R.id.id_totalharga);
         tambah = findViewById(R.id.tambah);
+        buktiImage = findViewById(R.id.buktiImage);
+        teksbukti = findViewById(R.id.teksbukti);
+        byteArrayOutputStream = new ByteArrayOutputStream();
 
         tambah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +113,40 @@ public class TambahPembelian extends AppCompatActivity {
             }
         });
 
+        buktiImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog alertDialog = new Dialog(TambahPembelian.this);
+                alertDialog.setCancelable(true);
+                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                alertDialog.setCanceledOnTouchOutside(true);
+                alertDialog.setContentView(R.layout.gallery_dialog);
+                LinearLayout galery= alertDialog.findViewById(R.id.galery);
+                LinearLayout camera= alertDialog.findViewById(R.id.camera);
+                galery.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openGallery();
+                    }
+                });
+                camera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openGallery();
+                    }
+                });
 
+                alertDialog.show();
+            }
+        });
+        if (imageUri != null){
+            imageUri.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+            byteArray = byteArrayOutputStream.toByteArray();
+            ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        }else {
+            teksbukti.setText("Mohon Lampirkan Bukti Transfer");
+            teksbukti.setTextColor(Color.parseColor("#FFFF0004"));
+        }
 
         List<String> metodepembayaran = new ArrayList<String>();
         metodepembayaran.add("Cash");
@@ -326,6 +385,7 @@ public class TambahPembelian extends AppCompatActivity {
                 params.put("id_barang", idBarangPilih);
                 params.put("ket", keterangan.getText().toString());
                 params.put("nama_gudang", namaGudang.getText().toString());
+                params.put("image",ConvertImage);
                 Log.d(TAG, "getParams: " + params.toString());
                 return params;
             }
@@ -356,6 +416,45 @@ public class TambahPembelian extends AppCompatActivity {
         @Override
         public String toString() {
             return string;
+        }
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = TambahPembelian.this.managedQuery(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } else
+            return null;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+
+            if (data != null) {
+                contentUri = data.getData();
+
+                try {
+                    imageUri = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getApplicationContext()).getContentResolver(), contentUri);
+                    String selectedPath = getPath(contentUri);
+                    buktiImage.setImageBitmap(imageUri);
+                    f = new File(selectedPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         }
     }
 
