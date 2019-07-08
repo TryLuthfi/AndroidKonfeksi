@@ -19,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,13 +26,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.HistoryPembelianAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.HistoryPenjualanAdapter;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPembelian;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
-public class HistoryPenjualan extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class HistoryPembelian extends Fragment {
     private RecyclerView recyclerView;
-    List<ProductHistoryPenjualan> productList;
+    List<ProductHistoryPembelian> productList;
     private String JSON_STRING, kode_barang, kode_barcode, nama_barang, harga_barang;
     private ProgressBar progressBar;
     private TextView txErr;
@@ -41,7 +45,7 @@ public class HistoryPenjualan extends Fragment {
     private View view;
 
 
-    public HistoryPenjualan() {
+    public HistoryPembelian() {
         // Required empty public constructor
     }
 
@@ -50,8 +54,7 @@ public class HistoryPenjualan extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_history_penjualan, container, false);
-
+        view = inflater.inflate(R.layout.fragment_history_pembelian, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -59,11 +62,12 @@ public class HistoryPenjualan extends Fragment {
 
         productList = new ArrayList<>();
         loadProducts();
+
         return view;
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_HISTORYPENJUALAN,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_HISTORYPEMBELIAN,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -74,45 +78,25 @@ public class HistoryPenjualan extends Fragment {
                             //traversing through all the object
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject product = array.getJSONObject(i);
-                                    productList.add(new ProductHistoryPenjualan(
-                                            product.getString("id_penjualan"),
-                                            product.getString("id_karyawan"),
-                                            product.getString("id_pelanggan"),
-                                            product.getString("date"),
-                                            product.getString("time"),
-                                            product.getString("no_faktur"),
-                                            product.getString("no_nota"),
-                                            product.getString("metode_pembayaran"),
-                                            product.getString("diskon_persen"),
-                                            product.getString("diskon_rupiah"),
-                                            product.getString("total_harga"),
-                                            product.getString("biaya"),
-                                            product.getString("selisih"),
-                                            product.getString("status"),
-                                            product.getString("kode_karyawan"),
-                                            product.getString("username"),
-                                            product.getString("password"),
-                                            product.getString("nama"),
-                                            product.getString("alamat"),
-                                            product.getString("kota"),
-                                            product.getString("negara"),
-                                            product.getString("kode_pos"),
-                                            product.getString("no_telp"),
-                                            product.getString("email"),
-                                            product.getString("date_input"),
-                                            product.getString("date_edit"),
-                                            product.getString("token"),
-                                            product.getString("id_posisi"),
-                                            product.getString("kode_pelanggan"),
-                                            product.getString("nama_toko"),
-                                            product.getString("no_telp2"),
-                                            product.getString("no_telp3"),
-                                            product.getString("catatan"),
-                                            product.getString("nama_karyawan")
-                                    ));
+                                productList.add(new ProductHistoryPembelian(
+                                        product.getString("id_pembelian"),
+                                        product.getString("date"),
+                                        product.getString("time"),
+                                        product.getString("total_harga"),
+                                        product.getString("no_faktur"),
+                                        product.getString("no_nota"),
+                                        product.getString("biaya"),
+                                        product.getString("id_karyawan"),
+                                        product.getString("kode_karyawan"),
+                                        product.getString("nama_karyawan"),
+                                        product.getString("email_karyawan"),
+                                        product.getString("id_supplier"),
+                                        product.getString("nama_supplier"),
+                                        product.getString("kode_supplier")
+                                ));
                             }
 
-                            HistoryPenjualanAdapter adapter = new HistoryPenjualanAdapter(getActivity(), productList);
+                            HistoryPembelianAdapter adapter = new HistoryPembelianAdapter(getActivity(), productList);
                             recyclerView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);

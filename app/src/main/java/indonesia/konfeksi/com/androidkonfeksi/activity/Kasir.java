@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.fragment.HistoryPembelian;
 import indonesia.konfeksi.com.androidkonfeksi.fragment.HistoryPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.fragment.KonfirmasiKasir;
 
@@ -75,7 +76,8 @@ public class Kasir extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new KonfirmasiKasir(), "Konfirmasi Kasir");//isitulisan jika ingin
-        adapter.addFrag(new HistoryPenjualan(), "History Pembelian");
+        adapter.addFrag(new HistoryPembelian(), "History Pembelian");
+        adapter.addFrag(new HistoryPenjualan(), "History Penjualan");
         viewPager.setAdapter(adapter);
     }
 

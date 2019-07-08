@@ -11,12 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         app:cardCornerRadius="7dp"
-        app:cardElevation="3dp"
+        app:cardElevation="5dp"
         app:cardUseCompatPadding="true">
 
-
         <LinearLayout
-            android:paddingHorizontal="5dp"
+            android:paddingHorizontal="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -24,7 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="#304ffe"
-                android:layout_height="10dp"></LinearLayout>
+                android:layout_height="5dp"></LinearLayout>
 
             <LinearLayout
                 android:layout_marginTop="5dp"
@@ -40,19 +39,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1 LUSIN"
-                    android:textColor="#000"
-                    android:textSize="17dp" />
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
 
                 <TextView
-                    android:paddingRight="5dp"
                     android:gravity="right"
                     android:layout_weight="1"
                     android:id="@+id/date_input"
+                    android:paddingRight="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="12/06/2019"
-                    android:textColor="#A1000000"
-                    android:textSize="16dp" />
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -66,31 +65,7 @@
                     android:paddingHorizontal="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jumlah : "
-                    android:textColor="#3F3C3C"
-                    android:textSize="17dp" />
-
-                <TextView
-                    android:id="@+id/jumlah"
-                    android:gravity="right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="pth"
-                    android:textColor="#3F3C3C"
-                    android:textSize="19dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:paddingHorizontal="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Warna : "
+                    android:text="Warna     : "
                     android:textColor="#3F3C3C"
                     android:textSize="17dp" />
 
@@ -99,13 +74,38 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Merah"
+                    android:textColor="#3F3C3C"
+                    android:textSize="17dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:paddingHorizontal="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah    : "
+                    android:textColor="#3F3C3C"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/jumlah"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="12"
                     android:textColor="#3F3C3C"
-                    android:textSize="19dp" />
+                    android:textSize="17dp" />
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="5dp"
+                android:layout_marginVertical="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="100"
                     android:textColor="#3F3C3C"
-                    android:textSize="19dp" />
+                    android:textSize="17dp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
@@ -150,8 +150,6 @@
                         android:textSize="19dp"/>
 
                 </LinearLayout>
-
-
 
             </LinearLayout>
         </LinearLayout>

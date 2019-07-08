@@ -78,22 +78,23 @@ public class Produk extends AppCompatActivity {
                                 JSONObject product = array.getJSONObject(i);
                                 //adding the product to product list
                                 int harga = Integer.parseInt(product.getString("harga_barang"));
-                                if(harga > 10000)
-                                productList.add(new Product(
-                                        product.getString("id_barang"),
-                                        product.getString("kode_barang"),
-                                        product.getString("kode_barcode"),
-                                        product.getString("nama_barang"),
-                                        product.getString("diskon_persen"),
-                                        product.getString("diskon_rupiah"),
-                                        product.getString("ukuran"),
-                                        product.getString("meter"),
-                                        product.getString("warna"),
-                                        product.getString("stok_jual"),
-                                        product.getString("date_input"),
-                                        product.getString("date_edit"),
-                                        product.getString("harga_barang")
-                                ));
+                                if(harga > 10000) {
+                                    productList.add(new Product(
+                                            product.getString("id_barang"),
+                                            product.getString("kode_barang"),
+                                            product.getString("kode_barcode"),
+                                            product.getString("nama_barang"),
+                                            product.getString("diskon_persen"),
+                                            product.getString("diskon_rupiah"),
+                                            product.getString("ukuran"),
+                                            product.getString("meter"),
+                                            product.getString("warna"),
+                                            product.getString("stok_jual"),
+                                            product.getString("date_input"),
+                                            product.getString("date_edit"),
+                                            product.getString("harga_barang")
+                                    ));
+                                }
                             }
 
                             //creating adapter object and Xsetting it to recyclerview

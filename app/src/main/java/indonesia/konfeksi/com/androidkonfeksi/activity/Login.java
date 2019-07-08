@@ -167,7 +167,7 @@ public class Login extends AppCompatActivity {
         editor.putString("alamat", alamat);
         editor.putString("kota", kota);
         editor.putString("negara", negara);
-        editor.putString("kode_pos", kode_pos);
+
         editor.putString("no_telp", no_telp);
         editor.putString("email", email);
         editor.putString("status", status);

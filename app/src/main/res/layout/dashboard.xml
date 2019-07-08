@@ -29,6 +29,7 @@
             android:layout_above="@id/tengah"
             android:layout_width="wrap_content"
             android:text="SELAMAT DATANG"
+            android:textStyle="bold"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -280,7 +281,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="7dp"
             android:gravity="center"
             android:orientation="horizontal">
 

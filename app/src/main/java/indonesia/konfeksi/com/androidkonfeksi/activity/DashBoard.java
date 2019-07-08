@@ -66,6 +66,7 @@ public class DashBoard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Penjualan.class);
+                intent.putExtra("NamaKaryawan", nama);
                 startActivity(intent);
             }
         });
@@ -101,6 +102,6 @@ public class DashBoard extends AppCompatActivity {
 
     private String getNama(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        return preferences.getString("nama", "Nama Karyawan");
+        return preferences.getString("nama", "Null");
     }
 }
