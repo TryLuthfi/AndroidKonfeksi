@@ -52,7 +52,7 @@ public class TambahPembelian extends AppCompatActivity {
     String idSupplierPilih;
     String idBarangPilih;
     int idStatusPilih;
-    int idPembayaranPilih;
+    String idPembayaranPilih;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +138,11 @@ public class TambahPembelian extends AppCompatActivity {
         metodeBayar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                idPembayaranPilih = position;
+                if(position == 0){
+                    idPembayaranPilih = "cash";
+                }else{
+                    idPembayaranPilih = "piutang";
+                }
             }
 
             @Override
@@ -236,10 +240,8 @@ public class TambahPembelian extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject resObj = new JSONObject(response);
-                            Log.d(TAG, "onResponse: " + resObj.toString());
                             if(resObj.getString("success").equals("true")){
                                 Log.d(TAG, "onResponse: " + resObj.toString());
-
                             }else{
                                 Log.d(TAG, "onResponse false: " + resObj.toString());
                                 Toast.makeText(TambahPembelian.this, resObj.getString("message"), Toast.LENGTH_LONG).show();
@@ -262,7 +264,7 @@ public class TambahPembelian extends AppCompatActivity {
 
                 params.put("no_faktur", nofaktur.getText().toString());
                 params.put("no_nota", nonota.getText().toString());
-                params.put("metode_pembayaran", String.valueOf(idPembayaranPilih));
+                params.put("metode_pembayaran", idPembayaranPilih);
                 params.put("total_harga", totalHarga.getText().toString());
                 params.put("biaya", biaya.getText().toString());
                 params.put("id_karyawan", getId_Karyawan());
@@ -276,7 +278,6 @@ public class TambahPembelian extends AppCompatActivity {
                 return params;
             }
         };
-
 
         Volley.newRequestQueue(this).add(stringRequest);
 
