@@ -348,9 +348,9 @@ m
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="50dp"
                     android:background="#30a5ff"
+                    android:id="@+id/tambah"
                     android:text="Tambah Barang Pembelian"
-                    android:textColor="#fff"
-                    android:onClick="tambahBarangPembelian"/>
+                    android:textColor="#fff"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_pembelian"

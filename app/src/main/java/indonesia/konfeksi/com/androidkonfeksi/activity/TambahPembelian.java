@@ -1,13 +1,18 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,6 +41,9 @@ public class TambahPembelian extends AppCompatActivity {
     private static final String TAG = "TambahPembelian";
     private String date;
     private TextView tgl;
+    private ProgressDialog loading;
+    private ProgressDialog loading2;
+    private Button tambah;
 
     private TextView nonota;
     private Spinner namaSupplier;
@@ -70,6 +78,14 @@ public class TambahPembelian extends AppCompatActivity {
         namaGudang = findViewById(R.id.id_namagudang);
         biaya = findViewById(R.id.id_biaya);
         totalHarga = findViewById(R.id.id_totalharga);
+        tambah = findViewById(R.id.tambah);
+
+        tambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tambahBarangPembelian();
+            }
+        });
 
 
 
@@ -88,6 +104,7 @@ public class TambahPembelian extends AppCompatActivity {
                 TambahPembelian.this,
                 android.R.layout.simple_spinner_dropdown_item, statusbarang);
         status.setAdapter(adapterStatusBarang);
+
 
         ambilNoNota();
 
@@ -156,6 +173,7 @@ public class TambahPembelian extends AppCompatActivity {
     List<StringWithTag> supplierName = new ArrayList<StringWithTag>();
     List<StringWithTag> barangName = new ArrayList<StringWithTag>();
     private void ambilNoNota() {
+        loading2 = ProgressDialog.show(TambahPembelian.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTA,
             new Response.Listener<String>() {
                 @Override
@@ -192,6 +210,7 @@ public class TambahPembelian extends AppCompatActivity {
                                 TambahPembelian.this,
                                 android.R.layout.simple_spinner_dropdown_item, barangName);
                         namaBarang.setAdapter(adapterBarangSupplier);
+                        loading2.dismiss();
 
 
 
@@ -212,7 +231,8 @@ public class TambahPembelian extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    public void tambahBarangPembelian(View view){
+    public void tambahBarangPembelian(){
+        loading = ProgressDialog.show(TambahPembelian.this, "Updating...", "Mohon Tunggu...", false, false);
 
 //        String noNotaKirim = nonota.getText().toString();
 //        String namaSupplierKirim = idSupplierPilih;
@@ -241,13 +261,44 @@ public class TambahPembelian extends AppCompatActivity {
                         try {
                             JSONObject resObj = new JSONObject(response);
                             if(resObj.getString("success").equals("true")){
+                                loading.dismiss();
                                 Log.d(TAG, "onResponse: " + resObj.toString());
+                                Toast.makeText(TambahPembelian.this, "Berhasil Menambah Data", Toast.LENGTH_SHORT).show();
+                                final Dialog alertDialog = new Dialog(TambahPembelian.this);
+                                alertDialog.setCancelable(true);
+                                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                alertDialog.setCanceledOnTouchOutside(true);
+                                alertDialog.setContentView(R.layout.dialog_pembelian);
+                                Button tambah =alertDialog.findViewById(R.id.tambah);
+                                Button tidak =alertDialog.findViewById(R.id.tidak);
+                                tidak.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent (TambahPembelian.this, DashBoard.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                                tambah.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        recreate();
+                                        jumlahColi.setText(null);
+                                        keterangan.setText(null);
+                                        namaGudang.setText(null);
+                                        biaya.setText(null);
+                                        totalHarga.setText(null);
+                                    }
+                                });
+                                alertDialog.show();
                             }else{
+                                loading.dismiss();
                                 Log.d(TAG, "onResponse false: " + resObj.toString());
                                 Toast.makeText(TambahPembelian.this, resObj.getString("message"), Toast.LENGTH_LONG).show();
                             }
                         } catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + response + "\"");
+                            loading.dismiss();
+                            Log.d("My App", "Could not parse malformed JSON: \"" + response + "\"");
                         }
                     }
                 },
@@ -255,6 +306,7 @@ public class TambahPembelian extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "onErrorResponse: " + error);
+                        loading.dismiss();
                         Toast.makeText(TambahPembelian.this, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
                     }
                 }) {
