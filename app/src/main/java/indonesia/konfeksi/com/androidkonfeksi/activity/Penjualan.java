@@ -1,16 +1,23 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -41,15 +48,21 @@ public class Penjualan extends AppCompatActivity {
     private String idPelanggan;
     private String TelpPelanggan;
     private String AlamatPelanggan;
+    private String CatatanPelanggan;
     private String mPostKeyNama = null;
     private Spinner input_nama_pelanggan;
-    private EditText input_tgl_nota;
-    private EditText input_waktu;
-    private EditText input_no_nota;
-    private EditText input_kasir;
-    private EditText input_no_hp;
-    private EditText input_alamat;
-    private EditText input_info_lain;
+    private TextView input_tgl_nota;
+    private TextView input_waktu;
+    private TextView input_no_nota;
+    private TextView input_kasir;
+    private TextView input_no_hp;
+    private TextView input_alamat;
+    private TextView input_info_lain;
+    private RecyclerView recyclerView;
+    private Button tambah_pembelian;
+    private AlertDialog.Builder dialog;
+    private LayoutInflater inflater;
+    private View dialogView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +77,10 @@ public class Penjualan extends AppCompatActivity {
         input_no_hp = findViewById(R.id.input_no_hp);
         input_alamat = findViewById(R.id.input_alamat);
         input_info_lain = findViewById(R.id.input_info_lain);
+        tambah_pembelian = findViewById(R.id.tambah_pembelian);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
 
         setDate();
@@ -84,18 +101,48 @@ public class Penjualan extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Penjualan.StringWithTag pelanggan = (Penjualan.StringWithTag) parent.getItemAtPosition(position);
-                Log.d(TAG, "onItemSelected: " + pelanggan.id + ", " + pelanggan.string + ", " + pelanggan.Telp + ", " + pelanggan.Alaamat);
+                Log.d(TAG, "onItemSelected: " + pelanggan.id + ", " + pelanggan.string + ", " + pelanggan.Telp + ", " + pelanggan.Alaamat + ", " + pelanggan.Caatatan);
                 idPelanggan = (String) pelanggan.id;
                 TelpPelanggan = (String) pelanggan.Telp;
                 AlamatPelanggan = (String) pelanggan.Alaamat;
+                CatatanPelanggan = (String) pelanggan.Caatatan;
 
                 input_no_hp.setText(TelpPelanggan);
                 input_alamat.setText(AlamatPelanggan);
+                input_info_lain.setText(CatatanPelanggan);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        tambah_pembelian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new AlertDialog.Builder(Penjualan.this);
+                inflater = getLayoutInflater();
+                dialogView = inflater.inflate(R.layout.form_penjualan, null);
+                dialog.setView(dialogView);
+
+                dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
             }
         });
     }
@@ -118,7 +165,8 @@ public class Penjualan extends AppCompatActivity {
                                 String idpelanggan = supplierJson.getString("id_pelanggan");
                                 String notelp = supplierJson.getString("no_telp");
                                 String alamat = supplierJson.getString("alamat");
-                                pelangganName.add(new StringWithTag(namapelanggan, idpelanggan, notelp, alamat));
+                                String catatan = supplierJson.getString("catatan");
+                                pelangganName.add(new StringWithTag(namapelanggan, idpelanggan, notelp, alamat, catatan));
                             }
 
                             ArrayAdapter<Penjualan.StringWithTag> adapterSpinnerPelanggan = new ArrayAdapter<Penjualan.StringWithTag>(
@@ -159,12 +207,14 @@ public class Penjualan extends AppCompatActivity {
         public Object id;
         public String Telp;
         public String Alaamat;
+        public String Caatatan;
 
-        public StringWithTag(String string, Object id, String Telp, String Alaamat) {
+        public StringWithTag(String string, Object id, String Telp, String Alaamat, String Caatatan) {
             this.string = string;
             this.id = id;
             this.Telp = Telp;
             this.Alaamat = Alaamat;
+            this.Caatatan = Caatatan;
         }
 
         @Override
