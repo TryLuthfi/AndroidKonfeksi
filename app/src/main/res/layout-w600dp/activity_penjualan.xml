@@ -11,8 +11,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,16 +64,15 @@
                         android:id="@+id/layouttext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="52dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
-                            android:text="#"
                             android:gravity="center"
+                            android:text="#"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -83,8 +81,8 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
-                            android:text="Kode Barang"
                             android:gravity="center"
+                            android:text="Kode Barang"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -93,8 +91,8 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
-                            android:text="Nama Barang"
                             android:gravity="center"
+                            android:text="Nama Barang"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -103,8 +101,8 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
-                            android:text="Harga"
                             android:gravity="center"
+                            android:text="Harga"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -113,8 +111,8 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
-                            android:text="Qty"
                             android:gravity="center"
+                            android:text="Qty"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -123,9 +121,9 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
+                            android:gravity="center"
                             android:text="Subtotal"
                             android:textColor="#fff"
-                            android:gravity="center"
                             android:textSize="20dp" />
 
                         <TextView
@@ -133,8 +131,8 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
                             android:background="#304fff"
-                            android:text="a"
                             android:gravity="center"
+                            android:text="a"
                             android:textColor="#fff"
                             android:textSize="20dp" />
 
@@ -152,10 +150,10 @@
                             android:id="@+id/nomor"
                             android:layout_width="52dp"
                             android:layout_height="match_parent"
-                            android:hint="no"
                             android:background="@drawable/border_biru"
-                            android:textSize="12sp"
                             android:gravity="center"
+                            android:hint="no"
+                            android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -164,10 +162,10 @@
                             android:id="@+id/input_Kode"
                             android:layout_width="127dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/border_biru"
+                            android:gravity="center"
                             android:hint="Kode Barang"
                             android:textSize="12sp"
-                            android:gravity="center"
-                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -176,10 +174,10 @@
                             android:id="@+id/input_nama"
                             android:layout_width="138dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/border_biru"
+                            android:gravity="center"
                             android:hint="Nama Barang"
                             android:textSize="12sp"
-                            android:gravity="center"
-                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -188,10 +186,10 @@
                             android:id="@+id/input_harga"
                             android:layout_width="112dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/border_biru"
+                            android:gravity="center"
                             android:hint="Harga Barang"
                             android:textSize="12sp"
-                            android:gravity="center"
-                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -200,10 +198,10 @@
                             android:id="@+id/input_qty"
                             android:layout_width="97dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/border_biru"
+                            android:gravity="center"
                             android:hint="Jumlah"
                             android:textSize="12sp"
-                            android:gravity="center"
-                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -212,10 +210,10 @@
                             android:id="@+id/input_total"
                             android:layout_width="138dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/border_biru"
+                            android:gravity="center"
                             android:hint="Total"
                             android:textSize="12sp"
-                            android:gravity="center"
-                            android:background="@drawable/border_biru"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -245,11 +243,13 @@
 
                         <Button
                             android:id="@+id/tambah_baris"
-                            android:layout_width="104dp"
-                            android:layout_height="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignBottom="@+id/layouttotal"
                             android:background="#32CD32"
                             android:hint="+ Baris Baru"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
                             android:textColor="#FFFFFF"
                             android:textSize="15sp" />
 
@@ -270,7 +270,6 @@
                             android:textColor="#0000CD"
                             android:textSize="30dp" />
                     </LinearLayout>
-
 
 
                 </RelativeLayout>
@@ -297,16 +296,11 @@
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <android.support.constraint.ConstraintLayout
                             android:id="@+id/c_h_info_nota"
-                            android:layout_width="707dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignTop="@+id/c_info_nota"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:background="#304ffe"
-                            android:orientation="vertical"
-                            app:layout_constraintStart_toStartOf="parent">
+                            android:background="#304ffe">
 
                             <TextView
                                 android:id="@+id/tx_kiri"
@@ -320,10 +314,8 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:layout_conversion_absoluteHeight="19dp"
-                                tools:layout_conversion_absoluteWidth="145dp" />
-                        </LinearLayout>
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </android.support.constraint.ConstraintLayout>
 
                         <android.support.constraint.ConstraintLayout
                             android:layout_width="match_parent"
@@ -378,8 +370,8 @@
 
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/c_info_pelanggan"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
                         android:layout_marginEnd="8dp"
@@ -389,7 +381,7 @@
                         <android.support.constraint.ConstraintLayout
                             android:id="@+id/c_h_info_pelanggan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="#304ffe"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -419,12 +411,10 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/c_h_info_pelanggan">
 
-                            <EditText
+                            <Spinner
                                 android:id="@+id/input_nama_pelanngan"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="Nama Pelanggan"
-                                android:textSize="12sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
