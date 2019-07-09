@@ -21,7 +21,7 @@
                 android:id="@+id/header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/blueColor"
                 android:gravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                     android:text="Tambah Pembelian"
                     android:textAllCaps="true"
                     android:textColor="#fff"
-                    android:textSize="14sp"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -174,17 +174,14 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:layout_weight="1"
-                            android:background="@drawable/formshape"
-                            android:paddingLeft="6dp"
-                            android:paddingRight="6dp">
+                            android:background="@drawable/formshape">
 
-                            <EditText
+                            <Spinner
                                 android:id="@+id/id_namabarang"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="14sp" />
+                                android:layout_height="match_parent" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -275,19 +272,14 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_height="40dp"
                             android:background="@drawable/formshape"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="6dp"
-                            android:paddingRight="6dp">
+                            android:gravity="center_vertical">
 
-                            <TextView
+                            <Spinner
                                 android:id="@+id/id_status"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tanggal"
-                                android:textSize="14sp" />
+                                android:layout_width="match_parent"
+                                android:layout_height="10dp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -354,15 +346,14 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:layout_weight="1"
                             android:background="@drawable/formshape">
 
-                            <EditText
-                                android:id="@+id/id_meode_pembayaran"
+                            <Spinner
+                                android:id="@+id/id_metodepembayaran"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="14sp" />
+                                android:layout_height="match_parent" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -475,6 +466,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:id="@+id/tambah"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:background="#30a5ff"
@@ -483,7 +475,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/c_input_tp" />
+                app:layout_constraintTop_toBottomOf="@id/c_input_tp"/>
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
