@@ -79,6 +79,7 @@ public class TambahPembelian extends AppCompatActivity {
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] byteArray;
     private String ConvertImage;
+    private static final int CAMERA_REQUEST = 1;
 
     String idSupplierPilih;
     String idBarangPilih;
@@ -132,7 +133,7 @@ public class TambahPembelian extends AppCompatActivity {
                 camera.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openGallery();
+                        openCamera();
                     }
                 });
 
@@ -424,6 +425,11 @@ public class TambahPembelian extends AppCompatActivity {
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
+    private void openCamera(){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent,CAMERA_REQUEST);
+    }
+
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = TambahPembelian.this.managedQuery(uri, projection, null, null, null);
@@ -455,6 +461,10 @@ public class TambahPembelian extends AppCompatActivity {
                 }
 
             }
+        }
+        if (requestCode == CAMERA_REQUEST) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            buktiImage.setImageBitmap(photo);
         }
     }
 
