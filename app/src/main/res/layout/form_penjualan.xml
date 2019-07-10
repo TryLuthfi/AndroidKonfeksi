@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginVertical="10dp"
     android:layout_height="match_parent">
 
+    <Spinner
+        android:id="@+id/kodeBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="3dp"/>
+
+    <TextView
+        android:id="@+id/namaBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Barang"
+        android:layout_marginVertical="3dp"/>
+
+    <TextView
+        android:id="@+id/hargaBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Harga"
+        android:layout_marginVertical="3dp"/>
+
+    <TextView
+        android:id="@+id/qtyBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Qty"
+        android:layout_marginVertical="3dp"/>
+
+    <TextView
+        android:id="@+id/subTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sub Total"
+        android:layout_marginVertical="3dp"/>
 </LinearLayout>

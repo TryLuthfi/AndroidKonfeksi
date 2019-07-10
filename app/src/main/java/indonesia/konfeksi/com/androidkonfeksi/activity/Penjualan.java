@@ -37,8 +37,10 @@ import java.util.List;
 import java.util.Objects;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.PenjualanAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.Product;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class Penjualan extends AppCompatActivity {
@@ -63,6 +65,9 @@ public class Penjualan extends AppCompatActivity {
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
+    private PenjualanAdapter adapter;
+    private ArrayList<ProductPenjualan> penjualanArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +83,14 @@ public class Penjualan extends AppCompatActivity {
         input_alamat = findViewById(R.id.input_alamat);
         input_info_lain = findViewById(R.id.input_info_lain);
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        adapter = new PenjualanAdapter(penjualanArrayList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Penjualan.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
+        addData();
         setDate();
         settime();
 
@@ -126,6 +134,12 @@ public class Penjualan extends AppCompatActivity {
                 dialogView = inflater.inflate(R.layout.form_penjualan, null);
                 dialog.setView(dialogView);
 
+                Spinner kodeeBarang = dialogView.findViewById(R.id.kodeBarang);
+                TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
+                TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
+                TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
+                TextView subTootal = dialogView.findViewById(R.id.subTotal);
+
                 dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -145,6 +159,14 @@ public class Penjualan extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    void addData(){
+        penjualanArrayList = new ArrayList<>();
+        penjualanArrayList.add(new ProductPenjualan("B500HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "1", "Rp. 15.500"));
+        penjualanArrayList.add(new ProductPenjualan("B400HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "1", "Rp. 15.500"));
+        penjualanArrayList.add(new ProductPenjualan("B300HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "2", "Rp. 15.500"));
+        penjualanArrayList.add(new ProductPenjualan("B200HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "4", "Rp. 15.500"));
     }
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
