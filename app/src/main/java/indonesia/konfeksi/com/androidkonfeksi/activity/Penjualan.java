@@ -115,9 +115,23 @@ public class Penjualan extends AppCompatActivity {
                 AlamatPelanggan = (String) pelanggan.Alaamat;
                 CatatanPelanggan = (String) pelanggan.Caatatan;
 
-                input_no_hp.setText(TelpPelanggan);
-                input_alamat.setText(AlamatPelanggan);
-                input_info_lain.setText(CatatanPelanggan);
+                if (input_no_hp != null){
+                    input_no_hp.setText(TelpPelanggan);
+                }else {
+                    input_no_hp.setText("Tidak Ada No HP");
+                }
+
+                if (input_alamat != null){
+                    input_alamat.setText(AlamatPelanggan);
+                }else {
+                    input_alamat.setText("Tidak Ada Alamat");
+                }
+
+                if (input_info_lain != null){
+                    input_info_lain.setText(CatatanPelanggan);
+                }else {
+                    input_info_lain.setText("Tidak Ada Info Lain");
+                }
             }
 
             @Override
