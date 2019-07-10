@@ -130,6 +130,12 @@ public class TambahPembelian extends AppCompatActivity {
                         openGallery();
                     }
                 });
+                camera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openCamera();
+                    }
+                });
 
                 alertDialog.show();
             }
@@ -419,6 +425,11 @@ public class TambahPembelian extends AppCompatActivity {
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
+    private void openCamera(){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent,CAMERA_REQUEST);
+    }
+
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = TambahPembelian.this.managedQuery(uri, projection, null, null, null);
@@ -450,6 +461,10 @@ public class TambahPembelian extends AppCompatActivity {
                 }
 
             }
+        }
+        if (requestCode == CAMERA_REQUEST) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            buktiImage.setImageBitmap(photo);
         }
     }
 
