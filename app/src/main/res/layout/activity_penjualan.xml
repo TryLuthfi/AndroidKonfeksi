@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.Penjualan">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -41,33 +45,37 @@
             android:layout_marginHorizontal="15sp"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
                 android:id="@+id/input_no_nota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:hint="No Nota"/>
+                android:textSize="14sp"
+                android:layout_marginVertical="5dp"
+                android:text="No Nota"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/input_tgl_nota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:hint="Tanggal"/>
+                android:textSize="14sp"
+                android:layout_marginVertical="5dp"
+                android:text="Tanggal"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/input_waktu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:hint="Waktu"/>
+                android:textSize="14sp"
+                android:layout_marginVertical="5dp"
+                android:text="Waktu"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/input_kasir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:hint="Kasir"/>
+                android:textSize="14sp"
+                android:layout_marginVertical="5dp"
+                android:text="Kasir"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -104,7 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
-                android:layout_marginHorizontal="15sp"
                 android:orientation="vertical">
 
                 <Spinner
@@ -113,28 +120,52 @@
                     android:layout_height="match_parent"
                     android:spinnerMode="dialog" />
 
-                <EditText
+                <TextView
                     android:id="@+id/input_no_hp"
                     android:layout_width="match_parent"
+                    android:layout_marginHorizontal="15sp"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:hint="No Telp / Hp"/>
+                    android:textSize="14sp"
+                    android:layout_marginVertical="5dp"
+                    android:text="No Telp / Hp"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/input_alamat"
                     android:layout_width="match_parent"
+                    android:layout_marginHorizontal="15sp"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:hint="Alamat"/>
+                    android:textSize="14sp"
+                    android:layout_marginVertical="5dp"
+                    android:text="Alamat"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/input_info_lain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:hint="Info Lain"/>
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="15sp"
+                    android:layout_marginVertical="5dp"
+                    android:text="Info Lain"/>
 
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="15dp"></android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/tambah_pembelian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Tambah Penjualan"
+        android:textColor="#fff"
+        android:background="#304ffe"/>
+</RelativeLayout>
