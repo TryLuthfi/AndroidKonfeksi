@@ -79,6 +79,7 @@ public class TambahPembelian extends AppCompatActivity {
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] byteArray;
     private String ConvertImage;
+    private static final int CAMERA_REQUEST = 1;
 
     String idSupplierPilih;
     String idBarangPilih;
@@ -124,12 +125,6 @@ public class TambahPembelian extends AppCompatActivity {
                 LinearLayout galery= alertDialog.findViewById(R.id.galery);
                 LinearLayout camera= alertDialog.findViewById(R.id.camera);
                 galery.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openGallery();
-                    }
-                });
-                camera.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         openGallery();
