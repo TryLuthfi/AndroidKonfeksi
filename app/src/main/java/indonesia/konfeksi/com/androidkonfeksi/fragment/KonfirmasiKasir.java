@@ -63,7 +63,7 @@ public class KonfirmasiKasir extends Fragment {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_BARANG,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_KONFIRMASIBAYAR,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
