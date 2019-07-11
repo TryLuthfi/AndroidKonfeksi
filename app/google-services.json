@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1021652349008",
+    "firebase_url": "https://androidkonfeksi.firebaseio.com",
+    "project_id": "androidkonfeksi",
+    "storage_bucket": "androidkonfeksi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021652349008:android:0685e8ebd675d2da",
+        "android_client_info": {
+          "package_name": "indonesia.konfeksi.com.androidkonfeksi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021652349008-56moml2ipia6fkagl46tkgh5u5h58dsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "indonesia.konfeksi.com.androidkonfeksi",
+            "certificate_hash": "4c62868a7bc1c9a916b3e3d72046d8e7db105c88"
+          }
+        },
+        {
+          "client_id": "1021652349008-je2gtnurkju4i7tg88hns7hj2r09heq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPOSWhdhYd0Xp2BaQSPKjAcIgBWDZm60M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021652349008-je2gtnurkju4i7tg88hns7hj2r09heq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
