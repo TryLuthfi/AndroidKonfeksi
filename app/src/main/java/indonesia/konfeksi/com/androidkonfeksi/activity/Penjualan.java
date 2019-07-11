@@ -300,7 +300,6 @@ public class Penjualan extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         date = formatter.format(today);
     }
-
     public void settime(){
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");
