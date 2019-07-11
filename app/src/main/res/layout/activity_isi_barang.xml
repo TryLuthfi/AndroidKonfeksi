@@ -136,12 +136,20 @@
                     android:textSize="20sp" />
 
                 <LinearLayout
-                    android:id="@+id/kode_barcode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/barcode"
-                    android:orientation="vertical"></LinearLayout>
+                    android:background="#ccd1d9">
+
+                    <TextView
+                        android:id="@+id/kode_barcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20sp"
+                        android:text="Kode Barcode"
+                        android:textSize="18sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

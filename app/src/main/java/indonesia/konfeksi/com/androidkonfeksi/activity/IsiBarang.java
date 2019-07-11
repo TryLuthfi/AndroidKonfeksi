@@ -38,6 +38,7 @@ public class IsiBarang extends AppCompatActivity {
     private TextView kode_barang;
     private TextView nama_barang;
     private TextView diskon_rp;
+    private TextView kode_barcode;
     private String mPostIdBarang = null;
     private String mPostKodeBarang = null;
     private String mPostKodeBarcode = null;
@@ -58,10 +59,11 @@ public class IsiBarang extends AppCompatActivity {
         kode_barang  = findViewById(R.id.kode_barang);
         nama_barang  = findViewById(R.id.nama_barang);
         diskon_rp  = findViewById(R.id.diskon_rp);
+        kode_barcode  = findViewById(R.id.kode_barcode);
 
         mPostIdBarang = getIntent().getExtras().getString("id_barang");
         mPostKodeBarang = getIntent().getExtras().getString("kode_barang");
-        mPostKodeBarcode = getIntent().getExtras().getString("kode_barang");
+        mPostKodeBarcode = getIntent().getExtras().getString("kode_barcode");
         mPostNamaBarang = getIntent().getExtras().getString("nama_barang");
         mPostDiskonRupiah = getIntent().getExtras().getString("diskon_rupiah");
         mPostHargaBarang = getIntent().getExtras().getString("harga_barang");
@@ -70,6 +72,7 @@ public class IsiBarang extends AppCompatActivity {
 
         kode_barang.setText(mPostKodeBarang);
         nama_barang.setText(mPostNamaBarang);
+        kode_barcode.setText(mPostKodeBarcode);
         diskon_rp.setText(formatRupiah.format((double)hargabarang));
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);

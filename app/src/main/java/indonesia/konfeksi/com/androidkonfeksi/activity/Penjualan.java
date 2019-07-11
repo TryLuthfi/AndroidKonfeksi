@@ -53,6 +53,7 @@ public class Penjualan extends AppCompatActivity {
     private String CatatanPelanggan;
     private String mPostKeyNama = null;
     private Spinner input_nama_pelanggan;
+    private Spinner kodeeBarang;
     private TextView input_tgl_nota;
     private TextView input_waktu;
     private TextView input_no_nota;
@@ -66,7 +67,6 @@ public class Penjualan extends AppCompatActivity {
     private LayoutInflater inflater;
     private View dialogView;
     private PenjualanAdapter adapter;
-    private ArrayList<ProductPenjualan> penjualanArrayList;
 
 
     @Override
@@ -85,12 +85,29 @@ public class Penjualan extends AppCompatActivity {
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        adapter = new PenjualanAdapter(penjualanArrayList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Penjualan.this);
-        recyclerView.setLayoutManager(layoutManager);
+
+        dialog = new AlertDialog.Builder(Penjualan.this);
+        inflater = getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.form_penjualan, null);
+        dialog.setView(dialogView);
+
+        kodeeBarang = dialogView.findViewById(R.id.kodeBarang);
+        TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
+        TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
+        TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
+        TextView subTootal = dialogView.findViewById(R.id.subTotal);
+
+        ArrayList<String> penjualan = new ArrayList<>();
+        penjualan.add("001");
+        penjualan.add("002");
+        penjualan.add("003");
+        penjualan.add("004");
+        penjualan.add("005");
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new PenjualanAdapter(this, penjualan);
         recyclerView.setAdapter(adapter);
 
-        addData();
         setDate();
         settime();
 
@@ -105,6 +122,23 @@ public class Penjualan extends AppCompatActivity {
 
         ambilNoNotaPenjualan();
 
+//        kodeeBarang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Penjualan.StringWithTagg barang = (Penjualan.StringWithTagg) parent.getItemAtPosition(position);
+//                Log.d(TAG, "onItemSelected: " + barang.id + ", " + barang.string + ", " + barang.Telp + ", " + barang.Alaamat + ", " + barang.Caatatan);
+//                idPelanggan = (String) barang.id;
+//                TelpPelanggan = (String) barang.Telp;
+//                AlamatPelanggan = (String) barang.Alaamat;
+//                CatatanPelanggan = (String) barang.Caatatan;
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+
         input_nama_pelanggan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -115,22 +149,25 @@ public class Penjualan extends AppCompatActivity {
                 AlamatPelanggan = (String) pelanggan.Alaamat;
                 CatatanPelanggan = (String) pelanggan.Caatatan;
 
-                if (input_no_hp != null){
-                    input_no_hp.setText(TelpPelanggan);
-                }else {
+                if (input_no_hp == null){
                     input_no_hp.setText("Tidak Ada No HP");
+
+                }else {
+                    input_no_hp.setText(TelpPelanggan);
                 }
 
-                if (input_alamat != null){
-                    input_alamat.setText(AlamatPelanggan);
-                }else {
+                if (input_alamat == null){
                     input_alamat.setText("Tidak Ada Alamat");
+
+                }else {
+                    input_alamat.setText(AlamatPelanggan);
                 }
 
-                if (input_info_lain != null){
-                    input_info_lain.setText(CatatanPelanggan);
-                }else {
+                if (input_info_lain == null){
                     input_info_lain.setText("Tidak Ada Info Lain");
+
+                }else {
+                    input_info_lain.setText(CatatanPelanggan);
                 }
             }
 
@@ -143,16 +180,8 @@ public class Penjualan extends AppCompatActivity {
         tambah_pembelian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new AlertDialog.Builder(Penjualan.this);
-                inflater = getLayoutInflater();
-                dialogView = inflater.inflate(R.layout.form_penjualan, null);
-                dialog.setView(dialogView);
 
-                Spinner kodeeBarang = dialogView.findViewById(R.id.kodeBarang);
-                TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
-                TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
-                TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
-                TextView subTootal = dialogView.findViewById(R.id.subTotal);
+                ambilbarang();
 
                 dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
 
@@ -175,12 +204,52 @@ public class Penjualan extends AppCompatActivity {
         });
     }
 
-    void addData(){
-        penjualanArrayList = new ArrayList<>();
-        penjualanArrayList.add(new ProductPenjualan("B500HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "1", "Rp. 15.500"));
-        penjualanArrayList.add(new ProductPenjualan("B400HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "1", "Rp. 15.500"));
-        penjualanArrayList.add(new ProductPenjualan("B300HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "2", "Rp. 15.500"));
-        penjualanArrayList.add(new ProductPenjualan("B200HITAM", "B. putra 500y  hitam 1lusin (12 Pcs)", "Rp. 15.500", "4", "Rp. 15.500"));
+    List<Penjualan.StringWithTagg> barangName = new ArrayList<Penjualan.StringWithTagg>();
+    private void ambilbarang() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray arrSupplier = obj.getJSONArray("datanya");
+                            for(int i = 0; i < arrSupplier.length(); i++){
+                                JSONObject supplierJson = arrSupplier.getJSONObject(i);
+                                String id_barang = supplierJson.getString("id_barang");
+                                String kode_barang = supplierJson.getString("kode_barang");
+                                String nama_barang = supplierJson.getString("nama_barang");
+                                String diskon_persen = supplierJson.getString("diskon_persen");
+                                String diskon_rupiah = supplierJson.getString("diskon_rupiah");
+                                String id_varian_harga = supplierJson.getString("id_varian_harga");
+                                String ukuran = supplierJson.getString("ukuran");
+                                String meter = supplierJson.getString("meter");
+                                String warna = supplierJson.getString("warna");
+                                String stok_jual = supplierJson.getString("stok_jual");
+                                String harga = supplierJson.getString("harga");
+                                barangName.add(new StringWithTagg(id_barang, kode_barang, nama_barang, diskon_persen, diskon_rupiah, id_varian_harga, ukuran, meter, warna, stok_jual, harga));
+                            }
+
+                            ArrayAdapter<Penjualan.StringWithTagg> adapterSpinnerBarang = new ArrayAdapter<StringWithTagg>(
+                                    Penjualan.this,
+                                    android.R.layout.simple_spinner_dropdown_item, barangName);
+                            kodeeBarang.setAdapter(adapterSpinnerBarang);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "onResponse: " + e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error);
+                    }
+                });
+
+        //adding our stringrequest to queue
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
@@ -256,6 +325,39 @@ public class Penjualan extends AppCompatActivity {
         @Override
         public String toString() {
             return string;
+        }
+    }
+
+    private static class StringWithTagg {
+        public Object idBarang;
+        public String kodeBarang;
+        public String namaBarang;
+        public String diskonPersen;
+        public String diskonRupiah;
+        public String idVarianHarga;
+        public String ukuran;
+        public String meter;
+        public String warna;
+        public String stokJual;
+        public String harga;
+
+        public StringWithTagg(Object idBarang, String kodeBarang, String namaBarang, String diskonPersen, String diskonRupiah, String idVarianHarga, String ukuran, String meter, String warna, String stokJual, String harga) {
+            this.idBarang = idBarang;
+            this.kodeBarang = kodeBarang;
+            this.namaBarang = namaBarang;
+            this.diskonPersen = diskonPersen;
+            this.diskonRupiah = diskonRupiah;
+            this.idVarianHarga = idVarianHarga;
+            this.ukuran = ukuran;
+            this.meter = meter;
+            this.warna = warna;
+            this.stokJual = stokJual;
+            this.harga = harga;
+        }
+
+        @Override
+        public String toString() {
+            return namaBarang;
         }
     }
 
