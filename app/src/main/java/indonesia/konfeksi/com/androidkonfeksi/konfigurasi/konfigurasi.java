@@ -13,5 +13,6 @@ public class konfigurasi {
     public static final String URL_GET_NONOTA = "https://laris23.premiumcookieslimo.com/api/nonota";
     public static final String URL_GET_NONOTAPENJUALAN = "https://laris23.premiumcookieslimo.com/api/nonotapenjualan";
     public static final String URL_TAMBAH_PEMBELIAN = "http://laris23.premiumcookieslimo.com/api/pembelian";
+    public static final String URL_TAMBAH_PENJUALAN = "http://laris23.premiumcookieslimo.com/api/penjualan";
 
 }

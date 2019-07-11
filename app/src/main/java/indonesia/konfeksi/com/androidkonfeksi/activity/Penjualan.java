@@ -1,6 +1,11 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,13 +17,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,7 +41,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
@@ -67,6 +77,8 @@ public class Penjualan extends AppCompatActivity {
     private LayoutInflater inflater;
     private View dialogView;
     private PenjualanAdapter adapter;
+
+
 
 
     @Override
@@ -180,7 +192,7 @@ public class Penjualan extends AppCompatActivity {
         tambah_pembelian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                tambahBarangPembelian();
                 ambilbarang();
 
                 dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
@@ -306,6 +318,77 @@ public class Penjualan extends AppCompatActivity {
         time = formatter.format(today);
     }
 
+    public void tambahBarangPembelian(){
+        if(getId_Karyawan() == "null"){
+            Log.d(TAG, "tambahBarangPembelian: " + getId_Karyawan());
+            Toast.makeText(Penjualan.this, "Id Karyawan tidak tersedia", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // statik barang penjualan
+        final List<BarangBeli> barangBeli = new ArrayList<>();
+        barangBeli.add(new BarangBeli(12,12,1,10000));
+        barangBeli.add(new BarangBeli(13,13,1,10000));
+        barangBeli.add(new BarangBeli(14,13,1,10000));
+        barangBeli.add(new BarangBeli(15,13,1,10000));
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.URL_TAMBAH_PENJUALAN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject resObj = new JSONObject(response);
+                            if(resObj.getString("success").equals("true")){
+                                Log.d(TAG, "onResponse: " + resObj.toString());
+
+                            }else{
+                                Log.d(TAG, "onResponse false: " + resObj.toString());
+                            }
+                        } catch (Throwable t) {
+                            Log.d(TAG, "onResponse err try: " + t);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error);
+                        Toast.makeText(Penjualan.this, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id_karyawan", "10");
+                params.put("id_pelanggan", "8");
+                params.put("no_nota", "NOTA21");
+                params.put("metode_pembayaran", "cash");
+                params.put("Total", "100000");
+                params.put("cash", "200000");
+
+                for (int i = 0; i < barangBeli.size(); i++){
+                    params.put("id_barang[" + i + "]", String.valueOf(barangBeli.get(i).id_barang));
+                    params.put("id_varian_harga[" + i + "]", String.valueOf(barangBeli.get(i).id_varian_harga));
+                    params.put("jumlah_beli[" + i + "]", String.valueOf(barangBeli.get(i).jumlah_beli));
+                    params.put("sub_total[" + i + "]", String.valueOf(barangBeli.get(i).sub_total));
+                }
+
+                Log.d(TAG, "getParams: " + params.toString());
+
+                return params;
+            }
+        };
+
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private String getId_Karyawan(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String id_karyawan = preferences.getString("id_karyawan", "null");
+        return id_karyawan;
+    }
+
     private static class StringWithTag {
         public String string;
         public Object id;
@@ -360,4 +443,27 @@ public class Penjualan extends AppCompatActivity {
         }
     }
 
+    public class BarangBeli{
+        int id_barang;
+        int id_varian_harga;
+        int jumlah_beli;
+        int sub_total;
+
+        public BarangBeli( int id_barang, int id_varian_harga, int jumlah_beli, int sub_total)
+        {
+            this.id_barang = id_barang;
+            this.id_varian_harga = id_varian_harga;
+            this.jumlah_beli = jumlah_beli;
+            this.sub_total = sub_total;
+        }
+
+        void setId_barang(int c){ this.id_barang = c; }
+        void setId_varian_harga(int c){ this.id_varian_harga = c; }
+        void setJumlah_beli(int c){ this.jumlah_beli = c; }
+        void setSub_total(int c){ this.sub_total = c; }
+        public int getId_barang(){ return id_barang; }
+        public int  getId_varian_harga() { return id_varian_harga; }
+        public int  getJumlah_beli() { return id_varian_harga; }
+        public int  getSub_total() { return id_varian_harga; }
+    }
 }
