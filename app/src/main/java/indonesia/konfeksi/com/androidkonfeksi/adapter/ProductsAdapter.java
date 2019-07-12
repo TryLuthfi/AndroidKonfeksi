@@ -49,8 +49,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.kodebarang.setText(product.getKode_barang());
         holder.stokjual.setText(product.getStok_jual());
         holder.namabarang.setText(product.getNama_barang());
-        double hargabarang = Double.parseDouble(product.getHarga_barang());
-        holder.hargabarang.setText(formatRupiah.format((double)hargabarang));
+        double hargabarang2 = Double.parseDouble(product.getHarga_barang());
+        holder.hargabarang.setText(formatRupiah.format((double)hargabarang2));
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

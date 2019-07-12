@@ -140,14 +140,7 @@ public class TambahPembelian extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-        if (imageUri != null){
-            imageUri.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-            byteArray = byteArrayOutputStream.toByteArray();
-            ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        }else {
-            teksbukti.setText("Mohon Lampirkan Bukti Transfer");
-            teksbukti.setTextColor(Color.parseColor("#FFFF0004"));
-        }
+
 
         List<String> metodepembayaran = new ArrayList<String>();
         metodepembayaran.add("Cash");
@@ -449,6 +442,14 @@ public class TambahPembelian extends AppCompatActivity {
 
             if (data != null) {
                 contentUri = data.getData();
+
+                if (imageUri != null){
+                    imageUri.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+                    byteArray = byteArrayOutputStream.toByteArray();
+                    ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                }else {
+
+                }
 
                 try {
                     imageUri = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getApplicationContext()).getContentResolver(), contentUri);
