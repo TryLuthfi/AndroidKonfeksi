@@ -46,4 +46,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.firebaseui:firebase-ui-database:0.4.0'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-firestore:11.8.0'
 }
