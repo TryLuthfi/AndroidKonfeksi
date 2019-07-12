@@ -97,6 +97,8 @@ public class Penjualan extends AppCompatActivity {
         TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         TextView subTootal = dialogView.findViewById(R.id.subTotal);
 
+        ambilbarang();
+
         ArrayList<String> penjualan = new ArrayList<>();
         penjualan.add("001");
         penjualan.add("002");
@@ -149,25 +151,13 @@ public class Penjualan extends AppCompatActivity {
                 AlamatPelanggan = (String) pelanggan.Alaamat;
                 CatatanPelanggan = (String) pelanggan.Caatatan;
 
-                if (input_no_hp == null){
-                    input_no_hp.setText("Tidak Ada No HP");
+                input_no_hp.setText(TelpPelanggan);
+                input_alamat.setText(AlamatPelanggan);
 
-                }else {
-                    input_no_hp.setText(TelpPelanggan);
-                }
-
-                if (input_alamat == null){
-                    input_alamat.setText("Tidak Ada Alamat");
-
-                }else {
-                    input_alamat.setText(AlamatPelanggan);
-                }
-
-                if (input_info_lain == null){
-                    input_info_lain.setText("Tidak Ada Info Lain");
-
-                }else {
+                if (CatatanPelanggan != null){
                     input_info_lain.setText(CatatanPelanggan);
+                }else {
+                    input_info_lain.setText("Tidak Ada Info Lain");
                 }
             }
 
@@ -180,8 +170,6 @@ public class Penjualan extends AppCompatActivity {
         tambah_pembelian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ambilbarang();
 
                 dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
 
@@ -238,7 +226,7 @@ public class Penjualan extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d(TAG, "onResponse: " + e);
-                        }
+                       ; }
                     }
                 },
                 new Response.ErrorListener() {
@@ -248,7 +236,6 @@ public class Penjualan extends AppCompatActivity {
                     }
                 });
 
-        //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -292,7 +279,6 @@ public class Penjualan extends AppCompatActivity {
                     }
                 });
 
-        //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
     public void setDate() {
