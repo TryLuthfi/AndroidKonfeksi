@@ -17,6 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:paddingBottom="8dp"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -28,7 +29,74 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Info"
+                    android:text="Informasi"
+                    android:textAllCaps="true"
+                    android:textColor="#fff"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="15sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginVertical="5dp"
+                    android:text="Tanggal"/>
+
+                    <TextView
+                        android:id="@+id/nonota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_below="@id/tanggal"
+                        android:layout_weight="0.5"
+                        android:layout_marginVertical="5dp"
+                        android:text="No Nota"/>
+
+                <TextView
+                    android:id="@+id/karyawan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_below="@id/nonota"
+                    android:layout_marginVertical="5dp"
+                    android:text="Karyawan"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="10dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="3dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:background="#304ffe">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Informasi Pelanggan"
                     android:textAllCaps="true"
                     android:textColor="#fff"
                     android:textSize="15sp"/>
@@ -38,32 +106,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
-                android:layout_marginHorizontal="15sp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/nonota"
+                    android:id="@+id/input_nama_pelanngan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:layout_height="match_parent"
                     android:layout_marginVertical="5dp"
-                    android:text="No Nota"/>
+                    android:layout_marginHorizontal="15sp"
+                    android:text="Nama Pelanggan"/>
 
                 <TextView
-                    android:id="@+id/tanggal"
+                    android:id="@+id/input_no_hp"
                     android:layout_width="match_parent"
+                    android:layout_marginHorizontal="15sp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_marginVertical="5dp"
-                    android:text="Tanggal"/>
+                    android:text="No Telp / Hp"/>
 
                 <TextView
-                    android:id="@+id/karyawan"
+                    android:id="@+id/input_alamat"
                     android:layout_width="match_parent"
+                    android:layout_marginHorizontal="15sp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_marginVertical="5dp"
-                    android:text="Karyawan"/>
+                    android:text="Alamat"/>
+
+                <TextView
+                    android:id="@+id/input_info_lain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="15sp"
+                    android:layout_marginVertical="5dp"
+                    android:text="Info Lain"/>
 
             </LinearLayout>
         </LinearLayout>
