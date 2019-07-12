@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.activity.IsiBarang;
+import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.Product;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 
@@ -22,8 +23,6 @@ public class HistoryPenjualanAdapter extends RecyclerView.Adapter<HistoryPenjual
     private Activity mCtx;
     private List<ProductHistoryPenjualan> productList;
     private NumberFormat formatRupiah;
-
-
 
     public HistoryPenjualanAdapter(Activity mCtx, List<ProductHistoryPenjualan> productList) {
         this.mCtx = mCtx;
@@ -52,6 +51,17 @@ public class HistoryPenjualanAdapter extends RecyclerView.Adapter<HistoryPenjual
         holder.kasir.setText(product.getNama_karyawan());
         double hargabarang = Double.parseDouble(product.getBiaya());
         holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCtx.getApplicationContext(), isiKonfirmasiKasir.class);
+                intent.putExtra("no_nota", product.getNo_nota());
+                intent.putExtra("nama_karyawan", product.getNama_karyawan());
+                intent.putExtra("tanggal", product.getDate());
+                mCtx.startActivity(intent);
+            }
+        });
     }
 
     @Override

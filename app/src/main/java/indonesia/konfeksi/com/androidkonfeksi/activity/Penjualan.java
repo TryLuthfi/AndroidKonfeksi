@@ -346,5 +346,4 @@ public class Penjualan extends AppCompatActivity {
             return namaBarang;
         }
     }
-
 }
