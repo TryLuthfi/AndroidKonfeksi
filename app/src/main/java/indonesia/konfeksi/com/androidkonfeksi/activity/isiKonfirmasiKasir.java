@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.KonfirmasiKasirAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
@@ -34,9 +35,15 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
     private String mPostNoNota = null;
     private String mPostKaryawan = null;
     private String mPostTanggal = null;
+    private String mPostNamaPelanggan = null;
+    private String mPostNoTelp = null;
+    private String mPostAlamat = null;
     private TextView nonota;
     private TextView tanggal;
     private TextView karyawan;
+    private TextView nama_pelanggan;
+    private TextView no_telp;
+    private TextView alamat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +60,23 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         nonota = findViewById(R.id.nonota);
         tanggal = findViewById(R.id.tanggal);
         karyawan = findViewById(R.id.karyawan);
+        nama_pelanggan = findViewById(R.id.nama_pelanggan);
+        no_telp = findViewById(R.id.no_telp);
+        alamat = findViewById(R.id.alamat);
 
         mPostNoNota = getIntent().getExtras().getString("no_nota");
         mPostKaryawan = getIntent().getExtras().getString("nama_karyawan");
         mPostTanggal = getIntent().getExtras().getString("tanggal");
+        mPostNamaPelanggan = getIntent().getExtras().getString("nama_pelanggan");
+        mPostNoTelp = getIntent().getExtras().getString("no_telp");
+        mPostAlamat = getIntent().getExtras().getString("alamat");
 
         nonota.setText(mPostNoNota);
         tanggal.setText(mPostTanggal);
         karyawan.setText(mPostKaryawan);
+        nama_pelanggan.setText(mPostNamaPelanggan);
+        no_telp.setText(mPostNoTelp);
+        alamat.setText(mPostAlamat);
 
         loadProducts();
     }
@@ -121,7 +137,7 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
                             }
 
                             //creating adapter object and Xsetting it to recyclerview
-                            KonfirmasiKasirAdapter adapter = new KonfirmasiKasirAdapter(isiKonfirmasiKasir.this, productList);
+                            IsiKonfirmasiKasirAdapter adapter = new IsiKonfirmasiKasirAdapter(isiKonfirmasiKasir.this, productList);
                             recyclerView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);
