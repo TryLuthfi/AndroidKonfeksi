@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,23 +24,25 @@ import java.util.List;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.KonfirmasiKasirAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class isiKonfirmasiKasir extends AppCompatActivity {
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    List<ProductKonfirmasiKasir> productList;
+    List<ProductIsiKonfirmasiKasir> productList;
 
     private String mPostNoNota = null;
     private String mPostKaryawan = null;
+    private String mPostIdPenjualan = null;
     private String mPostTanggal = null;
+    private String mPostBiaya = null;
     private String mPostNamaPelanggan = null;
     private String mPostNoTelp = null;
     private String mPostAlamat = null;
     private TextView nonota;
     private TextView tanggal;
+    private TextView total_harga;
     private TextView karyawan;
     private TextView nama_pelanggan;
     private TextView no_telp;
@@ -61,12 +64,15 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         tanggal = findViewById(R.id.tanggal);
         karyawan = findViewById(R.id.karyawan);
         nama_pelanggan = findViewById(R.id.nama_pelanggan);
+        total_harga = findViewById(R.id.total_harga);
         no_telp = findViewById(R.id.no_telp);
         alamat = findViewById(R.id.alamat);
 
         mPostNoNota = getIntent().getExtras().getString("no_nota");
+        mPostIdPenjualan = getIntent().getExtras().getString("id_penjualan");
         mPostKaryawan = getIntent().getExtras().getString("nama_karyawan");
         mPostTanggal = getIntent().getExtras().getString("tanggal");
+        mPostBiaya = getIntent().getExtras().getString("biaya");
         mPostNamaPelanggan = getIntent().getExtras().getString("nama_pelanggan");
         mPostNoTelp = getIntent().getExtras().getString("no_telp");
         mPostAlamat = getIntent().getExtras().getString("alamat");
@@ -74,64 +80,54 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         nonota.setText(mPostNoNota);
         tanggal.setText(mPostTanggal);
         karyawan.setText(mPostKaryawan);
+        total_harga.setText(mPostBiaya);
         nama_pelanggan.setText(mPostNamaPelanggan);
         no_telp.setText(mPostNoTelp);
         alamat.setText(mPostAlamat);
 
         loadProducts();
+
+//        Toast.makeText(isiKonfirmasiKasir.this, konfigurasi.URL_DETAIL_KONFIRMASI_KASIR+mPostIdPenjualan, Toast.LENGTH_SHORT).show();
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_KONFIRMASI_KASIR,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_DETAIL_KONFIRMASI_KASIR+mPostIdPenjualan,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            //converting the string to json array object
-                            JSONArray array = new JSONArray(response);
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray array = obj.getJSONArray("detail");
 
                             //traversing through all the object
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject product = array.getJSONObject(i);
-                                //adding the product to product list
-//                                int harga = Integer.parseInt(product.getString("harga_barang"));
-//                                if(harga > 10000)
-                                if(mPostNoNota.equals(product.getString("no_nota"))) {
-                                    productList.add(new ProductKonfirmasiKasir(
+
+                                if(mPostIdPenjualan.equals(product.getString("id_penjualan"))) {
+                                    productList.add(new ProductIsiKonfirmasiKasir(
+                                            product.getString("id_detail_penjualan"),
                                             product.getString("id_penjualan"),
+                                            product.getString("id_barang"),
+                                            product.getString("id_varian_harga"),
+                                            product.getString("qty"),
+                                            product.getString("total_harga"),
+                                            product.getString("ket"),
+                                            product.getString("kode_barang"),
                                             product.getString("id_karyawan"),
-                                            product.getString("id_pelanggan"),
-                                            product.getString("date"),
-                                            product.getString("time"),
-                                            product.getString("no_faktur"),
-                                            product.getString("no_nota"),
-                                            product.getString("metode_pembayaran"),
                                             product.getString("diskon_persen"),
                                             product.getString("diskon_rupiah"),
-                                            product.getString("total_harga"),
-                                            product.getString("biaya"),
-                                            product.getString("selisih"),
-                                            product.getString("status"),
-                                            product.getString("kode_karyawan"),
-                                            product.getString("username"),
-                                            product.getString("password"),
-                                            product.getString("nama"),
-                                            product.getString("alamat"),
-                                            product.getString("kota"),
-                                            product.getString("negara"),
-                                            product.getString("kode_pos"),
-                                            product.getString("no_telp"),
-                                            product.getString("email"),
+                                            product.getString("nama_barang"),
+                                            product.getString("kode_barcode"),
+                                            product.getString("image"),
+                                            product.getString("konsinasi"),
                                             product.getString("date_input"),
                                             product.getString("date_edit"),
-                                            product.getString("token"),
-                                            product.getString("id_posisi"),
-                                            product.getString("kode_pelanggan"),
-                                            product.getString("nama_toko"),
-                                            product.getString("no_telp2"),
-                                            product.getString("no_telp3"),
-                                            product.getString("catatan"),
-                                            product.getString("nama_karyawan")
+                                            product.getString("ukuran"),
+                                            product.getString("meter"),
+                                            product.getString("warna"),
+                                            product.getString("stok_jual"),
+                                            product.getString("harga")
                                     ));
                                 }
                             }

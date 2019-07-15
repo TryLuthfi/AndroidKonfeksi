@@ -56,7 +56,9 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
             public void onClick(View v) {
                 Intent intent = new Intent (mCtx.getApplicationContext(), isiKonfirmasiKasir.class);
                 intent.putExtra("no_nota", product.getNo_nota());
+                intent.putExtra("id_penjualan", product.getId_penjualan());
                 intent.putExtra("nama_karyawan", product.getNama_karyawan());
+                intent.putExtra("biaya", product.getBiaya());
                 intent.putExtra("tanggal", product.getDate());
                 intent.putExtra("nama_pelanggan", product.getNama());
                 intent.putExtra("no_telp", product.getNo_telp());

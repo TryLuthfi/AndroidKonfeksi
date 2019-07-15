@@ -145,7 +145,7 @@ public class Penjualan extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Penjualan.StringWithTag pelanggan = (Penjualan.StringWithTag) parent.getItemAtPosition(position);
-                Log.d(TAG, "onItemSelected: " + pelanggan.id + ", " + pelanggan.string + ", " + pelanggan.Telp + ", " + pelanggan.Alaamat + ", " + pelanggan.Caatatan);
+                Log.d(TAG, "onItemSelected: " + pelanggan.id + ", " + pelanggan.nama + ", " + pelanggan.Telp + ", " + pelanggan.Alaamat + ", " + pelanggan.Caatatan);
                 idPelanggan = (String) pelanggan.id;
                 TelpPelanggan = (String) pelanggan.Telp;
                 AlamatPelanggan = (String) pelanggan.Alaamat;
@@ -294,14 +294,14 @@ public class Penjualan extends AppCompatActivity {
     }
 
     private static class StringWithTag {
-        public String string;
+        public String nama;
         public Object id;
         public String Telp;
         public String Alaamat;
         public String Caatatan;
 
-        public StringWithTag(String string, Object id, String Telp, String Alaamat, String Caatatan) {
-            this.string = string;
+        public StringWithTag(String nama, Object id, String Telp, String Alaamat, String Caatatan) {
+            this.nama = nama;
             this.id = id;
             this.Telp = Telp;
             this.Alaamat = Alaamat;
@@ -310,7 +310,7 @@ public class Penjualan extends AppCompatActivity {
 
         @Override
         public String toString() {
-            return string;
+            return nama;
         }
     }
 

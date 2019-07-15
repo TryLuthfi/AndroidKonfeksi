@@ -13,18 +13,18 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
-import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
 
 public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmasiKasirAdapter.ProductViewHolder> {
 
     private Activity mCtx;
-    private List<ProductKonfirmasiKasir> productList;
+    private List<ProductIsiKonfirmasiKasir> productList;
     private NumberFormat formatRupiah;
 
 
 
-    public IsiKonfirmasiKasirAdapter(Activity mCtx, List<ProductKonfirmasiKasir> productList) {
+    public IsiKonfirmasiKasirAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
     }
@@ -32,7 +32,7 @@ public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmas
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.listhistorypenjualan, parent, false);
+        View view = inflater.inflate(R.layout.listproduct, parent, false);
 
         Locale localeID = new Locale("in", "ID");
 
@@ -43,14 +43,13 @@ public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmas
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        final ProductKonfirmasiKasir product = productList.get(position);
+        final ProductIsiKonfirmasiKasir product = productList.get(position);
 
-        holder.dateInput.setText(product.getDate_input());
-        holder.nama.setText(product.getNama());
-        holder.no_nota.setText(product.getNo_nota());
-        holder.kasir.setText(product.getNama_karyawan());
-        double hargabarang = Double.parseDouble(product.getBiaya());
-        holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
+        holder.nama_barang.setText(product.getNama_barang());
+        holder.kode_barang.setText(product.getKode_barang());
+        holder.stok_jual.setText(product.getStok_jual());
+        double hargabarang1 = Double.parseDouble(product.getHarga());
+        holder.harga_barang.setText(formatRupiah.format((double)hargabarang1));
 
     }
 
@@ -61,10 +60,10 @@ public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmas
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView dateInput;
-        TextView nama;
-        TextView kasir;
-        TextView no_nota;
+        TextView nama_barang;
+        TextView kode_barang;
+        TextView stok_jual;
+        TextView harga_barang;
         TextView grandTotal;
         View view;
 
@@ -72,11 +71,10 @@ public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmas
             super(itemView);
             view = itemView;
 
-            dateInput = itemView.findViewById(R.id.date_input);
-            nama = itemView.findViewById(R.id.nama);
-            no_nota = itemView.findViewById(R.id.no_nota);
-            kasir = itemView.findViewById(R.id.kasir);
-            grandTotal = itemView.findViewById(R.id.grand_total);
+            nama_barang = view.findViewById(R.id.nama_barang);
+            kode_barang = view.findViewById(R.id.kode_barang);
+            stok_jual = view.findViewById(R.id.stok_jual);
+            harga_barang = view.findViewById(R.id.harga_barang);
         }
     }
 }
