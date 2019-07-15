@@ -1,6 +1,7 @@
 package indonesia.konfeksi.com.androidkonfeksi.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,10 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
-        import android.content.Intent;
 import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
 
-public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasirAdapter.ProductViewHolder> {
+public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmasiKasirAdapter.ProductViewHolder> {
 
     private Activity mCtx;
     private List<ProductKonfirmasiKasir> productList;
@@ -24,7 +24,7 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
 
 
 
-    public KonfirmasiKasirAdapter(Activity mCtx, List<ProductKonfirmasiKasir> productList) {
+    public IsiKonfirmasiKasirAdapter(Activity mCtx, List<ProductKonfirmasiKasir> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
     }
@@ -51,19 +51,6 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         holder.kasir.setText(product.getNama_karyawan());
         double hargabarang = Double.parseDouble(product.getBiaya());
         holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (mCtx.getApplicationContext(), isiKonfirmasiKasir.class);
-                intent.putExtra("no_nota", product.getNo_nota());
-                intent.putExtra("nama_karyawan", product.getNama_karyawan());
-                intent.putExtra("tanggal", product.getDate());
-                intent.putExtra("nama_pelanggan", product.getNama());
-                intent.putExtra("no_telp", product.getNo_telp());
-                intent.putExtra("alamat", product.getAlamat());
-                mCtx.startActivity(intent);
-            }
-        });
 
     }
 
@@ -93,4 +80,5 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         }
     }
 }
+
 
