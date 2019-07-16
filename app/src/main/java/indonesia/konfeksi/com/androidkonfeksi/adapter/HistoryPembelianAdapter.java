@@ -1,7 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,6 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
-import indonesia.konfeksi.com.androidkonfeksi.activity.isiHistoryPembelian;
-import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPembelian;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 
@@ -53,22 +50,6 @@ public class HistoryPembelianAdapter extends RecyclerView.Adapter<HistoryPembeli
         holder.kasir.setText(product.getNama_karyawan());
         double hargabarang = Double.parseDouble(product.getBiaya());
         holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
-
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (mCtx.getApplicationContext(), isiHistoryPembelian.class);
-                intent.putExtra("no_faktur", product.getNo_faktur());
-                intent.putExtra("no_nota", product.getNo_nota());
-                intent.putExtra("nama_karyawan", product.getNama_karyawan());
-                intent.putExtra("nama_supplier", product.getNama_supplier());
-                intent.putExtra("date", product.getDate());
-                intent.putExtra("time", product.getTime());
-                intent.putExtra("total_harga", product.getTotal_harga());
-                intent.putExtra("biaya", product.getBiaya());
-                mCtx.startActivity(intent);
-            }
-        });
     }
 
     @Override
