@@ -5,7 +5,7 @@
     android:layout_marginVertical="10dp"
     android:layout_height="match_parent">
 
-    <Spinner
+    <EditText
         android:id="@+id/kodeBarang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

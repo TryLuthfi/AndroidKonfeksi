@@ -35,6 +35,7 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         View view = inflater.inflate(R.layout.listhistorypenjualan, parent, false);
 
         Locale localeID = new Locale("in", "ID");
+
         formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         return new ProductViewHolder(view);
