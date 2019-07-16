@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +55,6 @@ public class Penjualan extends AppCompatActivity {
     private String CatatanPelanggan;
     private String mPostKeyNama = null;
     private Spinner input_nama_pelanggan;
-    private Spinner kodeeBarang;
     private TextView input_tgl_nota;
     private TextView input_waktu;
     private TextView input_no_nota;
@@ -61,13 +62,26 @@ public class Penjualan extends AppCompatActivity {
     private TextView input_no_hp;
     private TextView input_alamat;
     private TextView input_info_lain;
+    private TextView namaBarangDialog;
     private RecyclerView recyclerView;
     private Button tambah_pembelian;
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
     private PenjualanAdapter adapter;
-
+    private EditText kodeBarangDialog;
+    private String id_barang;
+    private String kode_barang;
+    private String nama_barang;
+    private String diskon_persen;
+    private String diskon_rupiah;
+    private String id_varian_harga;
+    private String ukuran;
+    private String meter;
+    private String warna;
+    private String stok_jual;
+    private String harga;
+    private String kode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,18 +100,20 @@ public class Penjualan extends AppCompatActivity {
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
+        ambilBarang();
+
         dialog = new AlertDialog.Builder(Penjualan.this);
         inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.form_penjualan, null);
         dialog.setView(dialogView);
+        dialog.setCancelable(true);
+        kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
+        namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
 
-        kodeeBarang = dialogView.findViewById(R.id.kodeBarang);
         TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
         TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
         TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         TextView subTootal = dialogView.findViewById(R.id.subTotal);
-
-        ambilbarang();
 
         ArrayList<String> penjualan = new ArrayList<>();
         penjualan.add("001");
@@ -123,23 +139,6 @@ public class Penjualan extends AppCompatActivity {
         }
 
         ambilNoNotaPenjualan();
-
-//        kodeeBarang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Penjualan.StringWithTagg barang = (Penjualan.StringWithTagg) parent.getItemAtPosition(position);
-//                Log.d(TAG, "onItemSelected: " + barang.id + ", " + barang.string + ", " + barang.Telp + ", " + barang.Alaamat + ", " + barang.Caatatan);
-//                idPelanggan = (String) barang.id;
-//                TelpPelanggan = (String) barang.Telp;
-//                AlamatPelanggan = (String) barang.Alaamat;
-//                CatatanPelanggan = (String) barang.Caatatan;
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         input_nama_pelanggan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -192,8 +191,7 @@ public class Penjualan extends AppCompatActivity {
         });
     }
 
-    List<Penjualan.StringWithTagg> barangName = new ArrayList<Penjualan.StringWithTagg>();
-    private void ambilbarang() {
+    private void ambilBarang(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -204,29 +202,43 @@ public class Penjualan extends AppCompatActivity {
                             JSONArray arrSupplier = obj.getJSONArray("datanya");
                             for(int i = 0; i < arrSupplier.length(); i++){
                                 JSONObject supplierJson = arrSupplier.getJSONObject(i);
-                                String id_barang = supplierJson.getString("id_barang");
-                                String kode_barang = supplierJson.getString("kode_barang");
-                                String nama_barang = supplierJson.getString("nama_barang");
-                                String diskon_persen = supplierJson.getString("diskon_persen");
-                                String diskon_rupiah = supplierJson.getString("diskon_rupiah");
-                                String id_varian_harga = supplierJson.getString("id_varian_harga");
-                                String ukuran = supplierJson.getString("ukuran");
-                                String meter = supplierJson.getString("meter");
-                                String warna = supplierJson.getString("warna");
-                                String stok_jual = supplierJson.getString("stok_jual");
-                                String harga = supplierJson.getString("harga");
-                                barangName.add(new StringWithTagg(id_barang, kode_barang, nama_barang, diskon_persen, diskon_rupiah, id_varian_harga, ukuran, meter, warna, stok_jual, harga));
-                            }
+                                id_barang = supplierJson.getString("id_barang");
+                                kode_barang = supplierJson.getString("kode_barang");
+                                nama_barang = supplierJson.getString("nama_barang");
+                                diskon_persen = supplierJson.getString("diskon_persen");
+                                diskon_rupiah = supplierJson.getString("diskon_rupiah");
+                                id_varian_harga = supplierJson.getString("id_varian_harga");
+                                ukuran = supplierJson.getString("ukuran");
+                                meter = supplierJson.getString("meter");
+                                warna = supplierJson.getString("warna");
+                                stok_jual = supplierJson.getString("stok_jual");
+                                harga = supplierJson.getString("harga");
 
-                            ArrayAdapter<Penjualan.StringWithTagg> adapterSpinnerBarang = new ArrayAdapter<StringWithTagg>(
-                                    Penjualan.this,
-                                    android.R.layout.simple_spinner_dropdown_item, barangName);
-                            kodeeBarang.setAdapter(adapterSpinnerBarang);
+                                kodeBarangDialog.addTextChangedListener(new TextWatcher() {
+                                    @Override
+                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                    }
+
+                                    @Override
+                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                        kode = kodeBarangDialog.getText().toString().trim();
+                                        if (kode.equals(kode_barang)){
+                                            namaBarangDialog.setText(nama_barang);
+                                        }else {
+                                            namaBarangDialog.setText("Tidak Ada");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void afterTextChanged(Editable s) {
+                                    }
+                                });
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d(TAG, "onResponse: " + e);
-                       ; }
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -237,6 +249,7 @@ public class Penjualan extends AppCompatActivity {
                 });
 
         Volley.newRequestQueue(this).add(stringRequest);
+
     }
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
@@ -311,39 +324,6 @@ public class Penjualan extends AppCompatActivity {
         @Override
         public String toString() {
             return string;
-        }
-    }
-
-    private static class StringWithTagg {
-        public Object idBarang;
-        public String kodeBarang;
-        public String namaBarang;
-        public String diskonPersen;
-        public String diskonRupiah;
-        public String idVarianHarga;
-        public String ukuran;
-        public String meter;
-        public String warna;
-        public String stokJual;
-        public String harga;
-
-        public StringWithTagg(Object idBarang, String kodeBarang, String namaBarang, String diskonPersen, String diskonRupiah, String idVarianHarga, String ukuran, String meter, String warna, String stokJual, String harga) {
-            this.idBarang = idBarang;
-            this.kodeBarang = kodeBarang;
-            this.namaBarang = namaBarang;
-            this.diskonPersen = diskonPersen;
-            this.diskonRupiah = diskonRupiah;
-            this.idVarianHarga = idVarianHarga;
-            this.ukuran = ukuran;
-            this.meter = meter;
-            this.warna = warna;
-            this.stokJual = stokJual;
-            this.harga = harga;
-        }
-
-        @Override
-        public String toString() {
-            return namaBarang;
         }
     }
 }

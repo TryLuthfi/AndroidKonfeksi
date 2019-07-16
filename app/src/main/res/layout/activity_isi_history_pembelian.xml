@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TambahPembelian">
+    tools:context=".activity.isiHistoryPembelian">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,8 +17,6 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="10dp"
                 android:layout_height="wrap_content"
                 app:cardElevation="4dp"
                 app:cardCornerRadius="3dp">
@@ -36,7 +34,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tambah Pembelian"
+                            android:text="History Pembelian"
                             android:textAllCaps="true"
                             android:textColor="#fff"
                             android:textSize="15sp"/>
@@ -52,6 +50,41 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#304ffe"
+                                android:layout_marginBottom="5dp"
+                                android:text="No Faktur"/>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/formshape">
+
+                                <TextView
+                                    android:id="@+id/id_nofaktur"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="NO FAKTUR"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="7dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -80,11 +113,48 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </android.support.constraint.ConstraintLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="7dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#304ffe"
+                                android:layout_marginBottom="5dp"
+                                android:text="Nama Karyawan"/>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/formshape">
+
+                                <TextView
+                                    android:id="@+id/id_namakaryawan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="NAMA KARYAWAN"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="7dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -94,22 +164,32 @@
                                 android:layout_marginBottom="5dp"
                                 android:text="Nama Supplier"/>
 
-                            <LinearLayout
+                            <android.support.constraint.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
 
-                                <Spinner
+                                <TextView
                                     android:id="@+id/id_namasupplier"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="NAMA SUPPLIER"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="7dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -117,111 +197,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#304ffe"
                                 android:layout_marginBottom="5dp"
-                                android:text="Nama Barang"/>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/formshape">
-
-                                <Spinner
-                                    android:id="@+id/id_namabarang"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:spinnerMode="dialog" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
-                                android:layout_marginBottom="5dp"
-                                android:text="Jumlah (Coly)"/>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/formshape">
-                                <EditText
-                                    android:id="@+id/id_jumlah"
-                                    android:layout_width="match_parent"
-                                    android:textSize="11sp"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
-                                android:layout_marginBottom="5dp"
-                                android:text="Keterangan"/>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/formshape">
-                                <EditText
-                                    android:id="@+id/id_keterangan"
-                                    android:layout_width="match_parent"
-                                    android:textSize="11sp"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
-                                android:layout_marginBottom="5dp"
-                                android:text="Status"/>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/formshape">
-
-                                <Spinner
-                                    android:id="@+id/id_status"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
-                                android:layout_marginBottom="5dp"
-                                android:text="No. Faktur"/>
+                                android:text="Date"/>
 
                             <android.support.constraint.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -230,24 +206,25 @@
                                 android:background="@drawable/formshape">
 
                                 <TextView
-                                    android:id="@+id/id_nofaktur"
+                                    android:id="@+id/id_date"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
-                                    android:text="NO FAKTUR"
+                                    android:text="DATE"
                                     android:textSize="14sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </android.support.constraint.ConstraintLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
+                            android:layout_marginVertical="7dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -255,77 +232,34 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#304ffe"
                                 android:layout_marginBottom="5dp"
-                                android:text="Nama Gudang"/>
+                                android:text="Time"/>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/formshape">
-                                <EditText
-                                    android:id="@+id/id_namagudang"
-                                    android:layout_width="match_parent"
-                                    android:textSize="11sp"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
-                                android:layout_marginBottom="5dp"
-                                android:text="Metode Pembayaran"/>
-
-                            <LinearLayout
+                            <android.support.constraint.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
 
-                                <Spinner
-                                    android:id="@+id/id_metodepembayaran"
+                                <TextView
+                                    android:id="@+id/id_time"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="TIME"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
-                                android:layout_marginBottom="5dp"
-                                android:text="Biaya"/>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/formshape">
-                                <EditText
-                                    android:id="@+id/id_biaya"
-                                    android:layout_width="match_parent"
-                                    android:textSize="11sp"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
+                            android:layout_marginVertical="7dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -335,59 +269,62 @@
                                 android:layout_marginBottom="5dp"
                                 android:text="Total Harga"/>
 
-                            <LinearLayout
+                            <android.support.constraint.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
-                                <EditText
+
+                                <TextView
                                     android:id="@+id/id_totalharga"
                                     android:layout_width="match_parent"
-                                    android:textSize="11sp"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="TOTAL HARGA"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/buktiImage"
-                                android:layout_width="130dp"
-                                android:layout_height="130dp"
-                                android:layout_marginTop="5dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/picture" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="7dp"
+                            android:orientation="vertical">
 
                             <TextView
-                                android:layout_gravity="center"
-                                android:id="@+id/teksbukti"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
-                                android:layout_marginLeft="5dp"
-                                android:text="Tekan gambar disamping untuk melampirkan bukti pembayaran"/>
+                                android:textColor="#304ffe"
+                                android:layout_marginBottom="5dp"
+                                android:text="Biaya"/>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/formshape">
+
+                                <TextView
+                                    android:id="@+id/id_biaya"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="BIAYA"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
 
                         </LinearLayout>
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="50dp"
-                            android:background="#304ffe"
-                            android:id="@+id/tambah"
-                            android:text="Tambah Barang Pembelian"
-                            android:textColor="#fff"/>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_pembelian"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
                     </LinearLayout>
                 </LinearLayout>
