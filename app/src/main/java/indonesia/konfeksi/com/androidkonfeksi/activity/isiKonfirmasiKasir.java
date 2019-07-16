@@ -80,7 +80,7 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         mPostIdPenjualan = getIntent().getExtras().getString("id_penjualan");
         mPostKaryawan = getIntent().getExtras().getString("nama_karyawan");
         mPostTanggal = getIntent().getExtras().getString("tanggal");
-        mPostBiaya = getIntent().getExtras().getString("biaya");
+        mPostBiaya = getIntent().getExtras().getString("total_harga");
         mPostNamaPelanggan = getIntent().getExtras().getString("nama_pelanggan");
         mPostNoTelp = getIntent().getExtras().getString("no_telp");
         mPostAlamat = getIntent().getExtras().getString("alamat");
