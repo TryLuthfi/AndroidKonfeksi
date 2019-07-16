@@ -3,7 +3,9 @@ package indonesia.konfeksi.com.androidkonfeksi.service;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -14,6 +16,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Random;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
+import indonesia.konfeksi.com.androidkonfeksi.activity.notifikasi;
 
 public class FirebaseCloudMessagingService extends FirebaseMessagingService {
     @Override
@@ -40,24 +43,25 @@ private void showNotification(String title,String body){
     }
 
     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,NOTIFICATION_CHANNEL_ID);
-
+    Intent resultIntent = new Intent(this, notifikasi.class);
+    PendingIntent resultPendingIntent = PendingIntent.getActivity(this,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
     notificationBuilder.setAutoCancel(true)
             .setDefaults(Notification.DEFAULT_ALL)
             .setWhen(System.currentTimeMillis())
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
             .setContentText(body)
-            .setContentInfo("info");
+            .setContentInfo("info")
+            .setContentIntent(resultPendingIntent)
+    ;
 
     notificationManager.notify(new Random().nextInt(),notificationBuilder.build());
-
-
 
 }
 
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.d("TOKENFIREBASE",s);
+        Log.d("TOKENFIREBASE1",s);
     }
 }

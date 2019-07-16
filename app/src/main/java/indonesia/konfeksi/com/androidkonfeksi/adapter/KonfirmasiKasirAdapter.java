@@ -12,23 +12,8 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
-        import android.app.Activity;
         import android.content.Intent;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.TextView;
-
-        import java.text.NumberFormat;
-        import java.util.List;
-        import java.util.Locale;
-
-        import indonesia.konfeksi.com.androidkonfeksi.R;
-        import indonesia.konfeksi.com.androidkonfeksi.activity.IsiBarang;
 import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
-import indonesia.konfeksi.com.androidkonfeksi.json.Product;
-        import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
 
 public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasirAdapter.ProductViewHolder> {
@@ -50,7 +35,6 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         View view = inflater.inflate(R.layout.listhistorypenjualan, parent, false);
 
         Locale localeID = new Locale("in", "ID");
-
         formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         return new ProductViewHolder(view);
@@ -71,8 +55,13 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
             public void onClick(View v) {
                 Intent intent = new Intent (mCtx.getApplicationContext(), isiKonfirmasiKasir.class);
                 intent.putExtra("no_nota", product.getNo_nota());
+                intent.putExtra("id_penjualan", product.getId_penjualan());
                 intent.putExtra("nama_karyawan", product.getNama_karyawan());
+                intent.putExtra("biaya", product.getBiaya());
                 intent.putExtra("tanggal", product.getDate());
+                intent.putExtra("nama_pelanggan", product.getNama());
+                intent.putExtra("no_telp", product.getNo_telp());
+                intent.putExtra("alamat", product.getAlamat());
                 mCtx.startActivity(intent);
             }
         });
