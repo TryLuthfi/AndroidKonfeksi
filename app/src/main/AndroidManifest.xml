@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.isiHistoryPembelian"></activity>
+        <activity android:name=".activity.isiHistoryPenjualan"></activity>
+        <activity android:name=".activity.isiHistoryPembelian" />
         <activity android:name=".activity.isiKonfirmasiKasir" />
         <activity android:name=".activity.Kasir" />
         <activity android:name=".activity.Return" />

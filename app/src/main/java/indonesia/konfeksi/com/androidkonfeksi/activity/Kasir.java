@@ -42,7 +42,7 @@ public class Kasir extends AppCompatActivity {
 
         tab = (TabLayout) findViewById(R.id.tab);
         tab.setupWithViewPager(pager);
-        
+
     }
 
 

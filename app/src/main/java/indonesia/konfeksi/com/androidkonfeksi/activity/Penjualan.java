@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -152,11 +153,20 @@ public class Penjualan extends AppCompatActivity {
 
                 input_no_hp.setText(TelpPelanggan);
                 input_alamat.setText(AlamatPelanggan);
+                input_info_lain.setText(CatatanPelanggan);
 
-                if (CatatanPelanggan != null){
-                    input_info_lain.setText(CatatanPelanggan);
-                }else {
-                    input_info_lain.setText("Tidak Ada Info Lain");
+                String noHp = input_no_hp.getText().toString().trim();
+                String almt = input_alamat.getText().toString().trim();
+                String infolain = input_info_lain.getText().toString().trim();
+
+                if(noHp.isEmpty()){
+                    input_no_hp.setText("Tidak Ada");
+                }
+                if(almt.isEmpty()){
+                    input_alamat.setText("Tidak Ada");
+                }
+                if(infolain.isEmpty()){
+                    input_info_lain.setText("Tidak Ada");
                 }
             }
 
@@ -222,11 +232,12 @@ public class Penjualan extends AppCompatActivity {
                                     @Override
                                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                                         kode = kodeBarangDialog.getText().toString().trim();
-                                        if (kode.equals(kode_barang)){
-                                            namaBarangDialog.setText(nama_barang);
-                                        }else {
-                                            namaBarangDialog.setText("Tidak Ada");
-                                        }
+                                        Toast.makeText(Penjualan.this, ""+kode, Toast.LENGTH_SHORT).show();
+//                                        if (kode.equals(kode_barang)){
+//                                            namaBarangDialog.setText(nama_barang);
+//                                        }else {
+//                                            namaBarangDialog.setText("Tidak Ada");
+//                                        }
                                     }
 
                                     @Override
@@ -254,6 +265,7 @@ public class Penjualan extends AppCompatActivity {
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
     private void ambilNoNotaPenjualan() {
+        pelangganName.add(new StringWithTag("-- Umum --", null,null, null, null));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
                 new Response.Listener<String>() {
                     @Override
