@@ -118,7 +118,7 @@ public class Penjualan extends AppCompatActivity {
 
         if (mPostKeyNama != null) {
             input_kasir.setText(mPostKeyNama);
-        }else {
+        } else {
             input_kasir.setText("");
         }
 
@@ -153,11 +153,20 @@ public class Penjualan extends AppCompatActivity {
 
                 input_no_hp.setText(TelpPelanggan);
                 input_alamat.setText(AlamatPelanggan);
+                input_info_lain.setText(CatatanPelanggan);
 
-                if (CatatanPelanggan != null){
-                    input_info_lain.setText(CatatanPelanggan);
-                }else {
-                    input_info_lain.setText("Tidak Ada Info Lain");
+                String noHp = input_no_hp.getText().toString().trim();
+                String almt = input_alamat.getText().toString().trim();
+                String infolain = input_info_lain.getText().toString().trim();
+
+                if(noHp.isEmpty()){
+                    input_no_hp.setText("Tidak Ada");
+                }
+                if(almt.isEmpty()){
+                    input_alamat.setText("Tidak Ada");
+                }
+                if(infolain.isEmpty()){
+                    input_info_lain.setText("Tidak Ada");
                 }
             }
 
@@ -193,6 +202,7 @@ public class Penjualan extends AppCompatActivity {
     }
 
     List<Penjualan.StringWithTagg> barangName = new ArrayList<Penjualan.StringWithTagg>();
+
     private void ambilbarang() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
@@ -202,7 +212,7 @@ public class Penjualan extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray arrSupplier = obj.getJSONArray("datanya");
-                            for(int i = 0; i < arrSupplier.length(); i++){
+                            for (int i = 0; i < arrSupplier.length(); i++) {
                                 JSONObject supplierJson = arrSupplier.getJSONObject(i);
                                 String id_barang = supplierJson.getString("id_barang");
                                 String kode_barang = supplierJson.getString("kode_barang");
@@ -226,7 +236,8 @@ public class Penjualan extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d(TAG, "onResponse: " + e);
-                       ; }
+                            ;
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -240,7 +251,9 @@ public class Penjualan extends AppCompatActivity {
     }
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
+
     private void ambilNoNotaPenjualan() {
+        pelangganName.add(new StringWithTag("-- Umum --", null,null, null, null));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
                 new Response.Listener<String>() {
                     @Override
@@ -251,7 +264,7 @@ public class Penjualan extends AppCompatActivity {
                             input_no_nota.setText(noNota);
 
                             JSONArray arrSupplier = obj.getJSONArray("pelanggan");
-                            for(int i = 0; i < arrSupplier.length(); i++){
+                            for (int i = 0; i < arrSupplier.length(); i++) {
                                 JSONObject supplierJson = arrSupplier.getJSONObject(i);
                                 String namapelanggan = supplierJson.getString("nama");
                                 String idpelanggan = supplierJson.getString("id_pelanggan");
@@ -281,13 +294,14 @@ public class Penjualan extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
     public void setDate() {
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         date = formatter.format(today);
     }
 
-    public void settime(){
+    public void settime() {
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");
         time = formatter.format(today);
