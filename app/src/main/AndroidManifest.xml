@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,18 +34,6 @@
         <activity android:name=".activity.TambahPembelian" />
         <activity android:name=".activity.Produk" />
         <activity android:name=".activity.DashBoard"></activity>
-        <activity android:name=".activity.notifikasi" />
-        <service android:name=".service.FirebaseCloudMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
     </application>
 
 </manifest>
