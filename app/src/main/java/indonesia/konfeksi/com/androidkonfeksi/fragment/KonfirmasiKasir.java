@@ -22,10 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.activity.Produk;
@@ -129,6 +127,8 @@ public class KonfirmasiKasir extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressBar.setVisibility(View.INVISIBLE);
+//                            txErr.setVisibility(View.VISIBLE);
+//                            cobaLagi.setVisibility(View.VISIBLE);
                         }
                     }
                 },
@@ -136,6 +136,8 @@ public class KonfirmasiKasir extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressBar.setVisibility(View.INVISIBLE);
+//                        txErr.setVisibility(View.VISIBLE);
+//                        cobaLagi.setVisibility(View.VISIBLE);
                     }
                 });
 

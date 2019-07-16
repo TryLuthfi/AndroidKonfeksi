@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.Penjualan">
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -124,7 +124,6 @@
                             android:layout_height="match_parent"
                             android:spinnerMode="dialog"/>
 
-
                         <TextView
                             android:id="@+id/input_no_hp"
                             android:layout_width="match_parent"
@@ -166,7 +165,7 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 
     <Button
         android:id="@+id/tambah_pembelian"

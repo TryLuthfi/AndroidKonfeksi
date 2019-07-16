@@ -19,10 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
@@ -49,8 +47,6 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
     private TextView nama_pelanggan;
     private TextView no_telp;
     private TextView alamat;
-    private TextView error;
-    private NumberFormat formatRupiah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +67,6 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         total_harga = findViewById(R.id.total_harga);
         no_telp = findViewById(R.id.no_telp);
         alamat = findViewById(R.id.alamat);
-        error = findViewById(R.id.error);
-
-        Locale localeID = new Locale("in", "ID");
-        formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         mPostNoNota = getIntent().getExtras().getString("no_nota");
         mPostIdPenjualan = getIntent().getExtras().getString("id_penjualan");
@@ -85,12 +77,10 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         mPostNoTelp = getIntent().getExtras().getString("no_telp");
         mPostAlamat = getIntent().getExtras().getString("alamat");
 
-        double hargabarang1 = Double.parseDouble(mPostBiaya);
-        total_harga.setText(formatRupiah.format((double)hargabarang1));
-
         nonota.setText(mPostNoNota);
         tanggal.setText(mPostTanggal);
         karyawan.setText(mPostKaryawan);
+        total_harga.setText(mPostBiaya);
         nama_pelanggan.setText(mPostNamaPelanggan);
         no_telp.setText(mPostNoTelp);
         alamat.setText(mPostAlamat);
@@ -148,11 +138,12 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
 
                             progressBar.setVisibility(View.INVISIBLE);
                             recyclerView.setVisibility(View.VISIBLE);
-                            error.setVisibility(View.VISIBLE);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressBar.setVisibility(View.INVISIBLE);
+//                            txErr.setVisibility(View.VISIBLE);
+//                            cobaLagi.setVisibility(View.VISIBLE);
                         }
                     }
                 },
