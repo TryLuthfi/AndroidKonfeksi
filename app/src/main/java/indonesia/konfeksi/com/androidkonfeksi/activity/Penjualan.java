@@ -225,6 +225,7 @@ public class Penjualan extends AppCompatActivity {
                                 harga = supplierJson.getString("harga");
 
                                 kodeBarangDialog.addTextChangedListener(new TextWatcher() {
+
                                     @Override
                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                                     }
@@ -233,11 +234,11 @@ public class Penjualan extends AppCompatActivity {
                                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                                         kode = kodeBarangDialog.getText().toString().trim();
                                         Toast.makeText(Penjualan.this, ""+kode, Toast.LENGTH_SHORT).show();
-//                                        if (kode.equals(kode_barang)){
-//                                            namaBarangDialog.setText(nama_barang);
-//                                        }else {
-//                                            namaBarangDialog.setText("Tidak Ada");
-//                                        }
+                                        if (kode.equals(kode_barang)){
+                                            namaBarangDialog.setText(nama_barang);
+                                        }else {
+                                            namaBarangDialog.setText("Tidak Ada");
+                                        }
                                     }
 
                                     @Override
@@ -306,6 +307,7 @@ public class Penjualan extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
     public void setDate() {
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
