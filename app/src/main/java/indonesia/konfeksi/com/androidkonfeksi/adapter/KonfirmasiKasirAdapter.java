@@ -48,7 +48,7 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         holder.nama.setText(product.getNama());
         holder.no_nota.setText(product.getNo_nota());
         holder.kasir.setText(product.getNama_karyawan());
-        double hargabarang = Double.parseDouble(product.getBiaya());
+        double hargabarang = Double.parseDouble(product.getTotal_harga());
         holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,7 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
                 intent.putExtra("no_nota", product.getNo_nota());
                 intent.putExtra("id_penjualan", product.getId_penjualan());
                 intent.putExtra("nama_karyawan", product.getNama_karyawan());
-                intent.putExtra("biaya", product.getBiaya());
+                intent.putExtra("total_harga", product.getTotal_harga());
                 intent.putExtra("tanggal", product.getDate());
                 intent.putExtra("nama_pelanggan", product.getNama());
                 intent.putExtra("no_telp", product.getNo_telp());
