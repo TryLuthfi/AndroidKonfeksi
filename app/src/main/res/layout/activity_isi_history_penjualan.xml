@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.isiKonfirmasiKasir">
+    tools:context=".activity.isiHistoryPenjualan">
 
     <LinearLayout
         android:id="@+id/top"
@@ -17,14 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Konfirmasi Kasir"
+            android:text="History Penjualan"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:layout_above="@id/bottom"
         android:layout_below="@id/top"
-        android:layout_above="@id/btn_bayar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -34,101 +34,92 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="10dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="4dp">
-
+                android:layout_marginHorizontal="15dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="3dp">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="8dp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="#304ffe"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:background="#304ffe">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Informasi"
+                            android:text="Informasi Nota"
                             android:textAllCaps="true"
                             android:textColor="#fff"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="15sp"
                         android:layout_marginVertical="5dp"
+                        android:layout_marginHorizontal="15sp"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/input_no_nota"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/nonota"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/tanggal"
-                                android:layout_marginVertical="5dp"
-                                android:layout_weight="0.5"
-                                android:text="No Nota"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tanggal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="5dp"
-                                android:layout_weight="1"
-                                android:gravity="right"
-                                android:text="Tanggal"
-                                android:textSize="14sp" />
-
-                        </LinearLayout>
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="No Nota"/>
 
                         <TextView
-                            android:id="@+id/karyawan"
+                            android:id="@+id/input_tgl_nota"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/nonota"
+                            android:textSize="14sp"
                             android:layout_marginVertical="5dp"
-                            android:text="Karyawan"
-                            android:textSize="14sp" />
+                            android:text="Tanggal"/>
+
+                        <TextView
+                            android:id="@+id/input_waktu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="Waktu"/>
+
+                        <TextView
+                            android:id="@+id/input_kasir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="Kasir"/>
 
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cv2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="10dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="4dp">
-
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="3dp">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="#304ffe"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:background="#304ffe">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -136,7 +127,7 @@
                             android:text="Informasi Pelanggan"
                             android:textAllCaps="true"
                             android:textColor="#fff"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -145,31 +136,30 @@
                         android:layout_marginVertical="5dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/nama_pelanggan"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginHorizontal="15sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="Nama Pelanggan" />
+                        <!--<Spinner-->
+                        <!--android:id="@+id/input_nama_pelanngan"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:spinnerMode="dialog"/>-->
+
 
                         <TextView
-                            android:id="@+id/no_telp"
+                            android:id="@+id/input_no_hp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:layout_marginHorizontal="15sp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
                             android:layout_marginVertical="5dp"
-                            android:text="No Telp / Hp"
-                            android:textSize="14sp" />
+                            android:text="No Telp / Hp"/>
 
                         <TextView
-                            android:id="@+id/alamat"
+                            android:id="@+id/input_alamat"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:layout_marginHorizontal="15sp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
                             android:layout_marginVertical="5dp"
-                            android:text="Alamat"
-                            android:textSize="14sp" />
+                            android:text="Alamat"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -242,32 +232,27 @@
                             android:layout_centerVertical="true" />
 
                         <android.support.v7.widget.RecyclerView
+                            android:visibility="invisible"
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/cv"
                             android:layout_marginVertical="10dp"></android.support.v7.widget.RecyclerView>
                     </RelativeLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:id="@+id/btn_bayar"
-        android:layout_alignParentBottom="true"
+    <Button
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#304ffe"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BAYAR"
-            android:textAllCaps="true"
-            android:textColor="#fff"
-            android:textSize="17sp" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Status Penjualan : Sudah Dibayar"
+        android:textColor="#fff"
+        android:background="#304ffe"/>
 
 </RelativeLayout>

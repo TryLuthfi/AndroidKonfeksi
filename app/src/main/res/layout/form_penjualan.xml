@@ -1,41 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_marginHorizontal="15dp"
-    android:layout_marginVertical="10dp"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/kodeBarang"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="3dp"/>
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="#304ffe">
 
-    <TextView
-        android:id="@+id/namaBarang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nama Barang"
-        android:layout_marginVertical="3dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Penjualan"
+            android:textAllCaps="true"
+            android:textColor="#fff"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/hargaBarang"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Harga"
-        android:layout_marginVertical="3dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingVertical="3dp"
+        android:paddingHorizontal="12dp">
 
-    <TextView
-        android:id="@+id/qtyBarang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Qty"
-        android:layout_marginVertical="3dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/subTotal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sub Total"
-        android:layout_marginVertical="3dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#304ffe"
+                android:layout_marginBottom="5dp"
+                android:text="No Nota"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="@drawable/formshape">
+
+                <EditText
+                    android:id="@+id/kodeBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#304ffe"
+                android:layout_marginBottom="5dp"
+                android:text="Nama Barang"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="@drawable/formshape">
+
+                <TextView
+                    android:id="@+id/namaBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Nama Barang"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#304ffe"
+                android:layout_marginBottom="5dp"
+                android:text="Harga"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="@drawable/formshape">
+
+                <TextView
+                    android:id="@+id/hargaBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Harga"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#304ffe"
+                android:layout_marginBottom="5dp"
+                android:text="QTY"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="@drawable/formshape">
+
+                <TextView
+                    android:id="@+id/qtyBarang"
+                    android:text="QTY"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#304ffe"
+                android:layout_marginBottom="5dp"
+                android:text="Sub Total"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="@drawable/formshape">
+
+                <TextView
+                    android:id="@+id/subTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Sub Total"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
-        import android.content.Intent;
+import android.content.Intent;
 import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
 
@@ -35,7 +35,6 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         View view = inflater.inflate(R.layout.listhistorypenjualan, parent, false);
 
         Locale localeID = new Locale("in", "ID");
-
         formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         return new ProductViewHolder(view);
