@@ -217,11 +217,9 @@ public class Penjualan extends AppCompatActivity {
                 kode = kodeBarangDialog.getText().toString().trim();
 //                Toast.makeText(Penjualan.this, ""+ kode, Toast.LENGTH_SHORT).show();
                 for(int i = 0; i < productBarang.size(); i++){
-                    if(productBarang.get(i).getKodeBarang().equalsIgnoreCase("BP500HITAM")){
+                    if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
 //                        Log.d(TAG, "onTextChanged: " + productBarang.get(i).getNamaBarang());
                         namaBarangDialog.setText(productBarang.get(i).getNamaBarang());
-                    }else {
-                        namaBarangDialog.setText("Tidak Ada");
                     }
                 }
             }
