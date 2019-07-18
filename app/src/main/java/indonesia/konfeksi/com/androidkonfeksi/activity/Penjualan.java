@@ -115,7 +115,7 @@ public class Penjualan extends AppCompatActivity {
         kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
         namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
 
-        TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
+        final TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
         TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
         TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         TextView subTootal = dialogView.findViewById(R.id.subTotal);
@@ -203,6 +203,33 @@ public class Penjualan extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+
+
+        kodeBarangDialog.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                kode = kodeBarangDialog.getText().toString().trim();
+//                Toast.makeText(Penjualan.this, ""+ kode, Toast.LENGTH_SHORT).show();
+                for(int i = 0; i < productBarang.size(); i++){
+                    if(productBarang.get(i).getKodeBarang().equalsIgnoreCase("BP500HITAM")){
+//                        Log.d(TAG, "onTextChanged: " + productBarang.get(i).getNamaBarang());
+                        namaBarangDialog.setText(productBarang.get(i).getNamaBarang());
+                    }else {
+                        namaBarangDialog.setText("Tidak Ada");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     private void ambilBarang(){
@@ -217,8 +244,7 @@ public class Penjualan extends AppCompatActivity {
 
                             for(int i = 0; i < arrSupplier.length(); i++){
                                 JSONObject supplierJson = arrSupplier.getJSONObject(i);
-
-                                productBarang.add(new ProductPenjualanBarang(
+                                ProductPenjualanBarang barang = new ProductPenjualanBarang(
                                         supplierJson.getString("id_barang"),
                                         supplierJson.getString("kode_barang"),
                                         supplierJson.getString("nama_barang"),
@@ -230,30 +256,9 @@ public class Penjualan extends AppCompatActivity {
                                         supplierJson.getString("warna"),
                                         supplierJson.getString("stok_jual"),
                                         supplierJson.getString("harga")
-                                ));
-
-                                kodeBarangDialog.addTextChangedListener(new TextWatcher() {
-
-                                    @Override
-                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                                    }
-
-                                    @Override
-                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                        kode = kodeBarangDialog.getText().toString().trim();
-                                        Toast.makeText(Penjualan.this, ""+kode, Toast.LENGTH_SHORT).show();
-                                        if (kode.equals(kode_barang)){
-                                            namaBarangDialog.setText(nama_barang);
-                                        }else {
-                                            namaBarangDialog.setText("Tidak Ada");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void afterTextChanged(Editable s) {
-                                    }
-                                });
-
+                                );
+                                productBarang.add(barang);
+                                Log.d(TAG, "onResponse: " + barang);
                             }
 
                         } catch (JSONException e) {
