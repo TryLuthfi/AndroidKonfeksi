@@ -1,5 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -56,6 +58,7 @@ public class Penjualan extends AppCompatActivity {
     private String mPostKeyNama = null;
     private Spinner input_nama_pelanggan;
     private TextView input_tgl_nota;
+    private ProgressDialog loading2;
     private TextView input_waktu;
     private TextView input_no_nota;
     private TextView input_kasir;
@@ -192,6 +195,7 @@ public class Penjualan extends AppCompatActivity {
     }
 
     private void ambilBarang(){
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -199,38 +203,45 @@ public class Penjualan extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
 
-                            JSONArray arrSupplier = obj.getJSONArray("datanya");
+                            final JSONArray arrSupplier = obj.getJSONArray("datanya");
                             for(int i = 0; i < arrSupplier.length(); i++){
-                                JSONObject supplierJson = arrSupplier.getJSONObject(i);
-                                id_barang = supplierJson.getString("id_barang");
-                                kode_barang = supplierJson.getString("kode_barang");
-                                nama_barang = supplierJson.getString("nama_barang");
-                                diskon_persen = supplierJson.getString("diskon_persen");
-                                diskon_rupiah = supplierJson.getString("diskon_rupiah");
-                                id_varian_harga = supplierJson.getString("id_varian_harga");
-                                ukuran = supplierJson.getString("ukuran");
-                                meter = supplierJson.getString("meter");
-                                warna = supplierJson.getString("warna");
-                                stok_jual = supplierJson.getString("stok_jual");
-                                harga = supplierJson.getString("harga");
+                                final JSONObject supplierJson = arrSupplier.getJSONObject(i);
 
                                 kodeBarangDialog.addTextChangedListener(new TextWatcher() {
                                     @Override
                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                                     }
 
                                     @Override
                                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                        kode = kodeBarangDialog.getText().toString().trim();
-                                        if (kode.equals(kode_barang)){
-                                            namaBarangDialog.setText(nama_barang);
-                                        }else {
-                                            namaBarangDialog.setText("Tidak Ada");
+                                        try {
+                                            if(s.equals(supplierJson.getString("kode_barang"))) {
+                                                id_barang = supplierJson.getString("id_barang");
+                                                kode_barang = supplierJson.getString("kode_barang");
+                                                nama_barang = supplierJson.getString("nama_barang");
+                                                diskon_persen = supplierJson.getString("diskon_persen");
+                                                diskon_rupiah = supplierJson.getString("diskon_rupiah");
+                                                id_varian_harga = supplierJson.getString("id_varian_harga");
+                                                ukuran = supplierJson.getString("ukuran");
+                                                meter = supplierJson.getString("meter");
+                                                warna = supplierJson.getString("warna");
+                                                stok_jual = supplierJson.getString("stok_jual");
+                                                harga = supplierJson.getString("harga");
+
+                                                Toast.makeText(Penjualan.this, s+nama_barang, Toast.LENGTH_SHORT).show();
+                                                loading2.dismiss();
+                                            } else{
+                                                Toast.makeText(Penjualan.this, "Tidak Ada", Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
                                         }
                                     }
 
                                     @Override
                                     public void afterTextChanged(Editable s) {
+
                                     }
                                 });
                             }
@@ -254,6 +265,7 @@ public class Penjualan extends AppCompatActivity {
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
     private void ambilNoNotaPenjualan() {
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
                 new Response.Listener<String>() {
                     @Override
@@ -278,6 +290,7 @@ public class Penjualan extends AppCompatActivity {
                                     Penjualan.this,
                                     android.R.layout.simple_spinner_dropdown_item, pelangganName);
                             input_nama_pelanggan.setAdapter(adapterSpinnerPelanggan);
+                            loading2.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
