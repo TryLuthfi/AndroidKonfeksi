@@ -1,5 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,6 +55,7 @@ public class Penjualan extends AppCompatActivity {
     private String time;
     private String idPelanggan;
     private String TelpPelanggan;
+    private ProgressDialog loading2;
     private String AlamatPelanggan;
     private String CatatanPelanggan;
     private String mPostKeyNama = null;
@@ -231,6 +233,7 @@ public class Penjualan extends AppCompatActivity {
     }
 
     private void ambilBarang(){
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -256,6 +259,7 @@ public class Penjualan extends AppCompatActivity {
                                         supplierJson.getString("harga")
                                 );
                                 productBarang.add(barang);
+                                loading2.dismiss();
                                 Log.d(TAG, "onResponse: " + barang);
                             }
 
@@ -278,6 +282,7 @@ public class Penjualan extends AppCompatActivity {
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
     private void ambilNoNotaPenjualan() {
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         pelangganName.add(new StringWithTag("-- Umum --", null,null, null, null));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
                 new Response.Listener<String>() {
@@ -303,6 +308,7 @@ public class Penjualan extends AppCompatActivity {
                                     Penjualan.this,
                                     android.R.layout.simple_spinner_dropdown_item, pelangganName);
                             input_nama_pelanggan.setAdapter(adapterSpinnerPelanggan);
+                            loading2.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
