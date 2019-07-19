@@ -1,5 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -34,6 +35,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +45,9 @@ import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.PenjualanAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.Product;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPembelian;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualan;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class Penjualan extends AppCompatActivity {
@@ -52,6 +56,7 @@ public class Penjualan extends AppCompatActivity {
     private String time;
     private String idPelanggan;
     private String TelpPelanggan;
+    private ProgressDialog loading2;
     private String AlamatPelanggan;
     private String CatatanPelanggan;
     private String mPostKeyNama = null;
@@ -83,6 +88,7 @@ public class Penjualan extends AppCompatActivity {
     private String stok_jual;
     private String harga;
     private String kode;
+    List<ProductPenjualanBarang> productBarang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,7 @@ public class Penjualan extends AppCompatActivity {
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        productBarang = new ArrayList<>();
 
         ambilBarang();
 
@@ -111,7 +118,7 @@ public class Penjualan extends AppCompatActivity {
         kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
         namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
 
-        TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
+        final TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
         TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
         TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         TextView subTootal = dialogView.findViewById(R.id.subTotal);
@@ -199,9 +206,40 @@ public class Penjualan extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+
+
+        kodeBarangDialog.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                kode = kodeBarangDialog.getText().toString().trim();
+                List<ProductPenjualanBarang> barangPilih = new ArrayList<>();
+                for(int i = 0; i < productBarang.size(); i++){
+                    if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
+                        barangPilih.add(productBarang.get(i));
+                    }
+
+                }
+                if(barangPilih.size() > 1){
+                    //barang lebih dari 1 (buatkan popup untuk nampilin produk)
+                }else{
+                    namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     private void ambilBarang(){
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -210,41 +248,25 @@ public class Penjualan extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray arrSupplier = obj.getJSONArray("datanya");
+
                             for(int i = 0; i < arrSupplier.length(); i++){
                                 JSONObject supplierJson = arrSupplier.getJSONObject(i);
-                                id_barang = supplierJson.getString("id_barang");
-                                kode_barang = supplierJson.getString("kode_barang");
-                                nama_barang = supplierJson.getString("nama_barang");
-                                diskon_persen = supplierJson.getString("diskon_persen");
-                                diskon_rupiah = supplierJson.getString("diskon_rupiah");
-                                id_varian_harga = supplierJson.getString("id_varian_harga");
-                                ukuran = supplierJson.getString("ukuran");
-                                meter = supplierJson.getString("meter");
-                                warna = supplierJson.getString("warna");
-                                stok_jual = supplierJson.getString("stok_jual");
-                                harga = supplierJson.getString("harga");
-
-                                kodeBarangDialog.addTextChangedListener(new TextWatcher() {
-
-                                    @Override
-                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                                    }
-
-                                    @Override
-                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                        kode = kodeBarangDialog.getText().toString().trim();
-                                        Toast.makeText(Penjualan.this, ""+kode, Toast.LENGTH_SHORT).show();
-                                        if (kode.equals(kode_barang)){
-                                            namaBarangDialog.setText(nama_barang);
-                                        }else {
-                                            namaBarangDialog.setText("Tidak Ada");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void afterTextChanged(Editable s) {
-                                    }
-                                });
+                                ProductPenjualanBarang barang = new ProductPenjualanBarang(
+                                        supplierJson.getString("id_barang"),
+                                        supplierJson.getString("kode_barang"),
+                                        supplierJson.getString("nama_barang"),
+                                        supplierJson.getString("diskon_persen"),
+                                        supplierJson.getString("diskon_rupiah"),
+                                        supplierJson.getString("id_varian_harga"),
+                                        supplierJson.getString("ukuran"),
+                                        supplierJson.getString("meter"),
+                                        supplierJson.getString("warna"),
+                                        supplierJson.getString("stok_jual"),
+                                        supplierJson.getString("harga")
+                                );
+                                productBarang.add(barang);
+                                loading2.dismiss();
+                                Log.d(TAG, "onResponse: " + barang);
                             }
 
                         } catch (JSONException e) {
@@ -266,6 +288,7 @@ public class Penjualan extends AppCompatActivity {
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
     private void ambilNoNotaPenjualan() {
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         pelangganName.add(new StringWithTag("-- Umum --", null,null, null, null));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
                 new Response.Listener<String>() {
@@ -291,6 +314,7 @@ public class Penjualan extends AppCompatActivity {
                                     Penjualan.this,
                                     android.R.layout.simple_spinner_dropdown_item, pelangganName);
                             input_nama_pelanggan.setAdapter(adapterSpinnerPelanggan);
+                            loading2.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
