@@ -224,12 +224,11 @@ public class Penjualan extends AppCompatActivity {
                         barangPilih.add(productBarang.get(i));
                     }
 
-                    if(barangPilih.size() > 1){
-                        //barang lebih dari 1 (buatkan popup untuk nampilin produk)
-                    }else{
-                        //barang <= 1 (tampilkan barang pada textfiew
-                        namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
-                    }
+                }
+                if(barangPilih.size() > 1){
+                    //barang lebih dari 1 (buatkan popup untuk nampilin produk)
+                }else{
+                    namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
                 }
             }
 

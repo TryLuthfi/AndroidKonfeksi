@@ -66,7 +66,7 @@ public class TambahPembelian extends AppCompatActivity {
     private EditText jumlahColi;
     private EditText keterangan;
     private Spinner status;
-    private TextView nofaktur;
+    private EditText nofaktur;
     private EditText namaGudang;
     private EditText biaya;
     private EditText totalHarga;
