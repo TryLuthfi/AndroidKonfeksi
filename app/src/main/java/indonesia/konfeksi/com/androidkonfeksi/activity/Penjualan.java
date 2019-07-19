@@ -1,5 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -55,6 +56,7 @@ public class Penjualan extends AppCompatActivity {
     private String time;
     private String idPelanggan;
     private String TelpPelanggan;
+    private ProgressDialog loading2;
     private String AlamatPelanggan;
     private String CatatanPelanggan;
     private String mPostKeyNama = null;
@@ -72,15 +74,8 @@ public class Penjualan extends AppCompatActivity {
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
-    private AlertDialog.Builder dialog2;
-    private LayoutInflater inflater2;
-    private View dialogView2;
     private PenjualanAdapter adapter;
     private EditText kodeBarangDialog;
-    private TextView kode_BarangDialog;
-    private TextView nama_BarangDialog;
-    private TextView meterDialog;
-    private TextView ukuranDialog;
     private String id_barang;
     private String kode_barang;
     private String nama_barang;
@@ -229,21 +224,11 @@ public class Penjualan extends AppCompatActivity {
                         barangPilih.add(productBarang.get(i));
                     }
 
-                    if(barangPilih.size() > 1){
-                        //barang lebih dari 1 (buatkan popup untuk nampilin produk)
-                        dialog2 = new AlertDialog.Builder(Penjualan.this);
-                        inflater2 = getLayoutInflater();
-                        dialogView2 = inflater2.inflate(R.layout.form_penjualan, null);
-                        dialog2.setView(dialogView);
-                        dialog2.setCancelable(true);
-                        kode_BarangDialog = dialogView.findViewById(R.id.kode_barang);
-                        nama_BarangDialog = dialogView.findViewById(R.id.nama_barang);
-                        ukuranDialog = dialogView.findViewById(R.id.ukuran);
-                        meterDialog = dialogView.findViewById(R.id.meter);
-                    }else{
-                        //barang <= 1 (tampilkan barang pada textview
-                        namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
-                    }
+                }
+                if(barangPilih.size() > 1){
+                    //barang lebih dari 1 (buatkan popup untuk nampilin produk)
+                }else{
+                    namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
                 }
             }
 
@@ -254,6 +239,7 @@ public class Penjualan extends AppCompatActivity {
     }
 
     private void ambilBarang(){
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -279,6 +265,7 @@ public class Penjualan extends AppCompatActivity {
                                         supplierJson.getString("harga")
                                 );
                                 productBarang.add(barang);
+                                loading2.dismiss();
                                 Log.d(TAG, "onResponse: " + barang);
                             }
 
@@ -301,6 +288,7 @@ public class Penjualan extends AppCompatActivity {
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
     private void ambilNoNotaPenjualan() {
+        loading2 = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
         pelangganName.add(new StringWithTag("-- Umum --", null,null, null, null));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
                 new Response.Listener<String>() {
@@ -308,8 +296,8 @@ public class Penjualan extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
-                            String noNotaa = obj.getString("nota");
-                            input_no_nota.setText(noNotaa);
+                            String noNota = obj.getString("nota");
+                            input_no_nota.setText(noNota);
 
                             JSONArray arrSupplier = obj.getJSONArray("pelanggan");
                             for(int i = 0; i < arrSupplier.length(); i++){
@@ -326,6 +314,7 @@ public class Penjualan extends AppCompatActivity {
                                     Penjualan.this,
                                     android.R.layout.simple_spinner_dropdown_item, pelangganName);
                             input_nama_pelanggan.setAdapter(adapterSpinnerPelanggan);
+                            loading2.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
