@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -66,16 +67,20 @@ public class Penjualan extends AppCompatActivity {
     private TextView input_alamat;
     private TextView input_info_lain;
     private TextView namaBarangDialog;
-    private TextView hargaBarangDialog;
-    private TextView qtyBarangDialog;
-    private TextView subTotalBarangDialog;
     private RecyclerView recyclerView;
     private Button tambah_pembelian;
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
+    private AlertDialog.Builder dialog2;
+    private LayoutInflater inflater2;
+    private View dialogView2;
     private PenjualanAdapter adapter;
     private EditText kodeBarangDialog;
+    private TextView kode_BarangDialog;
+    private TextView nama_BarangDialog;
+    private TextView meterDialog;
+    private TextView ukuranDialog;
     private String id_barang;
     private String kode_barang;
     private String nama_barang;
@@ -88,10 +93,7 @@ public class Penjualan extends AppCompatActivity {
     private String stok_jual;
     private String harga;
     private String kode;
-    private String QTY;
-    private String HargaBarang;
     List<ProductPenjualanBarang> productBarang;
-    List<ProductPenjualanBarang> productsameBarang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +112,6 @@ public class Penjualan extends AppCompatActivity {
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         productBarang = new ArrayList<>();
-        productsameBarang = new ArrayList<>();
 
         ambilBarang();
 
@@ -121,9 +122,6 @@ public class Penjualan extends AppCompatActivity {
         dialog.setCancelable(true);
         kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
         namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
-        hargaBarangDialog = dialogView.findViewById(R.id.hargaBarang);
-        qtyBarangDialog = dialogView.findViewById(R.id.qtyBarang);
-        subTotalBarangDialog = dialogView.findViewById(R.id.subTotal);
 
         final TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
         TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
@@ -225,22 +223,28 @@ public class Penjualan extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 kode = kodeBarangDialog.getText().toString().trim();
-//                QTY = qtyBarangDialog.getText().toString().trim();
-
+                List<ProductPenjualanBarang> barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
-//                        int kodeBarang = Integer.parseInt(productBarang.get(i).getIdBarang());
-//                        Log.d(TAG, "onTextChanged: " + productBarang.get(i).getNamaBarang());
-                        namaBarangDialog.append(productBarang.get(i).getNamaBarang());
-//                        hargaBarangDialog.setText(productBarang.get(i).getHarga());
+                        barangPilih.add(productBarang.get(i));
+                    }
+
+                    if(barangPilih.size() > 1){
+                        //barang lebih dari 1 (buatkan popup untuk nampilin produk)
+                        dialog2 = new AlertDialog.Builder(Penjualan.this);
+                        inflater2 = getLayoutInflater();
+                        dialogView2 = inflater2.inflate(R.layout.form_penjualan, null);
+                        dialog2.setView(dialogView);
+                        dialog2.setCancelable(true);
+                        kode_BarangDialog = dialogView.findViewById(R.id.kode_barang);
+                        nama_BarangDialog = dialogView.findViewById(R.id.nama_barang);
+                        ukuranDialog = dialogView.findViewById(R.id.ukuran);
+                        meterDialog = dialogView.findViewById(R.id.meter);
+                    }else{
+                        //barang <= 1 (tampilkan barang pada textview
+                        namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
                     }
                 }
-
-//                HargaBarang = hargaBarangDialog.getText().toString().trim();
-//                int barangqty = Integer.parseInt(QTY);
-//                int barangharga = Integer.parseInt(HargaBarang);
-//                int subtotal = barangqty * barangharga;
-//                subTotalBarangDialog.setText(subtotal);
             }
 
             @Override
@@ -304,8 +308,8 @@ public class Penjualan extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
-                            String noNota = obj.getString("nota");
-                            input_no_nota.setText(noNota);
+                            String noNotaa = obj.getString("nota");
+                            input_no_nota.setText(noNotaa);
 
                             JSONArray arrSupplier = obj.getJSONArray("pelanggan");
                             for(int i = 0; i < arrSupplier.length(); i++){
