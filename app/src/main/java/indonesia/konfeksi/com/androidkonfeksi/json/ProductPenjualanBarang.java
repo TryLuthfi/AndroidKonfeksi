@@ -1,6 +1,7 @@
 package indonesia.konfeksi.com.androidkonfeksi.json;
 
 public class ProductPenjualanBarang {
+
     private String idBarang;
     private String kodeBarang;
     private String namaBarang;
