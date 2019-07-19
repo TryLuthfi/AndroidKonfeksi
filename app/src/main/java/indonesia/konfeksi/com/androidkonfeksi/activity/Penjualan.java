@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -215,11 +216,17 @@ public class Penjualan extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 kode = kodeBarangDialog.getText().toString().trim();
-//                Toast.makeText(Penjualan.this, ""+ kode, Toast.LENGTH_SHORT).show();
+                List<ProductPenjualanBarang> barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
-//                        Log.d(TAG, "onTextChanged: " + productBarang.get(i).getNamaBarang());
-                        namaBarangDialog.setText(productBarang.get(i).getNamaBarang());
+                        barangPilih.add(productBarang.get(i));
+                    }
+
+                    if(barangPilih.size() > 1){
+                        //barang lebih dari 1 (buatkan popup untuk nampilin produk)
+                    }else{
+                        //barang <= 1 (tampilkan barang pada textfiew
+                        namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
                     }
                 }
             }
