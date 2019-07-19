@@ -66,6 +66,9 @@ public class Penjualan extends AppCompatActivity {
     private TextView input_alamat;
     private TextView input_info_lain;
     private TextView namaBarangDialog;
+    private TextView hargaBarangDialog;
+    private TextView qtyBarangDialog;
+    private TextView subTotalBarangDialog;
     private RecyclerView recyclerView;
     private Button tambah_pembelian;
     private AlertDialog.Builder dialog;
@@ -85,7 +88,10 @@ public class Penjualan extends AppCompatActivity {
     private String stok_jual;
     private String harga;
     private String kode;
+    private String QTY;
+    private String HargaBarang;
     List<ProductPenjualanBarang> productBarang;
+    List<ProductPenjualanBarang> productsameBarang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +110,7 @@ public class Penjualan extends AppCompatActivity {
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         productBarang = new ArrayList<>();
+        productsameBarang = new ArrayList<>();
 
         ambilBarang();
 
@@ -114,6 +121,9 @@ public class Penjualan extends AppCompatActivity {
         dialog.setCancelable(true);
         kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
         namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
+        hargaBarangDialog = dialogView.findViewById(R.id.hargaBarang);
+        qtyBarangDialog = dialogView.findViewById(R.id.qtyBarang);
+        subTotalBarangDialog = dialogView.findViewById(R.id.subTotal);
 
         final TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
         TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
@@ -215,13 +225,22 @@ public class Penjualan extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 kode = kodeBarangDialog.getText().toString().trim();
-//                Toast.makeText(Penjualan.this, ""+ kode, Toast.LENGTH_SHORT).show();
+//                QTY = qtyBarangDialog.getText().toString().trim();
+
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
+//                        int kodeBarang = Integer.parseInt(productBarang.get(i).getIdBarang());
 //                        Log.d(TAG, "onTextChanged: " + productBarang.get(i).getNamaBarang());
-                        namaBarangDialog.setText(productBarang.get(i).getNamaBarang());
+                        namaBarangDialog.append(productBarang.get(i).getNamaBarang());
+//                        hargaBarangDialog.setText(productBarang.get(i).getHarga());
                     }
                 }
+
+//                HargaBarang = hargaBarangDialog.getText().toString().trim();
+//                int barangqty = Integer.parseInt(QTY);
+//                int barangharga = Integer.parseInt(HargaBarang);
+//                int subtotal = barangqty * barangharga;
+//                subTotalBarangDialog.setText(subtotal);
             }
 
             @Override
