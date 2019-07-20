@@ -14,8 +14,6 @@ import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
-import indonesia.konfeksi.com.androidkonfeksi.activity.isiHistoryPembelian;
-import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPembelian;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 
 public class DialogRecyclerAdapter extends RecyclerView.Adapter<DialogRecyclerAdapter.ProductViewHolder> {
