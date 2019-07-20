@@ -6,7 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".activity.Penjualan">
 
+    <LinearLayout
+        app:layout_constraintBottom_toTopOf="@id/top"
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#304ffe">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Produk"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
     <android.support.v4.widget.NestedScrollView
+        android:layout_below="@id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
