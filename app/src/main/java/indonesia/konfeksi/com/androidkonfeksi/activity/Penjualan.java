@@ -105,29 +105,21 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
         ambilBarang();
 
-        dialog = new AlertDialog.Builder(Penjualan.this);
-        inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.form_penjualan, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(true);
-        kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
-        namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
-
         final TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
         TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
         TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         TextView subTootal = dialogView.findViewById(R.id.subTotal);
 
-        ArrayList<String> penjualan = new ArrayList<>();
-        penjualan.add("001");
-        penjualan.add("002");
-        penjualan.add("003");
-        penjualan.add("004");
-        penjualan.add("005");
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PenjualanAdapter(this, penjualan);
-        recyclerView.setAdapter(adapter);
+//        ArrayList<String> penjualan = new ArrayList<>();
+//        penjualan.add("001");
+//        penjualan.add("002");
+//        penjualan.add("003");
+//        penjualan.add("004");
+//        penjualan.add("005");
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new PenjualanAdapter(this, penjualan);
+//        recyclerView.setAdapter(adapter);
 
         setDate();
         settime();
@@ -183,6 +175,14 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         tambah_pembelian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dialog = new AlertDialog.Builder(Penjualan.this);
+                inflater = getLayoutInflater();
+                dialogView = inflater.inflate(R.layout.form_penjualan, null);
+                dialog.setView(dialogView);
+                dialog.setCancelable(true);
+                kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
+                namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
 
                 dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
 
