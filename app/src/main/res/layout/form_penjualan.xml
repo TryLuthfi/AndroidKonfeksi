@@ -126,9 +126,10 @@
                 android:gravity="center"
                 android:background="@drawable/formshape">
 
-                <TextView
+                <EditText
+                    android:background="@null"
                     android:id="@+id/qtyBarang"
-                    android:text="QTY"
+                    android:hint="QTY"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"/>
