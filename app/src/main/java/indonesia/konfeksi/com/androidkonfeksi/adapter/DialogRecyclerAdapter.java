@@ -12,6 +12,7 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 
@@ -22,10 +23,12 @@ public class DialogRecyclerAdapter extends RecyclerView.Adapter<DialogRecyclerAd
     private NumberFormat formatRupiah;
 
 
+    private static RecyclerViewClickListener itemListener;
 
-    public DialogRecyclerAdapter(Activity mCtx, List<ProductPenjualanBarang> productList) {
+    public DialogRecyclerAdapter(Activity mCtx, List<ProductPenjualanBarang> productList, RecyclerViewClickListener itemListener) {
         this.mCtx = mCtx;
         this.productList = productList;
+        this.itemListener = itemListener;
     }
 
     @Override
@@ -41,19 +44,26 @@ public class DialogRecyclerAdapter extends RecyclerView.Adapter<DialogRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(ProductViewHolder holder, int position) {
+    public void onBindViewHolder(ProductViewHolder holder, final int position) {
         final ProductPenjualanBarang product = productList.get(position);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.recyclerViewListClicked(v, position);
+            }
+        });
         holder.kode_barang.setText(product.getKodeBarang());
         holder.nama_barang.setText(product.getNamaBarang());
         holder.ukuran.setText(product.getUkuran());
         holder.meter.setText(("(")+product.getMeter()+("Pcs)"));
+
     }
 
     @Override
     public int getItemCount() {
         return productList.size();
     }
+
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
