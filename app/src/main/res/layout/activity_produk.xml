@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="LARIS 32 KONVEKSI"
+            android:text="Produk"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
