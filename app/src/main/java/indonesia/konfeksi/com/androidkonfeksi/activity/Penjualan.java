@@ -40,6 +40,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.DialogRecyclerAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.HistoryPembelianAdapter;
@@ -51,7 +52,7 @@ import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
-public class Penjualan extends AppCompatActivity {
+public class Penjualan extends AppCompatActivity implements RecyclerViewClickListener {
     private static final String TAG = "Penjualan";
     private String date;
     private String time;
@@ -234,13 +235,15 @@ public class Penjualan extends AppCompatActivity {
                     dialog2.show();
                     productBarangDialog = new ArrayList<>();
 
-                    DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih);
+                    DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
                     recyclerViewDialog.setAdapter(adapter);
 
 //                    loadProducts();
 
                 }else{
-                    namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
+                    if(barangPilih.size() > 0){
+                        namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
+                    }
                 }
             }
 
@@ -248,6 +251,10 @@ public class Penjualan extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
+
+    public void recyclerViewListClicked(View v, int position){
+        Log.d(TAG, "recyclerViewListClicked: " + position);
     }
 
     private void ambilBarang(){
@@ -294,52 +301,6 @@ public class Penjualan extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
 
-    }
-
-    private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray arrSupplier = obj.getJSONArray("datanya");
-                            for (int i = 0; i < arrSupplier.length(); i++) {
-                                JSONObject supplierJson = arrSupplier.getJSONObject(i);
-                                if(kode.equals(supplierJson.getString("kode_barang"))) {
-                                    productBarangDialog.add(new ProductPenjualanBarang(
-                                            supplierJson.getString("id_barang"),
-                                            supplierJson.getString("kode_barang"),
-                                            supplierJson.getString("nama_barang"),
-                                            supplierJson.getString("diskon_persen"),
-                                            supplierJson.getString("diskon_rupiah"),
-                                            supplierJson.getString("id_varian_harga"),
-                                            supplierJson.getString("ukuran"),
-                                            supplierJson.getString("meter"),
-                                            supplierJson.getString("warna"),
-                                            supplierJson.getString("stok_jual"),
-                                            supplierJson.getString("harga")
-                                    ));
-                                }
-                            }
-
-                            DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, productBarangDialog);
-                            recyclerViewDialog.setAdapter(adapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                });
-
-        //adding our stringrequest to queue
-        Volley.newRequestQueue(Penjualan.this).add(stringRequest);
     }
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
