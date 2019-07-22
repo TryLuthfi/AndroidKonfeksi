@@ -7,11 +7,9 @@
     android:orientation="vertical"
     tools:context=".activity.Return">
 
-    <ImageView
-        android:id="@+id/gmbr_barcode"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/ic_launcher"
-        android:layout_margin="10dp"/>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
