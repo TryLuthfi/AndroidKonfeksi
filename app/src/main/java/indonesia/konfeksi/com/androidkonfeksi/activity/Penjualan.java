@@ -82,6 +82,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private EditText kodeBarangDialog;
     private String kode;
 
+    private String nama;
+    private String harga;
+
     private LinearLayout isi;
     private ProgressBar loading;
     private ProgressBar progressbar;
@@ -98,7 +101,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
     List<ProductPenjualanBarang> productBarang;
     List<ProductPenjualanBarang> productBarangDialog;
+
     List<ProductPenjualanBarang> barangPilih;
+    List<ProductPenjualanBarang> barangPilih2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,11 +143,22 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         dialog.setView(dialogView);
         dialog.setCancelable(true);
 
+        kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
+        namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
+        namaaBarang = dialogView.findViewById(R.id.namaBarang);
+        hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
+        qtyBarang = dialogView.findViewById(R.id.qtyBarang);
+        subTootal = dialogView.findViewById(R.id.subTotal);
+
         dialog.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+                barangPilih2 = new ArrayList<>();
+
+//                for(int i = 0; i < productBarang.size(); i++){
+//                        barangPilih2.add(productBarang.get(i));
+//                }
             }
         });
 
@@ -153,13 +169,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 dialog.dismiss();
             }
         });
-
-        kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
-        namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
-        namaaBarang = dialogView.findViewById(R.id.namaBarang);
-        hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
-        qtyBarang = dialogView.findViewById(R.id.qtyBarang);
-        subTootal = dialogView.findViewById(R.id.subTotal);
 
         ArrayList<String> penjualan = new ArrayList<>();
 
@@ -261,7 +270,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
                     recyclerViewDialog.setAdapter(adapter);
 
-//                    loadProducts();
 
 
                 }else{
@@ -293,6 +301,8 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         namaaBarang.setText(barangPilih.get(position).getUkuran());
         hargaaBarang.setText(barangPilih.get(position).getHarga());
         dialog2.dismiss();
+        nama = namaaBarang.getText().toString().trim();
+        harga = hargaaBarang.getText().toString().trim();
     }
 
     private void ambilBarang(){
