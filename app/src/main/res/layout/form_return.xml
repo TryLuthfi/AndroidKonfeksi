@@ -18,10 +18,13 @@
             android:textColor="#fff"/>
     </LinearLayout>
 
-    <SearchView
-        android:id="@+id/searchView"
+    <EditText
+        android:id="@+id/cariBarang"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></SearchView>
+        android:background="@null"
+        android:hint="Cari"
+        android:paddingHorizontal="5dp"
+        android:layout_height="wrap_content"></EditText>
 
 </LinearLayout>
