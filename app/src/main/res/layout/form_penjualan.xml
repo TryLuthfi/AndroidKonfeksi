@@ -44,6 +44,7 @@
                 android:background="@drawable/formshape">
 
                 <EditText
+                    android:maxEms="1"
                     android:id="@+id/kodeBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,8 +75,7 @@
                     android:id="@+id/namaBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Nama Barang"/>
+                    android:layout_marginHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -102,8 +102,7 @@
                     android:id="@+id/hargaBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Harga"/>
+                    android:layout_marginHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -126,9 +125,9 @@
                 android:gravity="center"
                 android:background="@drawable/formshape">
 
-                <TextView
+                <EditText
                     android:id="@+id/qtyBarang"
-                    android:text="QTY"
+                    android:hint="Qty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"/>
@@ -158,8 +157,7 @@
                     android:id="@+id/subTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Sub Total"/>
+                    android:layout_marginHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
 

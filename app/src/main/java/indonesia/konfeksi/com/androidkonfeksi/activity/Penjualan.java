@@ -1,5 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,12 +46,7 @@ import java.util.Objects;
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.DialogRecyclerAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.HistoryPembelianAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.PenjualanAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.json.Product;
-import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPembelian;
-import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
@@ -73,17 +71,39 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private RecyclerView recyclerView;
     private RecyclerView recyclerViewDialog;
     private Button tambah_pembelian;
-    private AlertDialog.Builder dialog;
+    private AlertDialog dialog;
     private LayoutInflater inflater;
     private View dialogView;
-    private AlertDialog.Builder dialog2;
+    private AlertDialog dialog2;
     private LayoutInflater inflater2;
     private View dialogView2;
     private PenjualanAdapter adapter;
+    private String idBarang;
     private EditText kodeBarangDialog;
     private String kode;
+
+    private String nama;
+    private String harga;
+
+    private LinearLayout isi;
+    private ProgressBar loading;
+    private ProgressBar progressbar;
+
+    private TextView namaaBarang;
+    private TextView hargaaBarang;
+    private EditText qtyBarang;
+    private TextView subTootal;
+
+    private TextView txErr;
+    private Button cobaLagi;
+
+    private TextView error ;
+
     List<ProductPenjualanBarang> productBarang;
     List<ProductPenjualanBarang> productBarangDialog;
+
+    List<ProductPenjualanBarang> barangPilih;
+    List<ProductPenjualanBarang> barangPilih2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,27 +119,63 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         input_alamat = findViewById(R.id.input_alamat);
         input_info_lain = findViewById(R.id.input_info_lain);
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
+        txErr = findViewById(R.id.err_ap);
+        cobaLagi = findViewById(R.id.reload_ap);
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        isi = findViewById(R.id.isi);
+        loading = findViewById(R.id.loading);
+        progressbar = findViewById(R.id.progressbar);
+        error = findViewById(R.id.error);
+
+        isi.setVisibility(View.INVISIBLE);
+        txErr.setVisibility(View.INVISIBLE);
+        cobaLagi.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         productBarang = new ArrayList<>();
 
         ambilBarang();
 
-        final TextView namaaBarang = dialogView.findViewById(R.id.namaBarang);
-        TextView hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
-        TextView qtyBarang = dialogView.findViewById(R.id.qtyBarang);
-        TextView subTootal = dialogView.findViewById(R.id.subTotal);
+        dialog = new AlertDialog.Builder(Penjualan.this).create();
+        inflater = getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.form_penjualan, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(true);
 
-//        ArrayList<String> penjualan = new ArrayList<>();
-//        penjualan.add("001");
-//        penjualan.add("002");
-//        penjualan.add("003");
-//        penjualan.add("004");
-//        penjualan.add("005");
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new PenjualanAdapter(this, penjualan);
-//        recyclerView.setAdapter(adapter);
+        kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
+        namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
+        namaaBarang = dialogView.findViewById(R.id.namaBarang);
+        hargaaBarang = dialogView.findViewById(R.id.hargaBarang);
+        qtyBarang = dialogView.findViewById(R.id.qtyBarang);
+        subTootal = dialogView.findViewById(R.id.subTotal);
+
+        dialog.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                barangPilih2 = new ArrayList<>();
+
+//                for(int i = 0; i < productBarang.size(); i++){
+//                        barangPilih2.add(productBarang.get(i));
+//                }
+            }
+        });
+
+        dialog.setButton(Dialog.BUTTON_NEGATIVE,"CANCEL", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        ArrayList<String> penjualan = new ArrayList<>();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new PenjualanAdapter(this, penjualan);
+        error.setVisibility(View.VISIBLE);
+        progressbar.setVisibility(View.INVISIBLE);
 
         setDate();
         settime();
@@ -176,30 +232,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             @Override
             public void onClick(View v) {
 
-                dialog = new AlertDialog.Builder(Penjualan.this);
-                inflater = getLayoutInflater();
-                dialogView = inflater.inflate(R.layout.form_penjualan, null);
-                dialog.setView(dialogView);
-                dialog.setCancelable(true);
-                kodeBarangDialog = dialogView.findViewById(R.id.kodeBarang);
-                namaBarangDialog = dialogView.findViewById(R.id.namaBarang);
-
-                dialog.setPositiveButton("TAMBAH", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
                 dialog.show();
             }
         });
@@ -215,7 +247,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 kode = kodeBarangDialog.getText().toString().trim();
-                List<ProductPenjualanBarang> barangPilih = new ArrayList<>();
+                barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
                         barangPilih.add(productBarang.get(i));
@@ -223,7 +255,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 }
 
                 if(barangPilih.size() > 1){
-                    dialog2 = new AlertDialog.Builder(Penjualan.this);
+                    dialog2 = new AlertDialog.Builder(Penjualan.this).create();
                     inflater2 = getLayoutInflater();
                     dialogView2 = inflater2.inflate(R.layout.recycler_dialog, null);
                     dialog2.setView(dialogView2);
@@ -238,7 +270,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
                     recyclerViewDialog.setAdapter(adapter);
 
-//                    loadProducts();
+
 
                 }else{
                     if(barangPilih.size() > 0){
@@ -253,8 +285,24 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         });
     }
 
-    public void recyclerViewListClicked(View v, int position){
+    public void reload(View v) {
+        loading.setVisibility(View.VISIBLE);
+        txErr.setVisibility(View.INVISIBLE);
+        cobaLagi.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+
+        ambilBarang();
+    }
+
+
+        public void recyclerViewListClicked(View v, int position){
         Log.d(TAG, "recyclerViewListClicked: " + position);
+        Log.e(TAG, "recyclerViewListClicked: " + barangPilih.get(position).getNamaBarang());
+        namaaBarang.setText(barangPilih.get(position).getUkuran());
+        hargaaBarang.setText(barangPilih.get(position).getHarga());
+        dialog2.dismiss();
+        nama = namaaBarang.getText().toString().trim();
+        harga = hargaaBarang.getText().toString().trim();
     }
 
     private void ambilBarang(){
@@ -283,11 +331,18 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                                         supplierJson.getString("harga")
                                 );
                                 productBarang.add(barang);
+
+                                isi.setVisibility(View.VISIBLE);
+                                loading.setVisibility(View.INVISIBLE);
+
                                 Log.d(TAG, "onResponse: " + barang);
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            loading.setVisibility(View.INVISIBLE);
+                            txErr.setVisibility(View.VISIBLE);
+                            cobaLagi.setVisibility(View.VISIBLE);
                             Log.d(TAG, "onResponse: " + e);
                         }
                     }
@@ -295,6 +350,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loading.setVisibility(View.INVISIBLE);
+                        txErr.setVisibility(View.VISIBLE);
+                        cobaLagi.setVisibility(View.VISIBLE);
                         Log.d(TAG, "onErrorResponse: " + error);
                     }
                 });

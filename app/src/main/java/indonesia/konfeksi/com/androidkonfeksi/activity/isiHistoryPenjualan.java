@@ -18,8 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
@@ -49,6 +51,8 @@ public class isiHistoryPenjualan extends AppCompatActivity {
     private TextView input_alamat ;
     private TextView total_harga ;
     private TextView error ;
+
+    private NumberFormat formatRupiah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +84,18 @@ public class isiHistoryPenjualan extends AppCompatActivity {
         mPostIdPenjualan = getIntent().getExtras().getString("id_penjualan");
         mPostTotalHarga = getIntent().getExtras().getString("total_harga");
 
+        Locale localeID = new Locale("in", "ID");
+
+        formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+
         input_no_nota.setText(mPostKeyNoNota);
         input_tanggal.setText(mPostKeyTanggal);
         input_waktu.setText(mPostKeyWaktu);
         input_kasir.setText(mPostKeyKasir);
         input_no_telp.setText(mPostKeyNoTelp);
         input_alamat.setText(mPostKeyAlamat);
-        total_harga.setText(mPostTotalHarga);
+        double hargabarang = Double.parseDouble(mPostTotalHarga);
+        total_harga.setText(formatRupiah.format((double)hargabarang));
 
         String no_nota = input_no_nota.getText().toString().trim();
         String tanggal = input_tanggal.getText().toString().trim();
