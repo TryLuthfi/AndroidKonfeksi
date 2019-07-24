@@ -150,15 +150,23 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         subTootal = dialogView.findViewById(R.id.subTotal);
 
+        barangPilih2 = new ArrayList<>();
+
         dialog.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                barangPilih2 = new ArrayList<>();
+                nama = namaaBarang.getText().toString().trim();
+                for(int i = 0; i < productBarang.size(); i++){
+                    if(productBarang.get(i).getNamaBarang().equalsIgnoreCase(nama)){
+                        barangPilih2.add(productBarang.get(i));
 
-//                for(int i = 0; i < productBarang.size(); i++){
-//                        barangPilih2.add(productBarang.get(i));
-//                }
+                        recyclerView.setLayoutManager(new LinearLayoutManager(Penjualan.this));
+                        DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih2, Penjualan.this);
+                        recyclerView.setAdapter(adapter);
+                        dialog.dismiss();
+                    }
+                }
             }
         });
 
@@ -172,8 +180,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
         ArrayList<String> penjualan = new ArrayList<>();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PenjualanAdapter(this, penjualan);
         error.setVisibility(View.VISIBLE);
         progressbar.setVisibility(View.INVISIBLE);
 
@@ -269,12 +275,10 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
                     DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
                     recyclerViewDialog.setAdapter(adapter);
-
-
-
                 }else{
                     if(barangPilih.size() > 0){
                         namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
+                        hargaaBarang.setText(barangPilih.get(0).getHarga());
                     }
                 }
             }
@@ -301,7 +305,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         namaaBarang.setText(barangPilih.get(position).getUkuran());
         hargaaBarang.setText(barangPilih.get(position).getHarga());
         dialog2.dismiss();
-        nama = namaaBarang.getText().toString().trim();
         harga = hargaaBarang.getText().toString().trim();
     }
 

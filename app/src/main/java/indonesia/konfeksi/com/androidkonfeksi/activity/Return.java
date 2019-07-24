@@ -51,6 +51,7 @@ public class Return extends AppCompatActivity {
     private EditText cariBarang;
     List<ProductHistoryPenjualan> productBarang;
     List<ProductHistoryPenjualan> productBarangRecyclerview;
+    List<ProductHistoryPenjualan> barangPilih;
     private String kode;
     private RecyclerView recyclerView;
 
@@ -67,7 +68,8 @@ public class Return extends AppCompatActivity {
         cariBarang = dialogView.findViewById(R.id.cariBarang);
         dialog.show();
         productBarang = new ArrayList<>();
-        productBarangRecyclerview = new ArrayList<>();
+
+        recyclerView =  findViewById(R.id.recyclerviewR);
 
         ambilBarang();
 
@@ -80,17 +82,18 @@ public class Return extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 kode = cariBarang.getText().toString().trim();
-//                List<ProductHistoryPenjualan> barangPilih = new ArrayList<>();
+                barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getNo_faktur().equalsIgnoreCase(kode)){
-//                        barangPilih.add(productBarang.get(i));
-//                        recyclerView =  findViewById(R.id.recyclerviewR);
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(Return.this));
-//
-//                        ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, barangPilih, (RecyclerViewClickListener) Return.this);
-//                        recyclerView.setAdapter(adapter);
-//                        dialog.dismiss();
-                        Toast.makeText(Return.this, ""+productBarang.get(i).getNo_faktur(), Toast.LENGTH_SHORT).show();
+                        barangPilih.add(productBarang.get(i));
+                        recyclerView.setLayoutManager(new LinearLayoutManager(Return.this));
+
+                        productBarangRecyclerview = new ArrayList<>();
+                        ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, barangPilih);
+                        recyclerView.setAdapter(adapter);
+                        dialog.dismiss();
+                    }else {
+                        Toast.makeText(Return.this, "Tidak Ada", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
