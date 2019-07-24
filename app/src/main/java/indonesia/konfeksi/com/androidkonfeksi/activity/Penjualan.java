@@ -163,7 +163,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
                         recyclerView.setLayoutManager(new LinearLayoutManager(Penjualan.this));
                         DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih2, Penjualan.this);
-                        recyclerView.setAdapter(adapter);
+                         recyclerView.setAdapter(adapter);
                         dialog.dismiss();
                     }
                 }
@@ -177,8 +177,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 dialog.dismiss();
             }
         });
-
-        ArrayList<String> penjualan = new ArrayList<>();
 
         error.setVisibility(View.VISIBLE);
         progressbar.setVisibility(View.INVISIBLE);
