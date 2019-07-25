@@ -81,29 +81,30 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private String idBarang;
     private EditText kodeBarangDialog;
     private String kode;
-
     private String nama;
     private String harga;
-
     private LinearLayout isi;
     private ProgressBar loading;
     private ProgressBar progressbar;
-
     private TextView namaaBarang;
     private TextView hargaaBarang;
     private EditText qtyBarang;
     private TextView subTootal;
-
     private TextView txErr;
     private Button cobaLagi;
+    private TextView error;
+    private String QTYINTs;
+    private String hargaINTs;
 
-    private TextView error ;
+    private int QTYINT;
+    private int hargaINT;
+    private int subTotalINT;
 
     List<ProductPenjualanBarang> productBarang;
     List<ProductPenjualanBarang> productBarangDialog;
 
     List<ProductPenjualanBarang> barangPilih;
-    List<ProductPenjualanBarang> barangPilih2;
+    ProductPenjualanBarang barangPilih2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,22 +151,23 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         qtyBarang = dialogView.findViewById(R.id.qtyBarang);
         subTootal = dialogView.findViewById(R.id.subTotal);
 
-        barangPilih2 = new ArrayList<>();
 
         dialog.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                nama = namaaBarang.getText().toString().trim();
                 for(int i = 0; i < productBarang.size(); i++){
-                    if(productBarang.get(i).getNamaBarang().equalsIgnoreCase(nama)){
-                        barangPilih2.add(productBarang.get(i));
 
+                    if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
+                            && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
+                    {
+                        Log.d(TAG, "recyclerView: "+barangPilih2.getUkuran());
+//                        Toast.makeText(Penjualan.this, barangPilih2.getUkuran(), Toast.LENGTH_SHORT).show();
                         recyclerView.setLayoutManager(new LinearLayoutManager(Penjualan.this));
-                        DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih2, Penjualan.this);
-                         recyclerView.setAdapter(adapter);
-                        dialog.dismiss();
+                        DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
+                        recyclerView.setAdapter(adapter);
                     }
+
                 }
             }
         });
@@ -240,7 +242,23 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             }
         });
 
+        qtyBarang.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int harga = Integer.valueOf(hargaaBarang.getText().toString());
+                int qty = Integer.valueOf(qtyBarang.getText().toString());
+                subTootal.setText(String.valueOf(harga * qty));
+            }
+        });
 
         kodeBarangDialog.addTextChangedListener(new TextWatcher() {
 
@@ -297,13 +315,15 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     }
 
 
-        public void recyclerViewListClicked(View v, int position){
+    public void recyclerViewListClicked(View v, int position){
         Log.d(TAG, "recyclerViewListClicked: " + position);
         Log.e(TAG, "recyclerViewListClicked: " + barangPilih.get(position).getNamaBarang());
         namaaBarang.setText(barangPilih.get(position).getUkuran());
         hargaaBarang.setText(barangPilih.get(position).getHarga());
         dialog2.dismiss();
+        nama = namaaBarang.getText().toString().trim();
         harga = hargaaBarang.getText().toString().trim();
+        barangPilih2 = barangPilih.get(position);
     }
 
     private void ambilBarang(){
@@ -329,7 +349,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                                         supplierJson.getString("meter"),
                                         supplierJson.getString("warna"),
                                         supplierJson.getString("stok_jual"),
-                                        supplierJson.getString("harga")
+                                        supplierJson.getString("harga"), 0, 0
                                 );
                                 productBarang.add(barang);
 

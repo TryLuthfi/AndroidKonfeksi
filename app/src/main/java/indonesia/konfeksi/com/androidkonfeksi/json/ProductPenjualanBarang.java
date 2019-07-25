@@ -13,8 +13,10 @@ public class ProductPenjualanBarang {
     private String warna;
     private String stokJual;
     private String harga;
+    private int qty;
+    private int subTotal;
 
-    public ProductPenjualanBarang(String idBarang, String kodeBarang, String namaBarang, String diskonPersen, String diskonRupiah, String idVarianHarga, String ukuran, String meter, String warna, String stokJual, String harga) {
+    public ProductPenjualanBarang(String idBarang, String kodeBarang, String namaBarang, String diskonPersen, String diskonRupiah, String idVarianHarga, String ukuran, String meter, String warna, String stokJual, String harga, int qty, int subTotal) {
         this.idBarang = idBarang;
         this.kodeBarang = kodeBarang;
         this.namaBarang = namaBarang;
@@ -26,93 +28,59 @@ public class ProductPenjualanBarang {
         this.warna = warna;
         this.stokJual = stokJual;
         this.harga = harga;
+        this.qty = qty;
+        this.subTotal = subTotal;
     }
 
     public String getIdBarang() {
         return idBarang;
     }
 
-    public void setIdBarang(String idBarang) {
-        this.idBarang = idBarang;
-    }
-
     public String getKodeBarang() {
         return kodeBarang;
-    }
-
-    public void setKodeBarang(String kodeBarang) {
-        this.kodeBarang = kodeBarang;
     }
 
     public String getNamaBarang() {
         return namaBarang;
     }
 
-    public void setNamaBarang(String namaBarang) {
-        this.namaBarang = namaBarang;
-    }
-
     public String getDiskonPersen() {
         return diskonPersen;
-    }
-
-    public void setDiskonPersen(String diskonPersen) {
-        this.diskonPersen = diskonPersen;
     }
 
     public String getDiskonRupiah() {
         return diskonRupiah;
     }
 
-    public void setDiskonRupiah(String diskonRupiah) {
-        this.diskonRupiah = diskonRupiah;
-    }
-
     public String getIdVarianHarga() {
         return idVarianHarga;
-    }
-
-    public void setIdVarianHarga(String idVarianHarga) {
-        this.idVarianHarga = idVarianHarga;
     }
 
     public String getUkuran() {
         return ukuran;
     }
 
-    public void setUkuran(String ukuran) {
-        this.ukuran = ukuran;
-    }
-
     public String getMeter() {
         return meter;
-    }
-
-    public void setMeter(String meter) {
-        this.meter = meter;
     }
 
     public String getWarna() {
         return warna;
     }
 
-    public void setWarna(String warna) {
-        this.warna = warna;
-    }
-
     public String getStokJual() {
         return stokJual;
-    }
-
-    public void setStokJual(String stokJual) {
-        this.stokJual = stokJual;
     }
 
     public String getHarga() {
         return harga;
     }
 
-    public void setHarga(String harga) {
-        this.harga = harga;
+    public int getQty() {
+        return qty;
+    }
+
+    public int getSubTotal() {
+        return subTotal;
     }
 }
