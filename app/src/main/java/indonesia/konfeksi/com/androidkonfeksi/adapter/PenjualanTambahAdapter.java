@@ -21,13 +21,9 @@ public class PenjualanTambahAdapter extends RecyclerView.Adapter<PenjualanTambah
     private List<ProductPenjualanBarang> productList;
     private NumberFormat formatRupiah;
 
-
-    private static RecyclerViewClickListener itemListener;
-
-    public PenjualanTambahAdapter(Activity mCtx, List<ProductPenjualanBarang> productList, RecyclerViewClickListener itemListener) {
+    public PenjualanTambahAdapter(Activity mCtx, List<ProductPenjualanBarang> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
-        this.itemListener = itemListener;
     }
 
     @Override
@@ -45,7 +41,10 @@ public class PenjualanTambahAdapter extends RecyclerView.Adapter<PenjualanTambah
     @Override
     public void onBindViewHolder(ProductViewHolder holder, final int position) {
         final ProductPenjualanBarang product = productList.get(position);
-
+        holder.kode_barang.setText(product.getKodeBarang());
+        holder.nama_barang.setText(product.getNamaBarang());
+        holder.ukuran.setText(product.getUkuran());
+        holder.meter.setText(("(")+product.getMeter()+("Pcs)"));
     }
 
     @Override
@@ -56,11 +55,20 @@ public class PenjualanTambahAdapter extends RecyclerView.Adapter<PenjualanTambah
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
+        TextView kode_barang;
+        TextView nama_barang;
+        TextView ukuran;
+        TextView meter;
         View view;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
             view = itemView;
+
+            kode_barang = itemView.findViewById(R.id.kode_barang);
+            nama_barang = itemView.findViewById(R.id.nama_barang);
+            ukuran = itemView.findViewById(R.id.ukuran);
+            meter = itemView.findViewById(R.id.meter);
         }
     }
 }

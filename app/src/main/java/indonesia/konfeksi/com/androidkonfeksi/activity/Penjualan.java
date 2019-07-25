@@ -47,6 +47,7 @@ import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListene
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.DialogRecyclerAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.PenjualanAdapter;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.PenjualanTambahAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
@@ -104,6 +105,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     List<ProductPenjualanBarang> productBarangDialog;
 
     List<ProductPenjualanBarang> barangPilih;
+    List<ProductPenjualanBarang> barangPilih3;
     ProductPenjualanBarang barangPilih2;
 
     @Override
@@ -163,9 +165,11 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     {
                         Log.d(TAG, "recyclerView: "+barangPilih2.getUkuran());
 //                        Toast.makeText(Penjualan.this, barangPilih2.getUkuran(), Toast.LENGTH_SHORT).show();
+                        barangPilih3 = new ArrayList<>();
+                        barangPilih3.add(barangPilih2);
                         recyclerView.setLayoutManager(new LinearLayoutManager(Penjualan.this));
-                        DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
-                        recyclerView.setAdapter(adapter);
+                        PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
+                        recyclerView.setAdapter(penjualanadapter);
                     }
 
                 }
