@@ -92,6 +92,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private TextView subTootal;
     private TextView txErr;
     private Button cobaLagi;
+    private Button tambah_pembelian2;
     private TextView error;
     private String QTYINTs;
     private String hargaINTs;
@@ -123,6 +124,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
         txErr = findViewById(R.id.err_ap);
         cobaLagi = findViewById(R.id.reload_ap);
+        tambah_pembelian2 = findViewById(R.id.tambah_pembelian2);
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -153,6 +155,12 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
         barangPilih3 = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(Penjualan.this));
+
+        tambah_pembelian2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
 
         dialog.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
 
