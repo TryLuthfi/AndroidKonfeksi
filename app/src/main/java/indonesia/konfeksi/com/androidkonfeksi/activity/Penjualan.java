@@ -1,7 +1,11 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +19,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,7 +46,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
@@ -72,6 +80,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private RecyclerView recyclerView;
     private RecyclerView recyclerViewDialog;
     private Button tambah_pembelian;
+    private Button final_tambah_pembelian;
     private AlertDialog dialog;
     private LayoutInflater inflater;
     private View dialogView;
@@ -100,9 +109,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private int QTYINT;
     private int hargaINT;
     private int subTotalINT;
+    private ProgressDialog loadingg;
 
     List<ProductPenjualanBarang> productBarang;
-    List<ProductPenjualanBarang> productBarangDialog;
 
     List<ProductPenjualanBarang> barangPilih;
     List<ProductPenjualanBarang> barangPilih3;
@@ -122,6 +131,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         input_alamat = findViewById(R.id.input_alamat);
         input_info_lain = findViewById(R.id.input_info_lain);
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
+        final_tambah_pembelian = findViewById(R.id.final_tambah_pembelian2);
         txErr = findViewById(R.id.err_ap);
         cobaLagi = findViewById(R.id.reload_ap);
         tambah_pembelian2 = findViewById(R.id.tambah_pembelian2);
@@ -188,6 +198,13 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+            }
+        });
+
+        final_tambah_pembelian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tambahBarangPembelian();
             }
         });
 
@@ -296,7 +313,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     recyclerViewDialog.setLayoutManager(new LinearLayoutManager(Penjualan.this));
 
                     dialog2.show();
-                    productBarangDialog = new ArrayList<>();
 
                     DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
                     recyclerViewDialog.setAdapter(adapter);
@@ -335,7 +351,25 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         barangPilih2 = barangPilih.get(position);
     }
 
+
+
+
     private void ambilBarang(){
+        productBarang.add(new ProductPenjualanBarang(
+                "BP000PO",
+                "2",
+                "luthfi",
+                "100",
+                "0",
+                "122",
+                "1lusin",
+                "11",
+                "000",
+                "0",
+                "0",
+                0,
+                0
+        ));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -388,6 +422,74 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 });
 
         Volley.newRequestQueue(this).add(stringRequest);
+
+    }
+
+    public void tambahBarangPembelian(){
+        loadingg = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
+
+//
+
+        if(getId_Karyawan().equals("null")){
+            Log.d(TAG, "tambahBarangPembelian: " + getId_Karyawan());
+            Toast.makeText(Penjualan.this, "Id Karyawan tidak tersedia", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.URL_TAMBAH_PENJUALAN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject resObj = new JSONObject(response);
+                            if(resObj.getString("success").equals("true")){
+                                loadingg.dismiss();
+                                Log.d(TAG, "onResponse123: " + resObj.toString());
+                                Toast.makeText(Penjualan.this, "Berhasil Menambah Data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                loadingg.dismiss();
+                                Log.d(TAG, "onResponse false: " + resObj.toString());
+                                Toast.makeText(Penjualan.this, resObj.getString("message"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Throwable t) {
+                            loadingg.dismiss();
+                            Log.d("My App", "Could not parse malformed JSON: \"" + response + "\"");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error);
+                        loadingg.dismiss();
+                        Toast.makeText(Penjualan.this, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id_karyawan", getId_Karyawan());
+                params.put("id_pelanggan", idPelanggan);
+                params.put("no_nota", kodeBarangDialog.getText().toString());
+                params.put("Total", subTootal.getText().toString());
+
+                for(int i = 0; i < barangPilih3.size(); i++) {
+                    params.put("id_barang["+i+"]", barangPilih3.get(0).getIdBarang());
+                    params.put("id_varian_harga["+i+"]", barangPilih3.get(0).getIdVarianHarga());
+                    params.put("jumlah_beli["+i+"]", String.valueOf(barangPilih3.get(0).getQty()));
+                    params.put("sub_total["+i+"]", String.valueOf(barangPilih3.get(0).getSubTotal()));
+                }
+
+                Log.d(TAG, "hasil: " + barangPilih3.get(0).getIdBarang()+"_"+barangPilih3.get(0).getIdVarianHarga()+"_"+barangPilih3.get(0).getQty()+"_"+barangPilih3.get(0).getSubTotal());
+                Log.d(TAG, "getParams: " + params.toString());
+                return params;
+            }
+        };
+
+        Volley.newRequestQueue(this).add(stringRequest);
+
 
     }
 
@@ -466,5 +568,11 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         public String toString() {
             return string;
         }
+    }
+
+    private String getId_Karyawan(){
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String id_karyawan = preferences.getString("id_karyawan", "null");
+        return id_karyawan;
     }
 }
