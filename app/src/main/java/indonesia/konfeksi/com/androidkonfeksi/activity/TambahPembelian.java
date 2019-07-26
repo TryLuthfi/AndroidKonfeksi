@@ -287,18 +287,7 @@ public class TambahPembelian extends AppCompatActivity {
     public void tambahBarangPembelian(){
         loading = ProgressDialog.show(TambahPembelian.this, "Updating...", "Mohon Tunggu...", false, false);
 
-//        String noNotaKirim = nonota.getText().toString();
-//        String namaSupplierKirim = idSupplierPilih;
-//        String namaBarangKirim = idBarangPilih;
-//        String jumlahColiKirim = jumlahColi.getText().toString();
-//        String keteranganKirim = keterangan.getText().toString();
-//        int statusKirim = idStatusPilih;
 //
-//        String noFakturKirim = nofaktur.getText().toString();
-//        String namaGudangKirim = namaGudang.getText().toString();
-//        int metodeBayarKirim = idPembayaranPilih;
-//        String biayaKirim = biaya.getText().toString();
-//        String totalHargaKirim = totalHarga.getText().toString();
 
         if(getId_Karyawan() == "null"){
             Log.d(TAG, "tambahBarangPembelian: " + getId_Karyawan());
