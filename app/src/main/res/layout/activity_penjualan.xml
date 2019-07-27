@@ -54,7 +54,7 @@
         android:layout_height="wrap_content" />
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_above="@id/tambah_pembelian2"
+        android:layout_above="@id/final_tambah_pembelian2"
         android:layout_below="@id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -275,7 +275,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <Button
-        android:id="@+id/tambah_pembelian2"
+        android:id="@+id/final_tambah_pembelian2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
