@@ -134,7 +134,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         final_tambah_pembelian = findViewById(R.id.final_tambah_pembelian2);
         txErr = findViewById(R.id.err_ap);
         cobaLagi = findViewById(R.id.reload_ap);
-        tambah_pembelian2 = findViewById(R.id.tambah_pembelian2);
+        tambah_pembelian2 = findViewById(R.id.final_tambah_pembelian2);
         mPostKeyNama = Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -326,6 +326,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -339,7 +340,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         ambilBarang();
     }
 
-
     public void recyclerViewListClicked(View v, int position){
         Log.d(TAG, "recyclerViewListClicked: " + position);
         Log.e(TAG, "recyclerViewListClicked: " + barangPilih.get(position).getNamaBarang());
@@ -351,25 +351,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         barangPilih2 = barangPilih.get(position);
     }
 
-
-
-
     private void ambilBarang(){
-        productBarang.add(new ProductPenjualanBarang(
-                "BP000PO",
-                "2",
-                "luthfi",
-                "100",
-                "0",
-                "122",
-                "1lusin",
-                "11",
-                "000",
-                "0",
-                "0",
-                0,
-                0
-        ));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
                 new Response.Listener<String>() {
                     @Override
@@ -394,7 +376,22 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                                         supplierJson.getString("stok_jual"),
                                         supplierJson.getString("harga"), 0, 0
                                 );
-                                productBarang.add(barang);
+//                                productBarang.add(barang);
+                                productBarang.add(new ProductPenjualanBarang(
+                                        "BP000PO",
+                                        "2",
+                                        "luthfi",
+                                        "100",
+                                        "0",
+                                        "122",
+                                        "1lusin",
+                                        "11",
+                                        "000",
+                                        "0",
+                                        "0",
+                                        0,
+                                        0
+                                ));
 
                                 isi.setVisibility(View.VISIBLE);
                                 loading.setVisibility(View.INVISIBLE);
@@ -427,8 +424,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
     public void tambahBarangPembelian(){
         loadingg = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
-
-//
 
         if(getId_Karyawan().equals("null")){
             Log.d(TAG, "tambahBarangPembelian: " + getId_Karyawan());
@@ -489,7 +484,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         };
 
         Volley.newRequestQueue(this).add(stringRequest);
-
 
     }
 
