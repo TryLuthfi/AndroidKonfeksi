@@ -46,6 +46,7 @@
                 <EditText
                     android:maxEms="1"
                     android:id="@+id/kodeBarang"
+                    android:text="BP1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="3dp"/>
@@ -75,6 +76,7 @@
                     android:id="@+id/namaBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="apa"
                     android:layout_marginHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -102,6 +104,7 @@
                     android:id="@+id/hargaBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="15000"
                     android:layout_marginHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
