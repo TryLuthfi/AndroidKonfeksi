@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -170,6 +171,17 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             public void onClick(DialogInterface dialog, int which) {
                 for(int i = 0; i < productBarang.size(); i++){
 
+                    if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih.get(0).getIdBarang())
+                            && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih.get(0).getIdVarianHarga()))
+                    {
+                        error.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        barangPilih3.add(barangPilih2);
+                        PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
+                        recyclerView.setAdapter(penjualanadapter);
+
+                    }
+
                     if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
                             && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
                     {
@@ -309,7 +321,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     DialogRecyclerAdapter adapter = new DialogRecyclerAdapter(Penjualan.this, barangPilih, Penjualan.this);
                     recyclerViewDialog.setAdapter(adapter);
                 }else{
-                    if(barangPilih.size() > 0){
+                    if(barangPilih.size() == 1){
                         namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
                         hargaaBarang.setText(barangPilih.get(0).getHarga());
                     }
@@ -348,17 +360,17 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
     private void ambilBarang(){
         productBarang.add(new ProductPenjualanBarang(
-                "BP000PO",
-                "2",
-                "luthfi",
-                "100",
+                "500",
+                "BP500HIJAU",
+                "B. yml 800y",
+                "10",
                 "0",
-                "122",
+                "600",
                 "1lusin",
                 "11",
-                "000",
+                "10",
                 "0",
-                "0",
+                "10000",
                 0,
                 0
         ));
@@ -370,6 +382,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray arrSupplier = obj.getJSONArray("datanya");
+
 
                             for(int i = 0; i < arrSupplier.length(); i++){
                                 JSONObject supplierJson = arrSupplier.getJSONObject(i);
