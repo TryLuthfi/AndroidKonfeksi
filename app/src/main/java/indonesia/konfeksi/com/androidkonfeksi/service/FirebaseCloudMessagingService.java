@@ -3,6 +3,7 @@ package indonesia.konfeksi.com.androidkonfeksi.service;
 import android.content.Intent;
 import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -77,11 +78,10 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
     private static final String TOPIC_GLOBAL = "global";
     @Override
     public void onNewToken(String s) {
-
         super.onNewToken(s);
+        s= FirebaseInstanceId.getInstance().getId();
+        Log.e(TAG, "Refreshed token: " + s);
 
-        Log.d(TAG, "Refreshed token: " + s);
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_GLOBAL);
         sendRegistrationToServer(s);
 
     }
