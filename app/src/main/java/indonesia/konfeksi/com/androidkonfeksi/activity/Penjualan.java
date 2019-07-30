@@ -171,15 +171,19 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             public void onClick(DialogInterface dialog, int which) {
                 for(int i = 0; i < productBarang.size(); i++){
 
-                    if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
-                            && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
-                    {
-                        Log.d(TAG, "recyclerView: "+barangPilih2.getUkuran());
-                        error.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        barangPilih3.add(barangPilih2);
-                        PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
-                        recyclerView.setAdapter(penjualanadapter);
+                    if (barangPilih2.size()){
+                        if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
+                                && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
+                        {
+                            Log.d(TAG, "recyclerView: "+barangPilih2.getUkuran());
+                            error.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            barangPilih3.add(barangPilih2);
+                            PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
+                            recyclerView.setAdapter(penjualanadapter);
+                        }
+                    }else {
+                        Toast.makeText(Penjualan.this, "Tidak", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -271,7 +275,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (qtyBarang != null){
+                if (qtyBarang != null && hargaaBarang!= null){
                     int harga = Integer.valueOf(hargaaBarang.getText().toString());
                     int qty = Integer.valueOf(qtyBarang.getText().toString());
                     subTootal.setText(String.valueOf(harga * qty));
@@ -333,7 +337,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         ambilBarang();
     }
 
-
     public void recyclerViewListClicked(View v, int position){
         Log.d(TAG, "recyclerViewListClicked: " + position);
         Log.e(TAG, "recyclerViewListClicked: " + barangPilih.get(position).getNamaBarang());
@@ -344,9 +347,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         harga = hargaaBarang.getText().toString().trim();
         barangPilih2 = barangPilih.get(position);
     }
-
-
-
 
     private void ambilBarang(){
         productBarang.add(new ProductPenjualanBarang(
@@ -430,7 +430,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             Toast.makeText(Penjualan.this, "Id Karyawan tidak tersedia", Toast.LENGTH_LONG).show();
             return;
         }
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.URL_TAMBAH_PENJUALAN,
                 new Response.Listener<String>() {
