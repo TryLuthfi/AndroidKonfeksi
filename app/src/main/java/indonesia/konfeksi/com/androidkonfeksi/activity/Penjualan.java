@@ -171,17 +171,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             public void onClick(DialogInterface dialog, int which) {
                 for(int i = 0; i < productBarang.size(); i++){
 
-                    if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih.get(0).getIdBarang())
-                            && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih.get(0).getIdVarianHarga()))
-                    {
-                        error.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        barangPilih3.add(barangPilih2);
-                        PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
-                        recyclerView.setAdapter(penjualanadapter);
-
-                    }
-
                     if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
                             && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
                     {
@@ -322,6 +311,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     recyclerViewDialog.setAdapter(adapter);
                 }else{
                     if(barangPilih.size() == 1){
+                        barangPilih2 = barangPilih.get(0);
                         namaBarangDialog.setText(barangPilih.get(0).getNamaBarang());
                         hargaaBarang.setText(barangPilih.get(0).getHarga());
                     }
