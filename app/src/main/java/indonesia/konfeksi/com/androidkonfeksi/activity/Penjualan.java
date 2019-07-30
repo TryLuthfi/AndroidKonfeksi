@@ -169,23 +169,25 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                for(int i = 0; i < productBarang.size(); i++){
+                if (kodeBarangDialog == null && namaBarangDialog == null && hargaaBarang == null && qtyBarang == null && subTootal == null){
+                    Toast.makeText(Penjualan.this, "Field Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+                }else {
+                    for (int i = 0; i < productBarang.size(); i++) {
 
-                    if (barangPilih2.size()){
-                        if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
-                                && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
-                        {
-                            Log.d(TAG, "recyclerView: "+barangPilih2.getUkuran());
-                            error.setVisibility(View.GONE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                            barangPilih3.add(barangPilih2);
-                            PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
-                            recyclerView.setAdapter(penjualanadapter);
+                            if (productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
+                                    && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga())) {
+                                Log.d(TAG, "recyclerView: " + barangPilih2.getUkuran());
+                                error.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                                barangPilih3.add(barangPilih2);
+                                PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
+                                recyclerView.setAdapter(penjualanadapter);
+                            }
+                         else {
+                            Toast.makeText(Penjualan.this, "tidak", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
-                        Toast.makeText(Penjualan.this, "Tidak", Toast.LENGTH_SHORT).show();
-                    }
 
+                    }
                 }
             }
         });
