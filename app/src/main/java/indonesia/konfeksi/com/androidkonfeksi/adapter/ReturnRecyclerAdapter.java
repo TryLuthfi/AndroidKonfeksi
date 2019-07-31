@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
+import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewDeleteListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.activity.Return;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
@@ -24,9 +26,12 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     private List<ProductIsiKonfirmasiKasir> productList;
     private NumberFormat formatRupiah;
 
-    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList) {
+    private static RecyclerViewDeleteListener itemListener;
+
+    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList, RecyclerViewDeleteListener itemListener) {
         this.mCtx = mCtx;
         this.productList = productList;
+        this.itemListener = itemListener;
     }
 
     @Override
@@ -49,6 +54,13 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         double hargabarang1 = Double.parseDouble(product.getHarga());
         holder.harga_barang.setText(formatRupiah.format((double)hargabarang1));
 
+        holder.removeListener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemListener.recyclerViewListClicked(view, position);
+            }
+        });
+
     }
 
     @Override
@@ -63,6 +75,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         TextView kode_barang;
         TextView stok_jual;
         TextView harga_barang;
+        LinearLayout removeListener;
         View view;
 
         public ProductViewHolder(View itemView) {
@@ -73,6 +86,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
             kode_barang = view.findViewById(R.id.kode_barang);
             stok_jual = view.findViewById(R.id.stok_jual);
             harga_barang = view.findViewById(R.id.harga_barang);
+            removeListener = view.findViewById(R.id.removeListener);
         }
     }
 }

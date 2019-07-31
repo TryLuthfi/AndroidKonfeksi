@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
+import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewDeleteListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.DialogRecyclerAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
@@ -50,7 +51,7 @@ import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
-public class Return extends AppCompatActivity {
+public class Return extends AppCompatActivity implements RecyclerViewDeleteListener {
 
     private static final String TAG = "Return";
     private AlertDialog dialog;
@@ -64,7 +65,10 @@ public class Return extends AppCompatActivity {
     private TextView input_no_nota;
     private TextView input_tgl_nota;
     private TextView input_waktu;
+
     List<ProductIsiKonfirmasiKasir> productList;
+    ProductIsiKonfirmasiKasir isiBarang;
+
     private TextView input_kasir;
     private TextView input_no_hp;
     private TextView input_alamat;
@@ -74,6 +78,8 @@ public class Return extends AppCompatActivity {
     private NestedScrollView linear;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+
+    private String idListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +212,7 @@ public class Return extends AppCompatActivity {
                                             }
 
                                             //creating adapter object and Xsetting it to recyclerview
-                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList);
+                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList, Return.this);
                                             recyclerView.setAdapter(adapter);
 
                                             progressBar.setVisibility(View.INVISIBLE);
@@ -314,5 +320,12 @@ public class Return extends AppCompatActivity {
         final Intent intent = new Intent(getApplicationContext(), DashBoard.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void recyclerViewListClicked(View view, int position) {
+        isiBarang = productList.get(position);
+        productList.remove(isiBarang);
+        Log.d(TAG, "hapusData :"+isiBarang);
     }
 }
