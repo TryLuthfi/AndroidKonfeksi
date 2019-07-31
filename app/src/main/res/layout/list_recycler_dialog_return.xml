@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardview"
+        android:id="@+id/da"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
@@ -19,67 +19,78 @@
             android:layout_gravity="right"
             android:background="@drawable/cross"
             android:layout_width="16dp"
-            android:layout_height="16dp" />
+            android:layout_height="16dp">
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kode : "
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/kode_barang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:text="Kode Barang"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/nama_barang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:layout_marginVertical="5dp"
-                android:paddingLeft="20dp"
-                android:text="Nama Barang"/>
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/ukuran"
+                    android:id="@+id/nama_barang"
                     android:layout_width="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_marginVertical="5dp"
                     android:layout_height="wrap_content"
-                    android:text="1/2 lusin "/>
+                    android:text="Nama Barang"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:paddingLeft="5dp"
-                    android:id="@+id/meter"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_marginVertical="5dp"
                     android:layout_height="wrap_content"
-                    android:text="(6 Pcs)"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kode Barang : " />
+
+                    <TextView
+                        android:id="@+id/kode_barang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kode Barang" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stok Jual : " />
+
+                        <TextView
+                            android:id="@+id/stok_jual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stok Jual" />
+                    </LinearLayout>
+                    <TextView
+                        android:paddingRight="10dp"
+                        android:gravity="right"
+                        android:id="@+id/harga_barang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Harga Barang"
+                        android:textColor="#000 "
+                        android:textSize="16dp"/>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

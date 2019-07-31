@@ -1,5 +1,6 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
@@ -96,7 +97,7 @@ public class Return extends AppCompatActivity {
         inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.form_return, null);
         dialog.setView(dialogView);
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
         cariBarang = dialogView.findViewById(R.id.cariBarang);
         dialog.show();
         productBarang = new ArrayList<>();
@@ -119,7 +120,7 @@ public class Return extends AppCompatActivity {
                 kode = cariBarang.getText().toString().trim();
                 barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
-                    if(productBarang.get(i).getNo_nota().equalsIgnoreCase(kode)){
+                    if(productBarang.get(i).getNo_faktur().equalsIgnoreCase(kode)){
                         barangPilih.add(productBarang.get(i));
 
                         input_no_nota.setText(productBarang.get(i).getNo_nota());
@@ -176,7 +177,6 @@ public class Return extends AppCompatActivity {
                                             for (int i = 0; i < array.length(); i++) {
                                                 JSONObject product = array.getJSONObject(i);
 
-                                                if(productBarang.get(i).getId_penjualan().equals(product.getString("id_penjualan"))) {
                                                     productList.add(new ProductIsiKonfirmasiKasir(
                                                             product.getString("id_detail_penjualan"),
                                                             product.getString("id_penjualan"),
@@ -201,12 +201,12 @@ public class Return extends AppCompatActivity {
                                                             product.getString("stok_jual"),
                                                             product.getString("harga")
                                                     ));
-                                                }
+
 
                                             }
 
                                             //creating adapter object and Xsetting it to recyclerview
-                                            IsiKonfirmasiKasirAdapter adapter = new IsiKonfirmasiKasirAdapter(Return.this, productList);
+                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList);
                                             recyclerView.setAdapter(adapter);
 
                                             progressBar.setVisibility(View.INVISIBLE);
@@ -306,5 +306,13 @@ public class Return extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        dialog.dismiss();
+        final Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+        startActivity(intent);
+        finish();
     }
 }
