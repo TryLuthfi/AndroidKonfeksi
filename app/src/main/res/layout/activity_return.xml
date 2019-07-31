@@ -7,9 +7,245 @@
     android:orientation="vertical"
     tools:context=".activity.Return">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewR"
+    <LinearLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="55dp"
+        android:background="#304ffe">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Return"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@id/bottom"
+        android:layout_below="@id/top"
+        android:id="@+id/linear"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="3dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:background="#304ffe">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi Nota"
+                            android:textAllCaps="true"
+                            android:textColor="#fff"
+                            android:textSize="15sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginHorizontal="15sp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/input_no_nota"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="No Nota"/>
+
+                        <TextView
+                            android:id="@+id/input_tgl_nota"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="Tanggal"/>
+
+                        <TextView
+                            android:id="@+id/input_waktu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="Waktu"/>
+
+                        <TextView
+                            android:id="@+id/input_kasir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="Kasir"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="10dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="3dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:background="#304ffe">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi Pelanggan"
+                            android:textAllCaps="true"
+                            android:textColor="#fff"
+                            android:textSize="15sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="vertical">
+
+                        <!--<Spinner-->
+                        <!--android:id="@+id/input_nama_pelanngan"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:spinnerMode="dialog"/>-->
+
+
+                        <TextView
+                            android:id="@+id/input_no_hp"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="15sp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="No Telp / Hp"/>
+
+                        <TextView
+                            android:id="@+id/input_alamat"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="15sp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginVertical="5dp"
+                            android:text="Alamat"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="10dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingLeft="10dp"
+                        android:background="#304ffe"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Harga :"
+                            android:textAllCaps="true"
+                            android:textColor="#fff"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/total_harga"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp.100.000 "
+                            android:textAllCaps="true"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:textSize="22sp" />
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:visibility="invisible"
+                            android:id="@+id/error"
+                            android:gravity="center"
+                            android:layout_marginVertical="20dp"
+                            android:layout_width="match_parent"
+                            android:text="TIDAK ADA DATA"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:layout_height="match_parent" />
+
+                        <ProgressBar
+                            android:id="@+id/progressbar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:visibility="invisible"
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/cv"
+                            android:layout_marginVertical="10dp"></android.support.v7.widget.RecyclerView>
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
 import android.graphics.Bitmap;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,14 +34,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.DialogRecyclerAdapter;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.ReturnRecyclerAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
@@ -53,6 +60,18 @@ public class Return extends AppCompatActivity {
     List<ProductHistoryPenjualan> productBarangRecyclerview;
     List<ProductHistoryPenjualan> barangPilih;
     private String kode;
+    private TextView input_no_nota;
+    private TextView input_tgl_nota;
+    private TextView input_waktu;
+    List<ProductIsiKonfirmasiKasir> productList;
+    private TextView input_kasir;
+    private TextView input_no_hp;
+    private TextView input_alamat;
+    private TextView total_harga;
+    private NumberFormat formatRupiah;
+    private TextView error ;
+    private NestedScrollView linear;
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
 
     @Override
@@ -60,6 +79,19 @@ public class Return extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_return);
 
+        input_no_nota = findViewById(R.id.input_no_nota);
+        input_tgl_nota = findViewById(R.id.input_tgl_nota);
+        input_waktu = findViewById(R.id.input_waktu);
+        productList = new ArrayList<>();
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Return.this));
+        input_kasir = findViewById(R.id.input_kasir);
+        input_no_hp = findViewById(R.id.input_no_hp);
+        error = findViewById(R.id.error);
+        input_alamat = findViewById(R.id.input_alamat);
+        total_harga = findViewById(R.id.total_harga);
         dialog = new AlertDialog.Builder(Return.this).create();
         inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.form_return, null);
@@ -68,8 +100,11 @@ public class Return extends AppCompatActivity {
         cariBarang = dialogView.findViewById(R.id.cariBarang);
         dialog.show();
         productBarang = new ArrayList<>();
+        linear = findViewById(R.id.linear);
 
-        recyclerView =  findViewById(R.id.recyclerviewR);
+        Locale localeID = new Locale("in", "ID");
+
+        formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         ambilBarang();
 
@@ -84,16 +119,117 @@ public class Return extends AppCompatActivity {
                 kode = cariBarang.getText().toString().trim();
                 barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
-                    if(productBarang.get(i).getNo_faktur().equalsIgnoreCase(kode)){
+                    if(productBarang.get(i).getNo_nota().equalsIgnoreCase(kode)){
                         barangPilih.add(productBarang.get(i));
-                        recyclerView.setLayoutManager(new LinearLayoutManager(Return.this));
 
-                        productBarangRecyclerview = new ArrayList<>();
-                        ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, barangPilih);
-                        recyclerView.setAdapter(adapter);
+                        input_no_nota.setText(productBarang.get(i).getNo_nota());
+                        input_tgl_nota.setText(productBarang.get(i).getDate());
+                        input_waktu.setText(productBarang.get(i).getTime());
+                        input_kasir.setText(productBarang.get(i).getNama_karyawan());
+                        input_no_hp.setText(productBarang.get(i).getNo_telp());
+                        input_alamat.setText(productBarang.get(i).getAlamat());
+                        double hargabarang = Double.parseDouble(productBarang.get(i).getTotal_harga());
+                        total_harga.setText(formatRupiah.format((double)hargabarang));
+
+                        linear.setVisibility(View.VISIBLE);
+
+                        String no_nota = input_no_nota.getText().toString().trim();
+                        String tanggal = input_tgl_nota.getText().toString().trim();
+                        String waktu = input_waktu.getText().toString().trim();
+                        String kasir = input_kasir.getText().toString().trim();
+                        String no_telp = input_no_hp.getText().toString().trim();
+                        String alamat = input_alamat.getText().toString().trim();
+                        String total = total_harga.getText().toString().trim();
+
+                        if(no_nota.isEmpty()){
+                            input_no_nota.setText("Tidak Ada");
+                        }
+                        if(tanggal.isEmpty()){
+                            input_tgl_nota.setText("Tidak Ada");
+                        }
+                        if(waktu.isEmpty()){
+                            input_waktu.setText("Tidak Ada");
+                        }
+                        if(kasir.isEmpty()){
+                            input_kasir.setText("Tidak Ada");
+                        }
+                        if(no_telp.isEmpty()){
+                            input_no_hp.setText("Tidak Ada");
+                        }
+                        if(alamat.isEmpty()){
+                            input_alamat.setText("Tidak Ada");
+                        }
+                        if(total.isEmpty()){
+                            total_harga.setText("Tidak Ada");
+                        }
+
+                        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_DETAIL_KONFIRMASI_KASIR+productBarang.get(i).getId_penjualan(),
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        try {
+                                            JSONObject obj = new JSONObject(response);
+
+                                            JSONArray array = obj.getJSONArray("detail");
+
+                                            //traversing through all the object
+                                            for (int i = 0; i < array.length(); i++) {
+                                                JSONObject product = array.getJSONObject(i);
+
+                                                if(productBarang.get(i).getId_penjualan().equals(product.getString("id_penjualan"))) {
+                                                    productList.add(new ProductIsiKonfirmasiKasir(
+                                                            product.getString("id_detail_penjualan"),
+                                                            product.getString("id_penjualan"),
+                                                            product.getString("id_barang"),
+                                                            product.getString("id_varian_harga"),
+                                                            product.getString("qty"),
+                                                            product.getString("total_harga"),
+                                                            product.getString("ket"),
+                                                            product.getString("kode_barang"),
+                                                            product.getString("id_karyawan"),
+                                                            product.getString("diskon_persen"),
+                                                            product.getString("diskon_rupiah"),
+                                                            product.getString("nama_barang"),
+                                                            product.getString("kode_barcode"),
+                                                            product.getString("image"),
+                                                            product.getString("konsinasi"),
+                                                            product.getString("date_input"),
+                                                            product.getString("date_edit"),
+                                                            product.getString("ukuran"),
+                                                            product.getString("meter"),
+                                                            product.getString("warna"),
+                                                            product.getString("stok_jual"),
+                                                            product.getString("harga")
+                                                    ));
+                                                }
+
+                                            }
+
+                                            //creating adapter object and Xsetting it to recyclerview
+                                            IsiKonfirmasiKasirAdapter adapter = new IsiKonfirmasiKasirAdapter(Return.this, productList);
+                                            recyclerView.setAdapter(adapter);
+
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            error.setVisibility(View.VISIBLE);
+                                            recyclerView.setVisibility(View.VISIBLE);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                    }
+                                });
+
+                        //adding our stringrequest to queue
+                        Volley.newRequestQueue(Return.this).add(stringRequest);
+
                         dialog.dismiss();
-                    }else {
-                        Toast.makeText(Return.this, "Tidak Ada", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

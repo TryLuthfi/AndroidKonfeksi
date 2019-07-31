@@ -22,8 +22,6 @@ public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmas
     private List<ProductIsiKonfirmasiKasir> productList;
     private NumberFormat formatRupiah;
 
-
-
     public IsiKonfirmasiKasirAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
@@ -78,5 +76,3 @@ public class IsiKonfirmasiKasirAdapter extends RecyclerView.Adapter<IsiKonfirmas
         }
     }
 }
-
-

@@ -265,9 +265,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 dialog.show();
                 namaaBarang.setText("");
                 hargaaBarang.setText("");
-                kodeBarangDialog.getText().clear();
-//                qtyBarang.getText().clear();
+                kodeBarangDialog.setText("");
                 subTootal.setText("");
+                qtyBarang.setText("");
             }
         });
 
@@ -278,10 +278,15 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(hargaaBarang != null && s != null) {
+                if(qtyBarang.equals("")) {
+                    hargaaBarang.setText("");
+                    qtyBarang.setText("");
+                }else {
+
                     int harga = Integer.valueOf(hargaaBarang.getText().toString());
                     int qty = Integer.valueOf(s.toString());
                     subTootal.setText(String.valueOf(harga * qty));
+
                 }
             }
 
@@ -495,10 +500,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 return params;
             }
         };
-
         Volley.newRequestQueue(this).add(stringRequest);
-
-
     }
 
     List<Penjualan.StringWithTag> pelangganName = new ArrayList<Penjualan.StringWithTag>();
