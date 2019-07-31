@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_margin="15dp"
+            android:layout_gravity="right"
+            android:background="@drawable/cross"
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kode : "
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/kode_barang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:text="Kode Barang"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/nama_barang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_marginVertical="5dp"
+                android:paddingLeft="20dp"
+                android:text="Nama Barang"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
+
+                <TextView
+                    android:id="@+id/ukuran"
+                    android:layout_width="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="1/2 lusin "/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:id="@+id/meter"
+                    android:layout_width="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="(6 Pcs)"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
