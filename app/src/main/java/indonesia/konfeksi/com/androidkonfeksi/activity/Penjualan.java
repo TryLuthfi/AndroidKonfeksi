@@ -141,6 +141,8 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         loading = findViewById(R.id.loading);
         error = findViewById(R.id.error);
 
+
+
         isi.setVisibility(View.INVISIBLE);
         txErr.setVisibility(View.INVISIBLE);
         cobaLagi.setVisibility(View.INVISIBLE);
@@ -169,25 +171,24 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (kodeBarangDialog == null && namaBarangDialog == null && hargaaBarang == null && qtyBarang == null && subTootal == null){
-                    Toast.makeText(Penjualan.this, "Field Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
-                }else {
-                    for (int i = 0; i < productBarang.size(); i++) {
+                for(int i = 0; i < productBarang.size(); i++){
 
-                            if (productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
-                                    && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga())) {
-                                Log.d(TAG, "recyclerView: " + barangPilih2.getUkuran());
-                                error.setVisibility(View.GONE);
-                                recyclerView.setVisibility(View.VISIBLE);
-                                barangPilih3.add(barangPilih2);
-                                PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
-                                recyclerView.setAdapter(penjualanadapter);
-                            }
-                         else {
-                            Toast.makeText(Penjualan.this, "tidak", Toast.LENGTH_SHORT).show();
+                    if (barangPilih2 == null){
+                        Toast.makeText(getApplicationContext(), "Barang Tidak Ada", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
+                                && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
+                        {
+                            Log.d(TAG, "recyclerView: "+barangPilih2.getUkuran());
+                            error.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            barangPilih3.add(barangPilih2);
+                            PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
+                            recyclerView.setAdapter(penjualanadapter);
                         }
 
                     }
+
                 }
             }
         });
@@ -262,6 +263,11 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             @Override
             public void onClick(View v) {
                 dialog.show();
+                namaaBarang.setText("");
+                hargaaBarang.setText("");
+                kodeBarangDialog.getText().clear();
+//                qtyBarang.getText().clear();
+                subTootal.setText("");
             }
         });
 
@@ -272,16 +278,15 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(hargaaBarang != null && s != null) {
+                    int harga = Integer.valueOf(hargaaBarang.getText().toString());
+                    int qty = Integer.valueOf(s.toString());
+                    subTootal.setText(String.valueOf(harga * qty));
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (qtyBarang != null && hargaaBarang!= null){
-                    int harga = Integer.valueOf(hargaaBarang.getText().toString());
-                    int qty = Integer.valueOf(qtyBarang.getText().toString());
-                    subTootal.setText(String.valueOf(harga * qty));
-                }
             }
         });
 
@@ -326,6 +331,13 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                final Button tambahButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                if(kodeBarangDialog.getText() == null){
+                    tambahButton.setEnabled(false);
+                } else {
+                    tambahButton.setEnabled(true);
+                }
             }
         });
     }
