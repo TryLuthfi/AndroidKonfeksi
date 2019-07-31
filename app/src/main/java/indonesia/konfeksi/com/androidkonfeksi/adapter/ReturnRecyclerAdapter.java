@@ -16,13 +16,14 @@ import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListene
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.activity.Return;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 
 public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAdapter.ProductViewHolder> {
 
     private Activity mCtx;
-    private List<ProductHistoryPenjualan> productList;
+    private List<ProductIsiKonfirmasiKasir> productList;
 
-    public ReturnRecyclerAdapter(Activity mCtx, List<ProductHistoryPenjualan> productList) {
+    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
     }
@@ -30,15 +31,18 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.list_recycler_dialog, parent, false);;
+        View view = inflater.inflate(R.layout.list_recycler_dialog_return, parent, false);;
 
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, final int position) {
-        final ProductHistoryPenjualan product = productList.get(position);
-        holder.kode_barang.setText(product.getNo_faktur());
+        final ProductIsiKonfirmasiKasir product = productList.get(position);
+        holder.kode_barang.setText(product.getKode_barang());
+        holder.nama_barang.setText(product.getNama_barang());
+        holder.ukuran.setText(product.getUkuran());
+        holder.meter.setText(product.getMeter());
 
     }
 
@@ -51,6 +55,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
         TextView kode_barang;
+        TextView nama_barang;
+        TextView ukuran;
+        TextView meter;
         View view;
 
         public ProductViewHolder(View itemView) {
@@ -58,6 +65,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
             view = itemView;
 
             kode_barang = itemView.findViewById(R.id.kode_barang);
+            nama_barang = itemView.findViewById(R.id.nama_barang);
+            ukuran = itemView.findViewById(R.id.ukuran);
+            meter = itemView.findViewById(R.id.meter);
         }
     }
 }
