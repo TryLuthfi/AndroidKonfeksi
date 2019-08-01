@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -26,12 +27,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     private List<ProductIsiKonfirmasiKasir> productList;
     private NumberFormat formatRupiah;
 
-    private static RecyclerViewDeleteListener itemListener;
-
-    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList, RecyclerViewDeleteListener itemListener) {
+    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
-        this.itemListener = itemListener;
     }
 
     @Override
@@ -57,7 +55,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         holder.removeListener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemListener.recyclerViewListClicked(view, position);
+                productList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,productList.size());
             }
         });
 
@@ -69,7 +69,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     }
 
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+        class ProductViewHolder extends RecyclerView.ViewHolder {
 
         TextView nama_barang;
         TextView kode_barang;

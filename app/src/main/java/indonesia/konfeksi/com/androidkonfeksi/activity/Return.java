@@ -51,7 +51,7 @@ import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
-public class Return extends AppCompatActivity implements RecyclerViewDeleteListener {
+public class Return extends AppCompatActivity {
 
     private static final String TAG = "Return";
     private AlertDialog dialog;
@@ -212,7 +212,7 @@ public class Return extends AppCompatActivity implements RecyclerViewDeleteListe
                                             }
 
                                             //creating adapter object and Xsetting it to recyclerview
-                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList, Return.this);
+                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList);
                                             recyclerView.setAdapter(adapter);
 
                                             progressBar.setVisibility(View.INVISIBLE);
@@ -320,12 +320,5 @@ public class Return extends AppCompatActivity implements RecyclerViewDeleteListe
         final Intent intent = new Intent(getApplicationContext(), DashBoard.class);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void recyclerViewListClicked(View view, int position) {
-        isiBarang = productList.get(position);
-        productList.remove(isiBarang);
-        Log.d(TAG, "hapusData :"+isiBarang);
     }
 }
