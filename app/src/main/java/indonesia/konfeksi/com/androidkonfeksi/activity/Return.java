@@ -1,7 +1,8 @@
 package indonesia.konfeksi.com.androidkonfeksi.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,49 +32,58 @@ import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
-import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewDeleteListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.DialogRecyclerAdapter;
-import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.ReturnRecyclerAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
-import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
+import indonesia.konfeksi.com.androidkonfeksi.request.RequestHandler;
 
-public class Return extends AppCompatActivity {
+public class Return extends AppCompatActivity implements RecyclerViewClickListener {
 
     private static final String TAG = "Return";
+
     private AlertDialog dialog;
     private LayoutInflater inflater;
     private View dialogView;
+
     private EditText cariBarang;
+
     List<ProductHistoryPenjualan> productBarang;
     List<ProductHistoryPenjualan> productBarangRecyclerview;
     List<ProductHistoryPenjualan> barangPilih;
+    List<ProductIsiKonfirmasiKasir> productList;
+    List<ProductIsiKonfirmasiKasir> productDelete;
+    ProductIsiKonfirmasiKasir isiBarang;
+
     private String kode;
+    private String id_detail_penjualan;
+
     private TextView input_no_nota;
     private TextView input_tgl_nota;
     private TextView input_waktu;
-
-    List<ProductIsiKonfirmasiKasir> productList;
-    ProductIsiKonfirmasiKasir isiBarang;
-
     private TextView input_kasir;
     private TextView input_no_hp;
     private TextView input_alamat;
     private TextView total_harga;
-    private NumberFormat formatRupiah;
     private TextView error ;
+
+    private NumberFormat formatRupiah;
+
     private NestedScrollView linear;
+
     private ProgressBar progressBar;
+
     private RecyclerView recyclerView;
 
     private String idListener;
+
+    private RelativeLayout delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,8 @@ public class Return extends AppCompatActivity {
         input_tgl_nota = findViewById(R.id.input_tgl_nota);
         input_waktu = findViewById(R.id.input_waktu);
         productList = new ArrayList<>();
+        productDelete = new ArrayList<>();
+
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -108,12 +114,22 @@ public class Return extends AppCompatActivity {
         dialog.show();
         productBarang = new ArrayList<>();
         linear = findViewById(R.id.linear);
+        delete = findViewById(R.id.delete);
+
+        delete.setVisibility(View.INVISIBLE);
 
         Locale localeID = new Locale("in", "ID");
 
         formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         ambilBarang();
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateData();
+            }
+        });
 
         cariBarang.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,6 +144,7 @@ public class Return extends AppCompatActivity {
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getNo_faktur().equalsIgnoreCase(kode)){
                         barangPilih.add(productBarang.get(i));
+                        productDelete.add(isiBarang);
 
                         input_no_nota.setText(productBarang.get(i).getNo_nota());
                         input_tgl_nota.setText(productBarang.get(i).getDate());
@@ -212,7 +229,7 @@ public class Return extends AppCompatActivity {
                                             }
 
                                             //creating adapter object and Xsetting it to recyclerview
-                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList);
+                                            ReturnRecyclerAdapter adapter = new ReturnRecyclerAdapter(Return.this, productList, Return.this);
                                             recyclerView.setAdapter(adapter);
 
                                             progressBar.setVisibility(View.INVISIBLE);
@@ -320,5 +337,51 @@ public class Return extends AppCompatActivity {
         final Intent intent = new Intent(getApplicationContext(), DashBoard.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+        Toast.makeText(this, productList.get(position).getId_detail_penjualan(), Toast.LENGTH_SHORT).show();
+        delete.setVisibility(View.VISIBLE);
+        id_detail_penjualan = productList.get(position).getId_detail_penjualan();
+        isiBarang = productList.get(position);
+    }
+
+    private void updateData() {
+
+        class AddData extends AsyncTask<Void, Void, String> {
+
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(Return.this, "Menghapus Data...", "Mohon Tunggu...", false, false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(Return.this, s, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+
+                HashMap<String, String> params = new HashMap<>();
+                for(int i = 0; i < productDelete.size(); i++) {
+                    params.put("id_detail_penjualan["+i+"]", productDelete.get(0).getId_detail_penjualan());
+                }
+                params.put("id_detail_penjualan", id_detail_penjualan);
+
+                RequestHandler rh = new RequestHandler();
+                String res = rh.sendPostRequest(konfigurasi.URL_UPDATE_STATUS, params);
+                return res;
+            }
+        }
+
+        AddData ae = new AddData();
+        ae.execute();
     }
 }

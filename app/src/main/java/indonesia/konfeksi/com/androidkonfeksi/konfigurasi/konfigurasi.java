@@ -16,5 +16,6 @@ public class konfigurasi {
     public static final String URL_TAMBAH_PENJUALAN = "http://laris23.premiumcookieslimo.com/api/testpenjualan";
     public static final String URL_KONFIRMASI_KASIR = "http://laris23.premiumcookieslimo.com/api/konfirmasibayar";
     public static final String URL_DETAIL_KONFIRMASI_KASIR = "http://laris23.premiumcookieslimo.com/api/detailhistory/";
+    public static final String URL_UPDATE_STATUS = "http://laris23.premiumcookieslimo.com/api/updatestatus.php";
 
 }

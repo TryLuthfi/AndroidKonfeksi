@@ -1,24 +1,19 @@
 package indonesia.konfeksi.com.androidkonfeksi.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
-import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewDeleteListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
-import indonesia.konfeksi.com.androidkonfeksi.activity.Return;
-import indonesia.konfeksi.com.androidkonfeksi.json.ProductHistoryPenjualan;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 
 public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAdapter.ProductViewHolder> {
@@ -27,9 +22,13 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     private List<ProductIsiKonfirmasiKasir> productList;
     private NumberFormat formatRupiah;
 
-    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList) {
+    private static RecyclerViewClickListener itemListener;
+
+    public ReturnRecyclerAdapter(Activity mCtx, List<ProductIsiKonfirmasiKasir> productList, RecyclerViewClickListener itemListener) {
         this.mCtx = mCtx;
         this.productList = productList;
+
+        this.itemListener = itemListener;
     }
 
     @Override
@@ -46,6 +45,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     @Override
     public void onBindViewHolder(ProductViewHolder holder, final int position) {
         final ProductIsiKonfirmasiKasir product = productList.get(position);
+
         holder.nama_barang.setText(product.getNama_barang());
         holder.kode_barang.setText(product.getKode_barang());
         holder.stok_jual.setText(product.getStok_jual());
@@ -54,7 +54,8 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
         holder.removeListener.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                itemListener.recyclerViewListClicked(v, position);
                 productList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,productList.size());
