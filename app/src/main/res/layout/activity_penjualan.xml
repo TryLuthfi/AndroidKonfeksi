@@ -275,6 +275,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/final_tambah_pembelian2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -310,6 +310,7 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
 
+
                                 <TextView
                                     android:id="@+id/id_biaya"
                                     android:layout_width="match_parent"

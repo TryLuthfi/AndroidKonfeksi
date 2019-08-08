@@ -185,6 +185,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                             barangPilih3.add(barangPilih2);
                             PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
                             recyclerView.setAdapter(penjualanadapter);
+                            final_tambah_pembelian.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -269,7 +270,6 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 hargaaBarang.setText("");
                 kodeBarangDialog.setText("");
                 subTootal.setText("");
-                qtyBarang.setText("");
             }
         });
 
@@ -280,16 +280,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(qtyBarang.equals("")) {
-                    hargaaBarang.setText("");
-                    qtyBarang.setText("");
-                }else {
-
                     int harga = Integer.valueOf(hargaaBarang.getText().toString());
                     int qty = Integer.valueOf(s.toString());
                     subTootal.setText(String.valueOf(harga * qty));
-
-                }
             }
 
             @Override

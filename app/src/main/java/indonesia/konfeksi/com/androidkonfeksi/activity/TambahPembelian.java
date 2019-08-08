@@ -69,7 +69,7 @@ public class TambahPembelian extends AppCompatActivity {
     private EditText nofaktur;
     private EditText namaGudang;
     private EditText biaya;
-    private EditText totalHarga;
+    private TextView totalHarga;
 
     private File f;
     private ImageView buktiImage;

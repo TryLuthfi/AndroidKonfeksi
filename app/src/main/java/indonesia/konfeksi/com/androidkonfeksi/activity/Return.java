@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import indonesia.konfeksi.com.androidkonfeksi.Interface.RecyclerViewClickListener;
 import indonesia.konfeksi.com.androidkonfeksi.R;
@@ -55,7 +57,6 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
     private EditText cariBarang;
 
     List<ProductHistoryPenjualan> productBarang;
-    List<ProductHistoryPenjualan> productBarangRecyclerview;
     List<ProductHistoryPenjualan> barangPilih;
     List<ProductIsiKonfirmasiKasir> productList;
     List<ProductIsiKonfirmasiKasir> productDelete;
@@ -63,6 +64,9 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
 
     private String kode;
     private String id_detail_penjualan;
+
+    private ProgressDialog loading2;
+    private ProgressDialog loadingg;;
 
     private TextView input_no_nota;
     private TextView input_tgl_nota;
@@ -84,6 +88,7 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
     private String idListener;
 
     private RelativeLayout delete;
+    private String jumlah_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +101,8 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
         productList = new ArrayList<>();
         productDelete = new ArrayList<>();
 
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        progressBar = findViewById(R.id.progressbar);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(Return.this));
         input_kasir = findViewById(R.id.input_kasir);
@@ -127,7 +132,8 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateData();
+//                updateData();
+                tambahBarangPembelian();
             }
         });
 
@@ -144,7 +150,6 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getNo_faktur().equalsIgnoreCase(kode)){
                         barangPilih.add(productBarang.get(i));
-                        productDelete.add(isiBarang);
 
                         input_no_nota.setText(productBarang.get(i).getNo_nota());
                         input_tgl_nota.setText(productBarang.get(i).getDate());
@@ -265,6 +270,7 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
     }
 
     private void ambilBarang(){
+        loading2 = ProgressDialog.show(Return.this, "Updating...", "Mohon Tunggu...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_HISTORYPENJUALAN,
                 new Response.Listener<String>() {
                     @Override
@@ -312,6 +318,7 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
                                 );
                                 productBarang.add(barang);
                                 Log.d(TAG, "onResponse: " + barang);
+                                loading2.dismiss();
                             }
 
                         } catch (JSONException e) {
@@ -344,44 +351,97 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
         Toast.makeText(this, productList.get(position).getId_detail_penjualan(), Toast.LENGTH_SHORT).show();
         delete.setVisibility(View.VISIBLE);
         id_detail_penjualan = productList.get(position).getId_detail_penjualan();
+        jumlah_data = String.valueOf(productList.size());
         isiBarang = productList.get(position);
+        productDelete.add(isiBarang);
     }
 
-    private void updateData() {
+//    private void updateData() {
+//
+//        class AddData extends AsyncTask<Void, Void, String> {
+//
+//            ProgressDialog loading;
+//
+//            @Override
+//            protected void onPreExecute() {
+//                super.onPreExecute();
+//                loading = ProgressDialog.show(Return.this, "Menghapus Data...", "Mohon Tunggu...", false, false);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String s) {
+//                super.onPostExecute(s);
+//                loading.dismiss();
+//                Toast.makeText(Return.this, s, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            protected String doInBackground(Void... v) {
+//
+//                HashMap<String, String> params = new HashMap<>();
+////                for(int i = 0; i < productDelete.size(); i++) {
+////                    params.put("id_detail_penjualan["+i+"]", productDelete.get(0).getId_detail_penjualan());
+////                }
+//                params.put("id_detail_penjualan", id_detail_penjualan);
+//
+//                RequestHandler rh = new RequestHandler();
+//                String res = rh.sendPostRequest(konfigurasi.URL_UPDATE_STATUS, params);
+//                return res;
+//            }
+//        }
+//
+//        AddData ae = new AddData();
+//        ae.execute();
+//    }
 
-        class AddData extends AsyncTask<Void, Void, String> {
-
-            ProgressDialog loading;
-
+    public void tambahBarangPembelian(){
+        loadingg = ProgressDialog.show(Return.this, "Menambah Data...", "Mohon Tunggu...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.URL_UPDATE_STATUS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+//                            JSONObject resObj = new JSONObject(response);
+//                            if(resObj.getString("success").equals("true")){
+                            if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
+                                loadingg.dismiss();
+//                                Log.d(TAG, "onResponse123: " + resObj.toString());
+                                Toast.makeText(Return.this, "Berhasil Menambah Data", Toast.LENGTH_SHORT).show();
+                            }else{
+                                loadingg.dismiss();
+//                                Log.d(TAG, "onResponse false: " + resObj.toString());
+//                                Toast.makeText(Return.this, resObj.getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(Return.this, "eror", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Throwable t) {
+                            loadingg.dismiss();
+                            Log.d("My App", "Could not parse malformed JSON: \"" + response + "\"");
+                        }
+                    }
+    },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error);
+                        loadingg.dismiss();
+                        Toast.makeText(Return.this, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
+                    }
+                }) {
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(Return.this, "Menghapus Data...", "Mohon Tunggu...", false, false);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(Return.this, s, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            protected String doInBackground(Void... v) {
-
-                HashMap<String, String> params = new HashMap<>();
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
                 for(int i = 0; i < productDelete.size(); i++) {
-                    params.put("id_detail_penjualan["+i+"]", productDelete.get(0).getId_detail_penjualan());
+//                    params.put("id_detail_penjualan", productDelete.get(0).getId_detail_penjualan());
+                    params.put("id_detail_penjualan", id_detail_penjualan);
                 }
-                params.put("id_detail_penjualan", id_detail_penjualan);
+                params.put("jumlah_data", jumlah_data);
 
-                RequestHandler rh = new RequestHandler();
-                String res = rh.sendPostRequest(konfigurasi.URL_UPDATE_STATUS, params);
-                return res;
+                Log.d(TAG, "getParams: " + params.toString());
+                return params;
             }
-        }
-
-        AddData ae = new AddData();
-        ae.execute();
+        };
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 }
+
+

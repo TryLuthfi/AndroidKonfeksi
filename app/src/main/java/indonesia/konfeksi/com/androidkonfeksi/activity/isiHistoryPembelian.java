@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import indonesia.konfeksi.com.androidkonfeksi.R;
 
 public class isiHistoryPembelian extends AppCompatActivity {
@@ -24,11 +27,15 @@ public class isiHistoryPembelian extends AppCompatActivity {
     private TextView time;
     private TextView totalHarga;
     private TextView biaya;
+    private NumberFormat formatRupiah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isi_history_pembelian);
+
+        Locale localeID = new Locale("in", "ID");
+        formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
         mPostNoFaktur = getIntent().getExtras().getString("no_faktur");
         mPostNoNota = getIntent().getExtras().getString("no_nota");
@@ -48,14 +55,17 @@ public class isiHistoryPembelian extends AppCompatActivity {
         totalHarga = findViewById(R.id.id_totalharga);
         biaya = findViewById(R.id.id_biaya);
 
+        double totalhargaD = Double.parseDouble(mPostTotalHarga);
+        double biayaD = Double.parseDouble(mPostBiaya);
+
         nofaktur.setText(mPostNoFaktur);
         noNota.setText(mPostNoNota);
         namaKaryawan.setText(mPostNamaKaryawan);
         namaSupplier.setText(mPostNamaSupplier);
         date.setText(mPostDate);
         time.setText(mPostTime);
-        totalHarga.setText(mPostTotalHarga);
-        biaya.setText(mPostBiaya);
+        totalHarga.setText(formatRupiah.format((double)totalhargaD));
+        biaya.setText(formatRupiah.format((double)biayaD));
 
         String no_faktur = nofaktur.getText().toString().trim();
         String no_nota = noNota.getText().toString().trim();
