@@ -19,6 +19,7 @@
     </LinearLayout>
 
     <EditText
+        android:singleLine="true"
         android:id="@+id/cariBarang"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
