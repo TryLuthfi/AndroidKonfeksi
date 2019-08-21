@@ -300,6 +300,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 kode = kodeBarangDialog.getText().toString().trim();
                 kode = kode.replace(" ", "");
+                
                 barangPilih = new ArrayList<>();
                 for(int i = 0; i < productBarang.size(); i++){
                     if(productBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)){
