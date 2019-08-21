@@ -44,7 +44,7 @@
                 android:background="@drawable/formshape">
 
                 <EditText
-                    android:maxEms="1"
+                    android:singleLine="true"
                     android:id="@+id/kodeBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
