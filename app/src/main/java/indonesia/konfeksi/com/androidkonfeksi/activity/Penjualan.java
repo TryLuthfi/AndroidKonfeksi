@@ -188,6 +188,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                             final_tambah_pembelian.setVisibility(View.VISIBLE);
                         }
 
+
                     }
 
                 }
