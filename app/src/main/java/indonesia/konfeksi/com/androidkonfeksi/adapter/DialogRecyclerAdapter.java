@@ -52,9 +52,9 @@ public class DialogRecyclerAdapter extends RecyclerView.Adapter<DialogRecyclerAd
                 itemListener.recyclerViewListClicked(v, position);
             }
         });
-        holder.kode_barang.setText(product.getKodeBarang());
+//        holder.kode_barang.setText(product.getKodeBarang());
         holder.nama_barang.setText(product.getNamaBarang());
-        holder.ukuran.setText(product.getUkuran());
+//        holder.ukuran.setText(product.getUkuran());
         holder.meter.setText(("(")+product.getMeter()+("Pcs)"));
 
     }

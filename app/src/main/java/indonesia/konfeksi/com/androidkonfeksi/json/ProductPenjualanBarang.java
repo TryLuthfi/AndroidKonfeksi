@@ -2,85 +2,104 @@ package indonesia.konfeksi.com.androidkonfeksi.json;
 
 public class ProductPenjualanBarang {
 
-    private String idBarang;
-    private String kodeBarang;
+    private String kodeBarcodeVarian;
     private String namaBarang;
-    private String diskonPersen;
-    private String diskonRupiah;
-    private String idVarianHarga;
-    private String ukuran;
+    private String satuan;
     private String meter;
-    private String warna;
-    private String stokJual;
     private String harga;
+    private String warna;
+    private String idVarianHarga;
+    private String idBarang;
     private int qty;
     private int subTotal;
 
-    public ProductPenjualanBarang(String idBarang, String kodeBarang, String namaBarang, String diskonPersen, String diskonRupiah, String idVarianHarga, String ukuran, String meter, String warna, String stokJual, String harga, int qty, int subTotal) {
-        this.idBarang = idBarang;
-        this.kodeBarang = kodeBarang;
+    /*private String kodeBarang;
+    private String diskonPersen;
+    private String diskonRupiah;
+    private String stokJual;*/
+
+    public ProductPenjualanBarang(
+            String kodeBarcodeVarian,
+            String namaBarang,
+            String satuan,
+            String meter,
+            String harga,
+            String warna,
+            String idVarianHarga,
+            String idBarang,
+            int qty,
+            int subTotal
+
+            /*String kodeBarang,
+            String diskonPersen,
+            String diskonRupiah,
+            String stokJual,
+            */
+
+            ) {
+        this.kodeBarcodeVarian = kodeBarcodeVarian;
         this.namaBarang = namaBarang;
-        this.diskonPersen = diskonPersen;
-        this.diskonRupiah = diskonRupiah;
-        this.idVarianHarga = idVarianHarga;
-        this.ukuran = ukuran;
+        this.satuan = satuan;
         this.meter = meter;
-        this.warna = warna;
-        this.stokJual = stokJual;
         this.harga = harga;
+        this.warna = warna;
+        this.idVarianHarga = idVarianHarga;
+        this.idBarang = idBarang;
         this.qty = qty;
         this.subTotal = subTotal;
+
+        /*this.kodeBarang = kodeBarang;
+        this.diskonPersen = diskonPersen;
+        this.diskonRupiah = diskonRupiah;
+        this.stokJual = stokJual;
+        */
     }
 
+    public String getKodeBarcodeVarian() {
+        return kodeBarcodeVarian;
+    }
+    public String getNamaBarang() {
+        return namaBarang;
+    }
+    public String getSatuan() {
+        return satuan;
+    }
+    public String getMeter() {
+        return meter;
+    }
+    public String getHarga() {
+        return harga;
+    }
+    public String getWarna() {
+        return warna;
+    }
+    public String getIdVarianHarga() {
+        return idVarianHarga;
+    }
     public String getIdBarang() {
         return idBarang;
     }
-
-    public String getKodeBarang() {
-        return kodeBarang;
+    public int getQty() {
+        return qty;
+    }
+    public int getSubTotal() {
+        return subTotal;
     }
 
-    public String getNamaBarang() {
-        return namaBarang;
+    /*
+    public String getKodeBarang() {
+        return kodeBarang;
     }
 
     public String getDiskonPersen() {
         return diskonPersen;
     }
-
     public String getDiskonRupiah() {
         return diskonRupiah;
     }
-
-    public String getIdVarianHarga() {
-        return idVarianHarga;
-    }
-
-    public String getUkuran() {
-        return ukuran;
-    }
-
-    public String getMeter() {
-        return meter;
-    }
-
-    public String getWarna() {
-        return warna;
-    }
-
     public String getStokJual() {
         return stokJual;
     }
 
-    public String getHarga() {
-        return harga;
-    }
-
-    public int getQty() {
-        return qty;
-    }
-
-    public int getSubTotal() {
-        return subTotal;
-    }
+    */
 }

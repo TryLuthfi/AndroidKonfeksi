@@ -41,9 +41,9 @@ public class PenjualanTambahAdapter extends RecyclerView.Adapter<PenjualanTambah
     @Override
     public void onBindViewHolder(ProductViewHolder holder, final int position) {
         final ProductPenjualanBarang product = productList.get(position);
-        holder.kode_barang.setText(product.getKodeBarang());
+//        holder.kode_barang.setText(product.getKodeBarang());
         holder.nama_barang.setText(product.getNamaBarang());
-        holder.ukuran.setText(product.getUkuran());
+//        holder.ukuran.setText(product.getUkuran());
         holder.meter.setText(("(")+product.getMeter()+("Pcs)"));
     }
 

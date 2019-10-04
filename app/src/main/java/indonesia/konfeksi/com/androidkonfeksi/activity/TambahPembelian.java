@@ -65,7 +65,7 @@ public class TambahPembelian extends AppCompatActivity {
     private Spinner namaBarang;
     private EditText jumlahColi;
     private EditText keterangan;
-    private Spinner status;
+    private Spinner metodePengiriman;
     private EditText nofaktur;
     private EditText namaGudang;
     private EditText biaya;
@@ -97,7 +97,7 @@ public class TambahPembelian extends AppCompatActivity {
         namaBarang = findViewById(R.id.id_namabarang);
         jumlahColi = findViewById(R.id.id_jumlah);
         keterangan = findViewById(R.id.id_keterangan);
-        status = findViewById(R.id.id_status);
+        metodePengiriman = findViewById(R.id.id_status);
         nofaktur = findViewById(R.id.id_nofaktur);
         namaGudang = findViewById(R.id.id_namagudang);
         biaya = findViewById(R.id.id_biaya);
@@ -151,12 +151,12 @@ public class TambahPembelian extends AppCompatActivity {
         metodeBayar.setAdapter(adapterBayarSupplier);
 
         List<String> statusbarang = new ArrayList<String>();
-        statusbarang.add("Tampilkan");
-        statusbarang.add("Sembunyikan");
+        statusbarang.add("Ekspedisi");
+        statusbarang.add("COD");
         ArrayAdapter<String> adapterStatusBarang = new ArrayAdapter<String>(
                 TambahPembelian.this,
                 android.R.layout.simple_spinner_dropdown_item, statusbarang);
-        status.setAdapter(adapterStatusBarang);
+        metodePengiriman.setAdapter(adapterStatusBarang);
 
 
         ambilNoNota();
@@ -189,7 +189,7 @@ public class TambahPembelian extends AppCompatActivity {
             }
         });
 
-        status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        metodePengiriman.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
@@ -233,8 +233,8 @@ public class TambahPembelian extends AppCompatActivity {
                 public void onResponse(String response) {
                     try {
                         JSONObject obj = new JSONObject(response);
-                        nonota.setText("NOTA" + String.format("%03d", Integer.parseInt(obj.getString("nota"))));
-                        nofaktur.setText("FAK" + String.format("%03d", Integer.parseInt(obj.getString("nota"))));
+                        //nonota.setText("NOTA" + String.format("%03d", Integer.parseInt(obj.getString("nota"))));
+                        //nofaktur.setText("FAK" + String.format("%03d", Integer.parseInt(obj.getString("nota"))));
 
                         JSONArray arrSupplier = obj.getJSONArray("supplier");
                         for(int i = 0; i < arrSupplier.length(); i++){
@@ -413,14 +413,14 @@ public class TambahPembelian extends AppCompatActivity {
     }
 
     public String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = TambahPembelian.this.managedQuery(uri, projection, null, null, null);
-        if (cursor != null) {
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } else
+//        String[] projection = {MediaStore.Images.Media.DATA};
+//        Cursor cursor = TambahPembelian.this.managedQuery(uri, projection, null, null, null);
+//        if (cursor != null) {
+//            int column_index = cursor
+//                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//            cursor.moveToFirst();
+//            return cursor.getString(column_index);
+//        } else
             return null;
     }
 

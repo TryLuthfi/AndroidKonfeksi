@@ -34,10 +34,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tambah Pembelian"
+                            android:text="Bukti Peneriman Barang"
                             android:textAllCaps="true"
                             android:textColor="#fff"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -55,23 +55,90 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
                                 android:layout_marginBottom="5dp"
-                                android:text="No Nota"/>
-
-                            <android.support.constraint.ConstraintLayout
+                                android:text="No Nota / No Faktur"
+                                android:textColor="#304ffe" />
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
 
-                                <TextView
+                                <EditText
                                     android:id="@+id/id_nonota"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="No Nota / No Faktur"
+                                    android:paddingHorizontal="8dp"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/formshape"
+                                android:visibility="gone">
+
+                                <EditText
+                                    android:id="@+id/id_nonota2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
-                                    android:text="NO NOTA"
+                                    android:hint="No Nota / No Faktur"
+                                    android:background="@null"
+                                    android:textSize="14sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </android.support.constraint.ConstraintLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="No Ekspedisi"
+                                android:textColor="#304ffe" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/formshape">
+
+                                <EditText
+                                    android:id="@+id/id_noekspedisi"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="No Ekpesidi"
+                                    android:paddingHorizontal="8dp"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/formshape"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:id="@+id/id_noekspedisi2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="No Ekpesidi"
                                     android:textSize="14sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +175,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -148,13 +216,15 @@
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
+
                                 <EditText
-                                    android:paddingHorizontal="8dp"
-                                    android:textSize="14sp"
-                                    android:background="@null"
                                     android:id="@+id/id_jumlah"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="Jumlah Coly"
+                                    android:paddingHorizontal="8dp"
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -175,13 +245,15 @@
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
+
                                 <EditText
-                                    android:paddingHorizontal="8dp"
-                                    android:textSize="14sp"
-                                    android:background="@null"
                                     android:id="@+id/id_keterangan"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="Keterangan dapat di kosongi"
+                                    android:paddingHorizontal="8dp"
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -194,9 +266,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#304ffe"
                                 android:layout_marginBottom="5dp"
-                                android:text="Status"/>
+                                android:text="Metode Pengiriman"
+                                android:textColor="#304ffe" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -216,7 +288,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -250,7 +323,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -278,7 +352,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -318,43 +393,18 @@
                                 android:layout_height="45dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/formshape">
+
                                 <EditText
-                                    android:paddingHorizontal="8dp"
-                                    android:textSize="14sp"
-                                    android:background="@null"
                                     android:id="@+id/id_biaya"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="Biaya Ekspedisi"
+                                    android:paddingHorizontal="8dp"
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
 
-                        <!--<LinearLayout-->
-                            <!--android:visibility="invisible"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="3dp"-->
-                            <!--android:orientation="vertical">-->
-
-                            <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:textColor="#304ffe"-->
-                                <!--android:layout_marginBottom="5dp"-->
-                                <!--android:text="Total Harga"/>-->
-
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="45dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@drawable/formshape">-->
-                                <!--<EditText-->
-                                    <!--android:id="@+id/id_totalharga"-->
-                                    <!--android:layout_width="match_parent"-->
-                                    <!--android:textSize="11sp"-->
-                                    <!--android:layout_height="match_parent" />-->
-                            <!--</LinearLayout>-->
-
-                        <!--</LinearLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"

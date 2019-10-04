@@ -100,37 +100,120 @@
                         android:layout_marginHorizontal="15sp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/input_no_nota"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="No Nota"/>
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginVertical="5dp"
+                                android:text="No Nota : "/>
 
-                        <TextView
-                            android:id="@+id/input_tgl_nota"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="Tanggal"/>
+                            <TextView
+                                android:id="@+id/input_no_nota"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="No Nota"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/input_waktu"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="Waktu"/>
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/input_kasir"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="Kasir"/>
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tanggal : "
+                                android:textSize="14sp"
+                                android:layout_marginVertical="5dp"/>
+
+                            <TextView
+                                android:id="@+id/input_tgl_nota"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="Tanggal"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginVertical="5dp"
+                                android:text="Waktu : "/>
+
+                            <TextView
+                                android:id="@+id/input_waktu"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="Waktu"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginVertical="5dp"
+                                android:text="Kasir : "/>
+
+                            <TextView
+                                android:id="@+id/input_kasir"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="Kasir"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/pengambil_barang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="Pengambil : "
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Spinner
+                                android:id="@+id/input_pengambil_barang"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="8dp"
+                                android:spinnerMode="dialog"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/pengambil_barang"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </android.support.constraint.ConstraintLayout>
+
 
                     </LinearLayout>
                 </LinearLayout>
@@ -169,38 +252,101 @@
                         android:layout_marginVertical="5dp"
                         android:orientation="vertical">
 
-                        <Spinner
-                            android:id="@+id/input_nama_pelanngan"
+                        <android.support.constraint.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:spinnerMode="dialog"/>
+                            android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/input_no_hp"
-                            android:layout_width="match_parent"
-                            android:layout_marginHorizontal="15sp"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="No Telp / Hp"/>
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15sp"
+                                android:layout_marginVertical="5dp"
+                                android:text="Nama : "
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/input_alamat"
-                            android:layout_width="match_parent"
-                            android:layout_marginHorizontal="15sp"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="Alamat"/>
+                            <Spinner
+                                android:id="@+id/input_nama_pelanngan"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="16dp"
+                                android:spinnerMode="dialog"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/textView"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </android.support.constraint.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/input_info_lain"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginHorizontal="15sp"
-                            android:layout_marginVertical="5dp"
-                            android:text="Info Lain"/>
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15sp"
+                                android:layout_marginVertical="5dp"
+                                android:textSize="14sp"
+                                android:text="No Telp / Hp : "/>
+
+                            <TextView
+                                android:id="@+id/input_no_hp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="No Telp / Hp"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15sp"
+                                android:layout_marginVertical="5dp"
+                                android:textSize="14sp"
+                                android:text="Alamat : "/>
+
+                            <TextView
+                                android:id="@+id/input_alamat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="Alamat"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginHorizontal="15sp"
+                                android:layout_marginVertical="5dp"
+                                android:text="Info Lain : "/>
+
+                            <TextView
+                                android:id="@+id/input_info_lain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:text="Info Lain"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>

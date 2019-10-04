@@ -90,15 +90,6 @@ public class Return extends AppCompatActivity implements RecyclerViewClickListen
 
     private String jumlah_data;
 
-
-
-
-
-    AS
-
-
-
-    []]
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
