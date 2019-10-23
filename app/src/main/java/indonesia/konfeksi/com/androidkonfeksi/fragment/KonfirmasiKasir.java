@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class KonfirmasiKasir extends Fragment {
+    private static final String TAG = "KonfirmasiKasir";
     private RecyclerView recyclerView;
     List<ProductKonfirmasiKasir> productList;
     private String JSON_STRING, kode_barang, kode_barcode, nama_barang, harga_barang;
@@ -45,19 +47,16 @@ public class KonfirmasiKasir extends Fragment {
     private View view;
 
 
-    public KonfirmasiKasir() {
-        // Required empty public constructor
-    }
+    public KonfirmasiKasir() {}
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_konfirmasi_kasir, container, false);
 
-        progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        progressBar = view.findViewById(R.id.progressbar);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -67,66 +66,42 @@ public class KonfirmasiKasir extends Fragment {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_KONFIRMASI_KASIR,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.url_kasir_list_pos,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            //converting the string to json array object
                             JSONArray array = new JSONArray(response);
-
-                            //traversing through all the object
+                            //Log.d(TAG, "onResponse: " + array.toString(4));
                             for (int i = 0; i < array.length(); i++) {
-                                JSONObject product = array.getJSONObject(i);
-                                //adding the product to product list
-//                                int harga = Integer.parseInt(product.getString("harga_barang"));
-//                                if(harga > 10000)
+                                JSONObject data = array.getJSONObject(i);
+                                //int harga = Integer.parseInt(product.getString("harga_barang"));
+                                //if(harga > 10000)
                                 productList.add(new ProductKonfirmasiKasir(
-                                        product.getString("id_penjualan"),
-                                        product.getString("id_karyawan"),
-                                        product.getString("id_pelanggan"),
-                                        product.getString("date"),
-                                        product.getString("time"),
-                                        product.getString("no_faktur"),
-                                        product.getString("no_nota"),
-                                        product.getString("metode_pembayaran"),
-                                        product.getString("diskon_persen"),
-                                        product.getString("diskon_rupiah"),
-                                        product.getString("total_harga"),
-                                        product.getString("biaya"),
-                                        product.getString("selisih"),
-                                        product.getString("status"),
-                                        product.getString("kode_karyawan"),
-                                        product.getString("username"),
-                                        product.getString("password"),
-                                        product.getString("nama"),
-                                        product.getString("alamat"),
-                                        product.getString("kota"),
-                                        product.getString("negara"),
-                                        product.getString("kode_pos"),
-                                        product.getString("no_telp"),
-                                        product.getString("email"),
-                                        product.getString("date_input"),
-                                        product.getString("date_edit"),
-                                        product.getString("token"),
-                                        product.getString("id_posisi"),
-                                        product.getString("kode_pelanggan"),
-                                        product.getString("nama_toko"),
-                                        product.getString("no_telp2"),
-                                        product.getString("no_telp3"),
-                                        product.getString("catatan"),
-                                        product.getString("nama_karyawan")
+                                        data.getString("id_penjualan"),
+                                        data.getString("id_karyawan"),
+                                        data.getString("id_pelanggan"),
+                                        data.getString("date"),
+                                        data.getString("time"),
+                                        data.getString("no_nota"),
+                                        data.getString("total_harga"),
+                                        data.getString("biaya"),
+                                        data.getString("biaya_debit"),
+                                        data.getString("selisih"),
+                                        data.getString("id_karyawan_pengambil"),
+                                        data.getString("status"),
+                                        data.getString("tgl_jatuh_tempo")
                                 ));
                             }
 
-                            //creating adapter object and Xsetting it to recyclerview
                             KonfirmasiKasirAdapter adapter = new KonfirmasiKasirAdapter(getActivity(), productList);
                             recyclerView.setAdapter(adapter);
 
-                            progressBar.setVisibility(View.INVISIBLE);
                             recyclerView.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.INVISIBLE);
 
                         } catch (JSONException e) {
+                            Log.d(TAG, "onResponse: " + e);
                             e.printStackTrace();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
@@ -135,6 +110,7 @@ public class KonfirmasiKasir extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error);
                         progressBar.setVisibility(View.INVISIBLE);
                     }
                 });

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class isiKonfirmasiKasir extends AppCompatActivity {
+    private static final String TAG = "isiKonfirmasiKasir";
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     List<ProductIsiKonfirmasiKasir> productList;
@@ -96,8 +98,6 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         alamat.setText(mPostAlamat);
 
         loadProducts();
-
-//        Toast.makeText(isiKonfirmasiKasir.this, konfigurasi.URL_DETAIL_KONFIRMASI_KASIR+mPostIdPenjualan, Toast.LENGTH_SHORT).show();
     }
 
     private void loadProducts() {
@@ -105,51 +105,48 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray array = obj.getJSONArray("detail");
-
-                            //traversing through all the object
-                            for (int i = 0; i < array.length(); i++) {
-                                JSONObject product = array.getJSONObject(i);
-
-                                if(mPostIdPenjualan.equals(product.getString("id_penjualan"))) {
-                                    productList.add(new ProductIsiKonfirmasiKasir(
-                                            product.getString("id_detail_penjualan"),
-                                            product.getString("id_penjualan"),
-                                            product.getString("id_barang"),
-                                            product.getString("id_varian_harga"),
-                                            product.getString("qty"),
-                                            product.getString("total_harga"),
-                                            product.getString("ket"),
-                                            product.getString("kode_barang"),
-                                            product.getString("id_karyawan"),
-                                            product.getString("diskon_persen"),
-                                            product.getString("diskon_rupiah"),
-                                            product.getString("nama_barang"),
-                                            product.getString("kode_barcode"),
-                                            product.getString("image"),
-                                            product.getString("konsinasi"),
-                                            product.getString("date_input"),
-                                            product.getString("date_edit"),
-                                            product.getString("ukuran"),
-                                            product.getString("meter"),
-                                            product.getString("warna"),
-                                            product.getString("stok_jual"),
-                                            product.getString("harga")
-                                    ));
-                                }
-                            }
-
-                            //creating adapter object and Xsetting it to recyclerview
-                            IsiKonfirmasiKasirAdapter adapter = new IsiKonfirmasiKasirAdapter(isiKonfirmasiKasir.this, productList);
-                            recyclerView.setAdapter(adapter);
-
-                            progressBar.setVisibility(View.INVISIBLE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                            error.setVisibility(View.VISIBLE);
-
+                            JSONArray array = new JSONArray(response);
+                            Log.d(TAG, "onResponse: " + array);
+//                            for (int i = 0; i < array.length(); i++) {
+//                                JSONObject product = array.getJSONObject(i);
+//
+//                                if(mPostIdPenjualan.equals(product.getString("id_penjualan"))) {
+//                                    productList.add(new ProductIsiKonfirmasiKasir(
+//                                            product.getString("id_detail_penjualan"),
+//                                            product.getString("id_penjualan"),
+//                                            product.getString("id_barang"),
+//                                            product.getString("id_varian_harga"),
+//                                            product.getString("qty"),
+//                                            product.getString("total_harga"),
+//                                            product.getString("ket"),
+//                                            product.getString("kode_barang"),
+//                                            product.getString("id_karyawan"),
+//                                            product.getString("diskon_persen"),
+//                                            product.getString("diskon_rupiah"),
+//                                            product.getString("nama_barang"),
+//                                            product.getString("kode_barcode"),
+//                                            product.getString("image"),
+//                                            product.getString("konsinasi"),
+//                                            product.getString("date_input"),
+//                                            product.getString("date_edit"),
+//                                            product.getString("ukuran"),
+//                                            product.getString("meter"),
+//                                            product.getString("warna"),
+//                                            product.getString("stok_jual"),
+//                                            product.getString("harga")
+//                                    ));
+//                                }
+//                            }
+//
+//                            //creating adapter object and Xsetting it to recyclerview
+//                            IsiKonfirmasiKasirAdapter adapter = new IsiKonfirmasiKasirAdapter(isiKonfirmasiKasir.this, productList);
+//                            recyclerView.setAdapter(adapter);
+//
+//                            progressBar.setVisibility(View.INVISIBLE);
+//                            recyclerView.setVisibility(View.VISIBLE);
+//                            error.setVisibility(View.VISIBLE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressBar.setVisibility(View.INVISIBLE);

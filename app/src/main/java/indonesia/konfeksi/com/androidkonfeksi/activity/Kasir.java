@@ -48,7 +48,7 @@ public class Kasir extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new KonfirmasiKasir(), "Konfirmasi Kasir");//isitulisan jika ingin
+        adapter.addFrag(new KonfirmasiKasir(), "POS");
         adapter.addFrag(new HistoryPembelian(), "History Pembelian");
         adapter.addFrag(new HistoryPenjualan(), "History Penjualan");
         viewPager.setAdapter(adapter);

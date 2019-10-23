@@ -44,10 +44,10 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         final ProductKonfirmasiKasir product = productList.get(position);
 
-        holder.dateInput.setText(product.getDate_input());
-        holder.nama.setText(product.getNama());
+        holder.dateInput.setText(product.getDate() + "  " + product.getTime());
+        holder.pelanggan.setText(product.getId_pelanggan());
         holder.no_nota.setText(product.getNo_nota());
-        holder.kasir.setText(product.getNama_karyawan());
+        //holder.kasir.setText(product.getNama_karyawan());
         double hargabarang = Double.parseDouble(product.getTotal_harga());
         holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -56,12 +56,12 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
                 Intent intent = new Intent (mCtx.getApplicationContext(), isiKonfirmasiKasir.class);
                 intent.putExtra("no_nota", product.getNo_nota());
                 intent.putExtra("id_penjualan", product.getId_penjualan());
-                intent.putExtra("nama_karyawan", product.getNama_karyawan());
+                //intent.putExtra("nama_karyawan", product.getNama_karyawan());
                 intent.putExtra("total_harga", product.getTotal_harga());
                 intent.putExtra("tanggal", product.getDate());
-                intent.putExtra("nama_pelanggan", product.getNama());
-                intent.putExtra("no_telp", product.getNo_telp());
-                intent.putExtra("alamat", product.getAlamat());
+                //intent.putExtra("nama_pelanggan", product.getNama());
+                //intent.putExtra("no_telp", product.getNo_telp());
+                //intent.putExtra("alamat", product.getAlamat());
                 mCtx.startActivity(intent);
             }
         });
@@ -76,7 +76,7 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateInput;
-        TextView nama;
+        TextView pelanggan;
         TextView kasir;
         TextView no_nota;
         TextView grandTotal;
@@ -87,7 +87,7 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
             view = itemView;
 
             dateInput = itemView.findViewById(R.id.date_input);
-            nama = itemView.findViewById(R.id.nama);
+            pelanggan = itemView.findViewById(R.id.nama);
             no_nota = itemView.findViewById(R.id.no_nota);
             kasir = itemView.findViewById(R.id.kasir);
             grandTotal = itemView.findViewById(R.id.grand_total);
