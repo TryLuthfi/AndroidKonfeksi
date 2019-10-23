@@ -10,46 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        app:cardCornerRadius="7dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kode : "
-                    android:textSize="17sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/kode_barang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:text="Kode Barang"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/nama_barang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:layout_marginVertical="5dp"
-                android:paddingLeft="20dp"
-                android:text="Nama Barang"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,21 +28,128 @@
                 android:paddingLeft="20dp">
 
                 <TextView
-                    android:id="@+id/ukuran"
+                    android:id="@+id/kode_barang"
                     android:layout_width="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_marginVertical="5dp"
                     android:layout_height="wrap_content"
-                    android:text="1/2 lusin "/>
+                    android:text="Kode Barang"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
 
                 <TextView
-                    android:paddingLeft="5dp"
+                    android:id="@+id/nama_barang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Barang"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/satuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="0 lusin "
+                    android:textSize="17sp" />
+
+                <TextView
                     android:id="@+id/meter"
                     android:layout_width="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_marginVertical="5dp"
                     android:layout_height="wrap_content"
-                    android:text="(6 Pcs)"/>
+                    android:paddingLeft="5dp"
+                    android:text="(0 Pcs)"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
+
+                <TextView
+                    android:id="@+id/qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tx_harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Harga: "
+                    android:textSize="17sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tx_x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="x"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp. 0"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
+
+                <TextView
+                    android:id="@+id/tx_sub_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sub Total: "
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/sub_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Rp 0"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/c_stok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sisa Stok: "
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/stok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="0"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

@@ -23,8 +23,10 @@ public class konfigurasi {
     public static final String url_nota_penjualan = "http://nuruddinhady.com/laris32/Penjualan/nota";
     public static final String url_karyawan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/karyawan";
     public static final String url_pelanggan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/pelanggan";
+    public static final String url_potongan_pelanggan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/getDiskon";
     public static final String url_top_pelanggan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/getTop";
     public static final String url_barang_penjualan = "http://nuruddinhady.com/laris32/Penjualan/getDataBarang";
+    public static final String url_simpan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/simpanTransaksi";
 
     public static final String url_diskon_pelanggan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/getDiskon";
     public static final String url_keuangan_penjualan = "http://nuruddinhady.com/laris32/Penjualan/keuangan";

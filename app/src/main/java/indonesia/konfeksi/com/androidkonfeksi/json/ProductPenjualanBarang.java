@@ -3,60 +3,54 @@ package indonesia.konfeksi.com.androidkonfeksi.json;
 public class ProductPenjualanBarang {
 
     private String kodeBarcodeVarian;
+    private String kodeBarang;
     private String namaBarang;
     private String satuan;
     private String meter;
+    private String hargaAwal;
     private String harga;
     private String warna;
     private String idVarianHarga;
     private String idBarang;
     private int qty;
     private int subTotal;
-
-    /*private String kodeBarang;
-    private String diskonPersen;
-    private String diskonRupiah;
-    private String stokJual;*/
+    private String stokGudang;
 
     public ProductPenjualanBarang(
             String kodeBarcodeVarian,
+            String kodeBarang,
             String namaBarang,
             String satuan,
             String meter,
+            String hargaAwal,
             String harga,
             String warna,
             String idVarianHarga,
             String idBarang,
             int qty,
-            int subTotal
-
-            /*String kodeBarang,
-            String diskonPersen,
-            String diskonRupiah,
-            String stokJual,
-            */
-
+            int subTotal,
+            String stokGudang
             ) {
         this.kodeBarcodeVarian = kodeBarcodeVarian;
+        this.kodeBarang = kodeBarang;
         this.namaBarang = namaBarang;
         this.satuan = satuan;
         this.meter = meter;
+        this.hargaAwal = hargaAwal;
         this.harga = harga;
         this.warna = warna;
         this.idVarianHarga = idVarianHarga;
         this.idBarang = idBarang;
         this.qty = qty;
         this.subTotal = subTotal;
-
-        /*this.kodeBarang = kodeBarang;
-        this.diskonPersen = diskonPersen;
-        this.diskonRupiah = diskonRupiah;
-        this.stokJual = stokJual;
-        */
+        this.stokGudang = stokGudang;
     }
 
     public String getKodeBarcodeVarian() {
         return kodeBarcodeVarian;
+    }
+    public String getKodeBarang() {
+        return kodeBarang;
     }
     public String getNamaBarang() {
         return namaBarang;
@@ -66,6 +60,9 @@ public class ProductPenjualanBarang {
     }
     public String getMeter() {
         return meter;
+    }
+    public String getHargaAwal() {
+        return hargaAwal;
     }
     public String getHarga() {
         return harga;
@@ -85,21 +82,18 @@ public class ProductPenjualanBarang {
     public int getSubTotal() {
         return subTotal;
     }
-
-    /*
-    public String getKodeBarang() {
-        return kodeBarang;
+    public String getStokGudang(){
+        return stokGudang;
     }
 
-    public String getDiskonPersen() {
-        return diskonPersen;
+    public void setHarga(String harga){
+        this.harga = harga;
     }
-    public String getDiskonRupiah() {
-        return diskonRupiah;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
-    public String getStokJual() {
-        return stokJual;
+    public void setSubTotal(int subTotal) {
+        this.subTotal = subTotal;
     }
 
-    */
 }

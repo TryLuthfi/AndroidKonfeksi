@@ -4,24 +4,23 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,7 +44,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,6 +61,8 @@ import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class Penjualan extends AppCompatActivity implements RecyclerViewClickListener {
     private static final String TAG = "Penjualan";
+    private NestedScrollView scroll_penjualan;
+
     // nota layout
     private TextView input_no_nota;
     private TextView input_tgl_nota;
@@ -70,6 +70,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private TextView input_kasir;
     private Spinner input_pengambil_barang;
     List<Penjualan.ListKaryawan> listKaryawans = new ArrayList<>();
+    private String kodeKaryawan;
 
     // pelanggan layout
     private Spinner input_nama_pelanggan;
@@ -82,51 +83,45 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
     private String TelpPelanggan;
     private String AlamatPelanggan;
     private String CatatanPelanggan;
+    List<Penjualan.ListPotonganPelanggan> listPotonganPelanggan = new ArrayList<>();
 
 
     // prepare layout
     private LinearLayout isi;
     private ProgressBar loading;
     private TextView error;
+    private TextView txErr;
+    private Button cobaLagi;
 
     // Barang
     List<ProductPenjualanBarang> listBarang  = new ArrayList<>();
     private RecyclerView container_barang;
     private AlertDialog dialogPencarianBarang;
+    private String kode;
     List<ProductPenjualanBarang> barangDitemukan = new ArrayList<>();
     private AlertDialog dialogBarangDitemukan;
-    private TextView namaBarangDialog;
-    private TextView hargaaBarangDialog;
-
-    private RecyclerView recyclerViewDialog;
-    private Button tambah_pembelian;
-    private Button final_tambah_pembelian;
-    private PenjualanAdapter adapter;
-    private String idBarang;
     private EditText kodeBarangDialog;
-    private String kode;
-    private String nama;
-    private String harga;
+    private TextView namaBarangDialog;
+    private TextView hargaBarangDialog;
     private EditText qtyBarang;
     private TextView subTootal;
-    private TextView txErr;
-    private Button cobaLagi;
-    private String QTYINTs;
-    private String hargaINTs;
+    ProductPenjualanBarang barangTerpilih = null;
+    PenjualanTambahAdapter penjualanadapter;
+    List<ProductPenjualanBarang> listBarangTepilih = new ArrayList<>();
+    private CardView c_kirim_penjualan;
+    private Button kirim_penjualan;
+    private TextView total_biaya;
+    private RecyclerView recyclerViewDialog;
+    private Button tambah_pembelian;
 
-    private int QTYINT;
-    private int hargaINT;
-    private int subTotalINT;
     private ProgressDialog loadingg;
 
-
-    List<ProductPenjualanBarang> barangPilih3;
-    ProductPenjualanBarang barangPilih2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penjualan);
+        scroll_penjualan = findViewById(R.id.scroll_penjualan);
 
         // prepare set layout
         isi = findViewById(R.id.isi);
@@ -152,6 +147,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         getNota();
         input_kasir.setText(Objects.requireNonNull(getIntent().getExtras()).getString("NamaKaryawan"));
         getKaryawan();
+        karyawanSpinner();
 
         // pelanggan set layout
         input_nama_pelanggan = findViewById(R.id.input_nama_pelanngan);
@@ -160,118 +156,30 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         input_info_lain = findViewById(R.id.input_info_lain);
         // pelanggan logic
         getPelanggan();
+        getPotonganPelanggan();
         pelangganSpiner();
 
 
 
         // barang set layout
-        container_barang = (RecyclerView) findViewById(R.id.recyclerView);
+        container_barang = findViewById(R.id.recyclerView);
         tambah_pembelian = findViewById(R.id.tambah_pembelian);
+        penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, listBarangTepilih);
+        container_barang.setLayoutManager(new LinearLayoutManager(Penjualan.this));
+        container_barang.setAdapter(penjualanadapter);
+        c_kirim_penjualan = findViewById(R.id.c_kirim_penjualan);
+        kirim_penjualan = findViewById(R.id.kirim_penjualan);
+        total_biaya = findViewById(R.id.total_biaya);
         //dialog cari barang
         setUpDialogTambahBarang();
         // barang logic
         getDataBarang();
-        tambah_pembelian.setOnClickListener(new View.OnClickListener() {
+        kirim_penjualan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogPencarianBarang.show();
-                kodeBarangDialog.setText("");
-                namaBarangDialog.setText("");
-                hargaaBarangDialog.setText("");
-                subTootal.setText("");
+                kirimPenjualan();
             }
         });
-        dialogPencarianBarang.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-//                for(int i = 0; i < productBarang.size(); i++){
-//                    if (barangPilih2 == null){
-//                        Toast.makeText(getApplicationContext(), "Barang Tidak Ada", Toast.LENGTH_SHORT).show();
-//                    }else {
-//                        if(productBarang.get(i).getIdBarang().equalsIgnoreCase(barangPilih2.getIdBarang())
-//                                && productBarang.get(i).getIdVarianHarga().equalsIgnoreCase(barangPilih2.getIdVarianHarga()))
-//                        {
-//                            error.setVisibility(View.GONE);
-//                            recyclerView.setVisibility(View.VISIBLE);
-//                            barangPilih3.add(barangPilih2);
-//                            PenjualanTambahAdapter penjualanadapter = new PenjualanTambahAdapter(Penjualan.this, barangPilih3);
-//                            recyclerView.setAdapter(penjualanadapter);
-//                            final_tambah_pembelian.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//                }
-            }
-        });
-        dialogPencarianBarang.setButton(Dialog.BUTTON_NEGATIVE,"CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        kodeBarangDialog.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    cariBarang();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-
-
-//        final_tambah_pembelian = findViewById(R.id.final_tambah_pembelian2);
-//
-//        productBarang = new ArrayList<>();
-//        ambilBarang();
-//
-//
-//
-//        barangPilih3 = new ArrayList<>();
-//        recyclerView.setLayoutManager(new LinearLayoutManager(Penjualan.this));
-//
-//
-//
-//
-//
-//        final_tambah_pembelian.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                tambahBarangPembelian();
-//            }
-//        });
-//
-//
-//
-//        ambilNoNotaPenjualan();
-//        ambilListKaryawan();
-//
-//        kode = kodeBarangDialog.getText().toString().trim();
-//
-//
-//
-//
-//        qtyBarang.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                    int harga = Integer.valueOf(hargaaBarang.getText().toString());
-//                    int qty = Integer.valueOf(s.toString());
-//                    subTootal.setText(String.valueOf(harga * qty));
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//        });
-//
-
     }
 
     // function for prepare
@@ -279,8 +187,14 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         loading.setVisibility(View.VISIBLE);
         txErr.setVisibility(View.INVISIBLE);
         cobaLagi.setVisibility(View.INVISIBLE);
-        // recyclerView.setVisibility(View.INVISIBLE);
-        // ambilBarang();
+        container_barang.setVisibility(View.INVISIBLE);
+        getNota();
+        getKaryawan();
+
+        getPelanggan();
+        getPotonganPelanggan();
+
+        getDataBarang();
     }
 
     // function for nota
@@ -338,6 +252,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "onErrorResponse: " + error);
+                        Toast.makeText(Penjualan.this, "Gagal Memuat Data Karyawan", Toast.LENGTH_LONG).show();
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
@@ -355,6 +270,20 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         public String toString() {
             return nama;
         }
+    }
+    private void karyawanSpinner(){
+        input_pengambil_barang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Penjualan.ListKaryawan pelanggan = (Penjualan.ListKaryawan) parent.getItemAtPosition(position);
+                kodeKaryawan = (String) pelanggan.kode;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     // function for pelanggan
@@ -388,6 +317,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d(TAG, "onErrorResponse: " + error);
+                    Toast.makeText(Penjualan.this, "Gagal Memuat Data Karyawan", Toast.LENGTH_LONG).show();
                 }
             });
         Volley.newRequestQueue(this).add(stringRequest);
@@ -412,6 +342,62 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             return nama;
         }
     }
+    private void getPotonganPelanggan(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.url_potongan_pelanggan_penjualan,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray arrPotonganPelanggan = new JSONArray(response);
+                            for(int i = 0; i < arrPotonganPelanggan.length(); i++){
+                                JSONObject jsonPotonganPelanggan = arrPotonganPelanggan.getJSONObject(i);
+                                String id_potongan = jsonPotonganPelanggan.getString("id");
+                                String kode_pelanggan = jsonPotonganPelanggan.getString("kode_pelanggan");
+                                String id_varian_harga = jsonPotonganPelanggan.getString("id_varian_harga");
+                                String rekom_harga = jsonPotonganPelanggan.getString("rekom_harga");
+                                String id_pelanggan= jsonPotonganPelanggan.getString("id_pelanggan");
+                                listPotonganPelanggan.add(new ListPotonganPelanggan(id_potongan, kode_pelanggan, id_varian_harga, rekom_harga, id_pelanggan));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse potongan pelanggan: " + error);
+                    }
+                });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+    private static class ListPotonganPelanggan {
+        public String id;
+        public String kode_pelanggan;
+        public String id_varian_harga;
+        public String rekom_harga;
+        public String id_pelanggan;
+
+        public ListPotonganPelanggan(String id,
+                                    String kode_pelanggan,
+                                    String id_varian_harga,
+                                    String rekom_harga,
+                                    String id_pelanggan) {
+            this.id = id;
+            this.kode_pelanggan = kode_pelanggan;
+            this.id_varian_harga = id_varian_harga;
+            this.rekom_harga = rekom_harga;
+            this.id_pelanggan = id_pelanggan;
+        }
+
+        public String getId_pelanggan() {
+            return id_pelanggan;
+        }
+        public String getId_varian_harga() { return  id_varian_harga; };
+        public String getRekom_harga() { return  rekom_harga; }
+    }
     private void pelangganSpiner(){
         input_nama_pelanggan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -428,6 +414,7 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                 input_info_lain.setText(CatatanPelanggan.isEmpty()? "Tidak Ada" : CatatanPelanggan);
 
                 cekTopPelanggan(idPelanggan);
+                gantiHargaBarang();
             }
 
             @Override
@@ -452,6 +439,16 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+    void gantiHargaBarang(){
+        for (int i = 0; i < listBarangTepilih.size(); i++){
+            String potongan = setPotonganPelanggan(idPelanggan, listBarangTepilih.get(i).getIdVarianHarga());
+            int hargaTotal = Integer.parseInt(listBarangTepilih.get(i).getHargaAwal()) - Integer.parseInt(potongan) ;
+            listBarangTepilih.get(i).setHarga(Integer.toString(hargaTotal));
+            listBarangTepilih.get(i).setSubTotal(listBarangTepilih.get(i).getQty() * hargaTotal);
+        }
+        penjualanadapter.notifyDataSetChanged();
+        hitungTotal();
+    }
 
     // function for barang
     void getDataBarang(){
@@ -466,15 +463,18 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
                                 JSONObject jsonBarang = arrBarang.getJSONObject(i);
                                 ProductPenjualanBarang barang = new ProductPenjualanBarang(
                                         jsonBarang.getString("kode_barcode_varian"),
+                                        jsonBarang.getString("kode_barang"),
                                         jsonBarang.getString("nama_barang"),
                                         jsonBarang.getString("satuan"),
                                         jsonBarang.getString("meter"),
-                                        jsonBarang.getString("harga"),
+                                        jsonBarang.getString("harga"), // harga awal
+                                        jsonBarang.getString("harga"), // harga awal (nantinya dirubah harga setelah diskon)
                                         jsonBarang.getString("warna"),
                                         jsonBarang.getString("id_varian_harga"),
                                         jsonBarang.getString("id_barang"),
                                         0,
-                                        0
+                                        0,
+                                        jsonBarang.getString("stok_gudang")
                                 );
                                 listBarang.add(barang);
                             }
@@ -507,9 +507,98 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
 
         kodeBarangDialog = dialogViewTambahBarang.findViewById(R.id.kodeBarang);
         namaBarangDialog = dialogViewTambahBarang.findViewById(R.id.namaBarang);
-        hargaaBarangDialog = dialogViewTambahBarang.findViewById(R.id.hargaBarang);
+        hargaBarangDialog = dialogViewTambahBarang.findViewById(R.id.hargaBarang);
         qtyBarang = dialogViewTambahBarang.findViewById(R.id.qtyBarang);
         subTootal = dialogViewTambahBarang.findViewById(R.id.subTotal);
+
+        tambah_pembelian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogPencarianBarang.show();
+                kodeBarangDialog.setText("");
+                namaBarangDialog.setText("");
+                hargaBarangDialog.setText("");
+                qtyBarang.setText("");
+                subTootal.setText("");
+                kodeBarangDialog.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        kodeBarangDialog.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                inputMethodManager.showSoftInput(kodeBarangDialog, InputMethodManager.SHOW_IMPLICIT);
+                            }
+                        });
+                    }
+                });
+                kodeBarangDialog.requestFocus();
+            }
+        });
+
+        dialogPencarianBarang.setButton(Dialog.BUTTON_POSITIVE,"TAMBAH", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (barangTerpilih == null){
+                    Toast.makeText(getApplicationContext(), "Tidak Ada Barang Yang Di Pilih", Toast.LENGTH_SHORT).show();
+                }else {
+                    error.setVisibility(View.GONE);
+                    container_barang.setVisibility(View.VISIBLE);
+                    listBarangTepilih.add(barangTerpilih);
+                    penjualanadapter.notifyDataSetChanged();
+                    c_kirim_penjualan.setVisibility(View.VISIBLE);
+                    barangTerpilih = null;
+                    scroll_penjualan.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scroll_penjualan.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
+                    hitungTotal();
+                }
+            }
+        });
+        dialogPencarianBarang.setButton(Dialog.BUTTON_NEGATIVE,"CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        kodeBarangDialog.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    cariBarang();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        qtyBarang.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s == null) return;
+                if(s.length() != 0){
+                    int qty = Integer.valueOf(s.toString());
+                    int subTotal = Integer.parseInt(barangTerpilih.getHarga()) * qty;
+                    barangTerpilih.setQty(qty);
+                    barangTerpilih.setSubTotal(subTotal);
+                    subTootal.setText("Rp. " + subTotal);
+
+                }else{
+                    subTootal.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
     void cariBarang(){
         kode = kodeBarangDialog.getText().toString().trim();
@@ -517,7 +606,9 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
         barangDitemukan.clear();
 
         for(int i = 0; i < listBarang.size(); i++){
-            if(listBarang.get(i).getKodeBarcodeVarian().equalsIgnoreCase(kode)){
+            if(listBarang.get(i).getKodeBarcodeVarian().equalsIgnoreCase(kode)
+                    || listBarang.get(i).getKodeBarang().equalsIgnoreCase(kode)
+                    ){
                 barangDitemukan.add(listBarang.get(i));
             }
         }
@@ -538,235 +629,158 @@ public class Penjualan extends AppCompatActivity implements RecyclerViewClickLis
             recyclerViewDialog.setAdapter(adapter);
         }else{
             if(barangDitemukan.size() == 1){
-                barangPilih2 = barangDitemukan.get(0);
-                namaBarangDialog.setText(barangDitemukan.get(0).getNamaBarang());
-                hargaaBarangDialog.setText(barangDitemukan.get(0).getHarga());
+                namaBarangDialog.setText(
+                        barangDitemukan.get(0).getNamaBarang() + " " +
+                                barangDitemukan.get(0).getWarna() + " " +
+                                barangDitemukan.get(0).getSatuan() + " " +
+                                "(" + barangDitemukan.get(0).getMeter() + " Pcs)");
+                String hargaPotongan = setPotonganPelanggan(idPelanggan, barangDitemukan.get(0).getIdVarianHarga());
+                String textHarga = Integer.parseInt(hargaPotongan) > 0 ? "Rp. " + barangDitemukan.get(0).getHarga() + ", Disc: <b> Rp. " + hargaPotongan + "</b>" : barangDitemukan.get(0).getHarga();
+                hargaBarangDialog.setText(Html.fromHtml(textHarga));
+
+                barangTerpilih = new ProductPenjualanBarang(
+                        barangDitemukan.get(0).getKodeBarcodeVarian(),
+                        barangDitemukan.get(0).getKodeBarang(),
+                        barangDitemukan.get(0).getNamaBarang(),
+                        barangDitemukan.get(0).getSatuan(),
+                        barangDitemukan.get(0).getMeter(),
+                        barangDitemukan.get(0).getHargaAwal(),
+                        Integer.toString(Integer.parseInt(barangDitemukan.get(0).getHarga()) - Integer.parseInt(hargaPotongan)),
+                        barangDitemukan.get(0).getWarna(),
+                        barangDitemukan.get(0).getIdVarianHarga(),
+                        barangDitemukan.get(0).getIdBarang(),
+                        0,
+                        0,
+                        barangDitemukan.get(0).getStokGudang()
+                );
+
+                qtyBarang.setText("1");
+                qtyBarang.setSelection(qtyBarang.getText().length());
             }
         }
     }
-
-
     public void recyclerViewListClicked(View v, int position){
-        Log.d(TAG, "recyclerViewListClicked: " + position);
-        Log.e(TAG, "recyclerViewListClicked: " + barangDitemukan.get(position).getNamaBarang());
-        // namaaBarang.setText(barangPilih.get(position).getUkuran());
-        // hargaaBarang.setText(barangPilih.get(position).getHarga());
-        // dialog2.dismiss();
-        // nama = namaaBarang.getText().toString().trim();
-        // harga = hargaaBarang.getText().toString().trim();
-        // barangPilih2 = barangPilih.get(position);
+        namaBarangDialog.setText(
+                barangDitemukan.get(position).getNamaBarang() + " " +
+                barangDitemukan.get(position).getWarna() + " " +
+                barangDitemukan.get(position).getSatuan() + " " +
+                "(" + barangDitemukan.get(position).getMeter() + " Pcs)");
+        String hargaPotongan = setPotonganPelanggan(idPelanggan, barangDitemukan.get(position).getIdVarianHarga());
+        String textHarga = Integer.parseInt(hargaPotongan) > 0 ? "Rp. " + barangDitemukan.get(position).getHarga() + ", Disc: <b> Rp. " + hargaPotongan + "</b>" : barangDitemukan.get(position).getHarga();
+        hargaBarangDialog.setText(Html.fromHtml(textHarga));
+        barangTerpilih = new ProductPenjualanBarang(
+                barangDitemukan.get(position).getKodeBarcodeVarian(),
+                barangDitemukan.get(position).getKodeBarang(),
+                barangDitemukan.get(position).getNamaBarang(),
+                barangDitemukan.get(position).getSatuan(),
+                barangDitemukan.get(position).getMeter(),
+                barangDitemukan.get(position).getHargaAwal(),
+                Integer.toString(Integer.parseInt(barangDitemukan.get(position).getHarga()) - Integer.parseInt(hargaPotongan)),
+                barangDitemukan.get(position).getWarna(),
+                barangDitemukan.get(position).getIdVarianHarga(),
+                barangDitemukan.get(position).getIdBarang(),
+                0, 0,
+                barangDitemukan.get(position).getStokGudang()
+        );
+
+        qtyBarang.setText("1");
+        qtyBarang.setSelection(qtyBarang.getText().length());
+
+        dialogBarangDitemukan.dismiss();
     }
+    private String setPotonganPelanggan(String idPelanggan, String idVariaHarga){
+        int potongan = 0;
+        for (int i = 0; i < listPotonganPelanggan.size(); i++){
+            if(listPotonganPelanggan.get(i).getId_pelanggan().equals(idPelanggan) && listPotonganPelanggan.get(i).getId_varian_harga().equals(idVariaHarga)){
+                potongan = Integer.parseInt(listPotonganPelanggan.get(i).getRekom_harga());
+            }
+        }
+        return Integer.toString(potongan);
+    }
+    void hitungTotal(){
+        int total = 0;
+        for (int i = 0; i < listBarangTepilih.size(); i++){
+            total += listBarangTepilih.get(i).getSubTotal();
+        }
+        total_biaya.setText(Integer.toString(total));
+    }
+    void kirimPenjualan(){
+        loadingg = ProgressDialog.show(Penjualan.this, "Mengirim Data...", "Mohon Tunggu...", false, false);
 
+        if(getId_Karyawan().equals("null")){
+            loadingg.dismiss();
+            Toast.makeText(Penjualan.this, "Terjadi kesalahan Id Karyawan tidak tersedia", Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.url_simpan_penjualan,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //Toast.makeText(Penjualan.this, response, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onResponse: " + response);
+                    try {
+                        JSONObject objResponse = new JSONObject(response);
+                        Log.d(TAG, objResponse.toString(4));
+                        JSONObject jsonRes = new JSONObject(response);
+                        int sukses = Integer.parseInt(jsonRes.getString("success"));
+                        if(sukses == 1){
+                            //Toast.makeText(Penjualan.this, "Penjualan Berhasil Disimpan.", Toast.LENGTH_LONG).show();
+                            AlertDialog alertDialog = new AlertDialog.Builder(Penjualan.this).create();
+                            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            alertDialog.setMessage("Penjualan Berhasil Disimpan");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            finish();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }else{
+                            Toast.makeText(Penjualan.this, "Gagal Melakukan Penjualan.", Toast.LENGTH_LONG).show();
+                        }
 
+                    } catch (Throwable t) {
+                        Log.e(TAG, "Could not parse malformed JSON");
+                    }
 
+                    loadingg.dismiss();
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(TAG, "onErrorResponse: " + error);
+                    loadingg.dismiss();
+                    Toast.makeText(Penjualan.this, "Terjadi Kesalahan. Periksa Koneksi Anda", Toast.LENGTH_LONG).show();
+                }
+            }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {               Map<String, String> params = new HashMap<>();
+                params.put("dataFrom" , "dariandroid");
+                params.put("id_pelanggan", idPelanggan);
+                params.put("id_karyawan", getId_Karyawan());
+                params.put("no_nota", input_no_nota.getText().toString());
+                params.put("Total", total_biaya.getText().toString());
+                params.put("pengambil_barang", kodeKaryawan);
 
+                for(int i = 0; i < listBarangTepilih.size(); i++) {
+                    params.put("id_barang[]", listBarangTepilih.get(i).getIdBarang());
+                    params.put("id_varian_harga[]", listBarangTepilih.get(i).getIdVarianHarga());
+                    params.put("harga_jual[]", listBarangTepilih.get(i).getHarga());
+                    params.put("jumlah_beli[]", String.valueOf(listBarangTepilih.get(i).getQty()));
+                    params.put("sub_total[]", String.valueOf(listBarangTepilih.get(i).getSubTotal()));
+                }
+                return params;
+            }
+        };
+        Volley.newRequestQueue(this).add(stringRequest);
 
-
-//    public void tambahBarangPembelian(){
-//        loadingg = ProgressDialog.show(Penjualan.this, "Updating...", "Mohon Tunggu...", false, false);
-//
-////
-//
-//        if(getId_Karyawan().equals("null")){
-//            Log.d(TAG, "tambahBarangPembelian: " + getId_Karyawan());
-//            Toast.makeText(Penjualan.this, "Id Karyawan tidak tersedia", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.URL_TAMBAH_PENJUALAN,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject resObj = new JSONObject(response);
-//                            if(resObj.getString("success").equals("true")){
-//                                loadingg.dismiss();
-//                                Log.d(TAG, "onResponse123: " + resObj.toString());
-//                                Toast.makeText(Penjualan.this, "Berhasil Menambah Data", Toast.LENGTH_SHORT).show();
-//                            }else{
-//                                loadingg.dismiss();
-//                                Log.d(TAG, "onResponse false: " + resObj.toString());
-//                                Toast.makeText(Penjualan.this, resObj.getString("message"), Toast.LENGTH_LONG).show();
-//                            }
-//                        } catch (Throwable t) {
-//                            loadingg.dismiss();
-//                            Log.d("My App", "Could not parse malformed JSON: \"" + response + "\"");
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.d(TAG, "onErrorResponse: " + error);
-//                        loadingg.dismiss();
-//                        Toast.makeText(Penjualan.this, "Server Tidak Terjangkau", Toast.LENGTH_LONG).show();
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//
-//                params.put("id_karyawan", getId_Karyawan());
-//                params.put("id_pelanggan", idPelanggan);
-//                params.put("no_nota", kodeBarangDialog.getText().toString());
-//                params.put("Total", subTootal.getText().toString());
-//
-//                for(int i = 0; i < barangPilih3.size(); i++) {
-//                    params.put("id_barang["+i+"]", barangPilih3.get(0).getIdBarang());
-//                    params.put("id_varian_harga["+i+"]", barangPilih3.get(0).getIdVarianHarga());
-//                    params.put("jumlah_beli["+i+"]", String.valueOf(barangPilih3.get(0).getQty()));
-//                    params.put("sub_total["+i+"]", String.valueOf(barangPilih3.get(0).getSubTotal()));
-//                }
-//
-//                Log.d(TAG, "hasil: " + barangPilih3.get(0).getIdBarang()+"_"+barangPilih3.get(0).getIdVarianHarga()+"_"+barangPilih3.get(0).getQty()+"_"+barangPilih3.get(0).getSubTotal());
-//                Log.d(TAG, "getParams: " + params.toString());
-//                return params;
-//            }
-//        };
-//        Volley.newRequestQueue(this).add(stringRequest);
-//    }
-
-
-
-
+    }
     private String getId_Karyawan(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String id_karyawan = preferences.getString("id_karyawan", "null");
         return id_karyawan;
     }
-
-
-
-
-
-//    private void ambilListKaryawan(){
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_LISTKARYAWAN,
-//            new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    try {
-//                        JSONArray arrKaryawan = new JSONArray(response);
-//                        for(int i = 0; i < arrKaryawan.length(); i++){
-//                            JSONObject supplierJson = arrKaryawan.getJSONObject(i);
-//                            String namaKaryawan = supplierJson.getString("nama");
-//                            String kodeKaryawan= supplierJson.getString("kode_karyawan");
-//                            listKaryawans.add(new ListKaryawan(namaKaryawan, kodeKaryawan));
-//                        }
-//
-//                        ArrayAdapter<Penjualan.ListKaryawan> listKaryawanArrayAdapter = new ArrayAdapter<Penjualan.ListKaryawan>(
-//                                Penjualan.this,
-//                                android.R.layout.simple_spinner_dropdown_item, listKaryawans);
-//                        input_pengambil_barang.setAdapter(listKaryawanArrayAdapter);
-//                        Log.d(TAG, "onResponse : " + response);
-//                    } catch (JSONException e) {
-//                        Log.e(TAG, "onError: " + e);
-//                        e.printStackTrace();
-//                    }
-//                }
-//            },
-//            new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Log.d(TAG, "onErrorResponse: " + error);
-//                }
-//            });
-//        Volley.newRequestQueue(this).add(stringRequest);
-//    }
-//    private void ambilNoNotaPenjualan() {
-//        pelangganName.add(new StringWithTag("-- Umum --", null,null, null, null));
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_NONOTAPENJUALAN,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject obj = new JSONObject(response);
-//                            String noNotaa = obj.getString("nota");
-//                            input_no_nota.setText(noNotaa);
-//                            Log.d(TAG, "onResponse: " + obj);
-//                            JSONArray arrSupplier = obj.getJSONArray("pelanggan");
-//                            for(int i = 0; i < arrSupplier.length(); i++){
-//                                JSONObject supplierJson = arrSupplier.getJSONObject(i);
-//                                String namapelanggan = supplierJson.getString("nama");
-//                                String idpelanggan = supplierJson.getString("id_pelanggan");
-//                                String notelp = supplierJson.getString("no_telp");
-//                                String alamat = supplierJson.getString("alamat");
-//                                String catatan = supplierJson.getString("catatan");
-//                                pelangganName.add(new StringWithTag(namapelanggan, idpelanggan, notelp, alamat, catatan));
-//                            }
-//
-//                            ArrayAdapter<Penjualan.StringWithTag> adapterSpinnerPelanggan = new ArrayAdapter<Penjualan.StringWithTag>(
-//                                    Penjualan.this,
-//                                    android.R.layout.simple_spinner_dropdown_item, pelangganName);
-//                            input_nama_pelanggan.setAdapter(adapterSpinnerPelanggan);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Log.d(TAG, "onResponse: " + e);
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.d(TAG, "onErrorResponse: " + error);
-//                    }
-//                });
-//
-//        Volley.newRequestQueue(this).add(stringRequest);
-//    }
-//    private void ambilBarang(){
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_GET_AMBIL_BARANG,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject obj = new JSONObject(response);
-//
-//                            JSONArray arrSupplier = obj.getJSONArray("datanya");
-//
-//                            for(int i = 0; i < arrSupplier.length(); i++){
-//                                JSONObject supplierJson = arrSupplier.getJSONObject(i);
-//                                ProductPenjualanBarang barang = new ProductPenjualanBarang(
-//                                        supplierJson.getString("id_barang"),
-//                                        supplierJson.getString("kode_barang"),
-//                                        supplierJson.getString("nama_barang"),
-//                                        supplierJson.getString("diskon_persen"),
-//                                        supplierJson.getString("diskon_rupiah"),
-//                                        supplierJson.getString("id_varian_harga"),
-//                                        supplierJson.getString("meter"),
-//                                        supplierJson.getString("warna"),
-//                                        supplierJson.getString("stok_jual"),
-//                                        supplierJson.getString("harga"), 0, 0
-//                                );
-//                                productBarang.add(barang);
-//
-//                                isi.setVisibility(View.VISIBLE);
-//                                loading.setVisibility(View.INVISIBLE);
-//
-//                                Log.d(TAG, "onResponse: " + supplierJson);
-//                            }
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            loading.setVisibility(View.INVISIBLE);
-//                            txErr.setVisibility(View.VISIBLE);
-//                            cobaLagi.setVisibility(View.VISIBLE);
-//                            Log.d(TAG, "onResponse: " + e);
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        loading.setVisibility(View.INVISIBLE);
-//                        txErr.setVisibility(View.VISIBLE);
-//                        cobaLagi.setVisibility(View.VISIBLE);
-//                        Log.d(TAG, "onErrorResponse: " + error);
-//                    }
-//                });
-//
-//        Volley.newRequestQueue(this).add(stringRequest);
-//
-//    }
 }

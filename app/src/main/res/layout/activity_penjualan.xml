@@ -6,22 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".activity.Penjualan">
 
-    <LinearLayout
-        app:layout_constraintBottom_toTopOf="@id/top"
-        android:id="@+id/top"
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="#304ffe">
-
-        <TextView
+        app:layout_constraintBottom_toTopOf="@id/top"
+        android:id="@+id/top"
+        app:cardElevation="4dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Penjualan"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:layout_height="55dp"
+            android:background="#304ffe">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Penjualan"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 
     <TextView
         android:id="@+id/err_ap"
@@ -54,7 +60,8 @@
         android:layout_height="wrap_content" />
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_above="@id/final_tambah_pembelian2"
+        android:id="@+id/scroll_penjualan"
+        android:layout_above="@id/c_kirim_penjualan"
         android:layout_below="@id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -421,13 +428,78 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <Button
-        android:visibility="gone"
-        android:id="@+id/final_tambah_pembelian2"
+    <android.support.v7.widget.CardView
+        android:id="@+id/c_kirim_penjualan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Tambah Penjualan"
-        android:textColor="#fff"
-        android:background="#304ffe"/>
+        android:visibility="gone"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/kirim_penjualan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Total : "
+                    android:textAllCaps="true"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Rp. "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+                <TextView
+                    android:id="@+id/total_biaya"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <Button
+                android:id="@+id/kirim_penjualan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#304ffe"
+                android:paddingHorizontal="10dp"
+                android:text="KIRIM"
+                android:textColor="#fff"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
 </RelativeLayout>
