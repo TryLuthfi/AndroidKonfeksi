@@ -5,7 +5,9 @@ public class ProductKonfirmasiKasir {
 
     private String id_penjualan;
     private String id_karyawan;
+    private String nama_karyawan;
     private String id_pelanggan;
+    private String nama_pelanggan;
     private String date;
     private String time;
     private String no_nota;
@@ -21,7 +23,9 @@ public class ProductKonfirmasiKasir {
     public ProductKonfirmasiKasir(
             String id_penjualan,
             String id_karyawan,
+            String nama_karyawan,
             String id_pelanggan,
+            String nama_pelanggan,
             String date,
             String time,
             String no_nota,
@@ -34,7 +38,9 @@ public class ProductKonfirmasiKasir {
             String tgl_jatuh_tempo) {
         this.id_penjualan = id_penjualan;
         this.id_karyawan = id_karyawan;
+        this.nama_karyawan = nama_karyawan;
         this.id_pelanggan = id_pelanggan;
+        this.nama_pelanggan = nama_pelanggan;
         this.date = date;
         this.time = time;
         this.no_nota = no_nota;
@@ -55,8 +61,16 @@ public class ProductKonfirmasiKasir {
         return id_karyawan;
     }
 
+    public String getNama_karyawan() {
+        return nama_karyawan;
+    }
+
     public String getId_pelanggan() {
         return id_pelanggan;
+    }
+
+    public String getNama_pelanggan() {
+        return nama_pelanggan;
     }
 
     public String getDate() {

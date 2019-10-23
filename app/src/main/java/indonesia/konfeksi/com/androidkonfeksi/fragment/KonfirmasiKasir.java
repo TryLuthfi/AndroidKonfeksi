@@ -80,7 +80,9 @@ public class KonfirmasiKasir extends Fragment {
                                 productList.add(new ProductKonfirmasiKasir(
                                         data.getString("id_penjualan"),
                                         data.getString("id_karyawan"),
+                                        data.getString("nama_karyawan"),
                                         data.getString("id_pelanggan"),
+                                        data.getString("nama_pelanggan"),
                                         data.getString("date"),
                                         data.getString("time"),
                                         data.getString("no_nota"),

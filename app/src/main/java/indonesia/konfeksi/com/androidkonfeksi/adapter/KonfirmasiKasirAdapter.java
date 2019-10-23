@@ -45,11 +45,13 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
         final ProductKonfirmasiKasir product = productList.get(position);
 
         holder.dateInput.setText(product.getDate() + "  " + product.getTime());
-        holder.pelanggan.setText(product.getId_pelanggan());
         holder.no_nota.setText(product.getNo_nota());
-        //holder.kasir.setText(product.getNama_karyawan());
-        double hargabarang = Double.parseDouble(product.getTotal_harga());
-        holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
+        holder.pelanggan.setText(product.getNama_pelanggan());
+        holder.kasir.setText(product.getNama_karyawan());
+        holder.grandTotal.setText("Rp. " + product.getTotal_harga());
+
+        //double hargabarang = Double.parseDouble(product.getTotal_harga());
+        //holder.grandTotal.setText(formatRupiah.format((double)hargabarang));
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,9 +88,9 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
             super(itemView);
             view = itemView;
 
+            no_nota = itemView.findViewById(R.id.no_nota);
             dateInput = itemView.findViewById(R.id.date_input);
             pelanggan = itemView.findViewById(R.id.nama);
-            no_nota = itemView.findViewById(R.id.no_nota);
             kasir = itemView.findViewById(R.id.kasir);
             grandTotal = itemView.findViewById(R.id.grand_total);
         }
