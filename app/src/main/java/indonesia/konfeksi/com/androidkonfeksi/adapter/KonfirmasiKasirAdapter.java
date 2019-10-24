@@ -1,12 +1,15 @@
 package indonesia.konfeksi.com.androidkonfeksi.adapter;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -15,6 +18,7 @@ import indonesia.konfeksi.com.androidkonfeksi.R;
 import android.content.Intent;
 import indonesia.konfeksi.com.androidkonfeksi.activity.isiKonfirmasiKasir;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 
 public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasirAdapter.ProductViewHolder> {
 
@@ -56,14 +60,17 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (mCtx.getApplicationContext(), isiKonfirmasiKasir.class);
-                intent.putExtra("no_nota", product.getNo_nota());
                 intent.putExtra("id_penjualan", product.getId_penjualan());
-                //intent.putExtra("nama_karyawan", product.getNama_karyawan());
-                intent.putExtra("total_harga", product.getTotal_harga());
                 intent.putExtra("tanggal", product.getDate());
-                //intent.putExtra("nama_pelanggan", product.getNama());
-                //intent.putExtra("no_telp", product.getNo_telp());
-                //intent.putExtra("alamat", product.getAlamat());
+                intent.putExtra("waktu", product.getTime());
+                intent.putExtra("no_nota", product.getNo_nota());
+                intent.putExtra("nama_karyawan", product.getNama_karyawan());
+                intent.putExtra("nama_pengambil", product.getNama_karyawan_pengambil());
+                intent.putExtra("nama_pelanggan", product.getNama_pelanggan());
+                intent.putExtra("no_telp", product.getNo_tlp_pelanggan());
+                intent.putExtra("alamat", product.getAlamat_pelanggan());
+                intent.putExtra("total_harga", product.getTotal_harga());
+                intent.putExtra("barang", (Serializable) product.getListBarang());
                 mCtx.startActivity(intent);
             }
         });
@@ -78,9 +85,9 @@ public class KonfirmasiKasirAdapter extends RecyclerView.Adapter<KonfirmasiKasir
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateInput;
+        TextView no_nota;
         TextView pelanggan;
         TextView kasir;
-        TextView no_nota;
         TextView grandTotal;
         View view;
 

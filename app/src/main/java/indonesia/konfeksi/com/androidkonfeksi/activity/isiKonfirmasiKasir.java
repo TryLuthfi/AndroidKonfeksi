@@ -27,28 +27,36 @@ import java.util.Locale;
 
 import indonesia.konfeksi.com.androidkonfeksi.R;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.IsiKonfirmasiKasirAdapter;
+import indonesia.konfeksi.com.androidkonfeksi.adapter.PenjualanTambahAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductIsiKonfirmasiKasir;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class isiKonfirmasiKasir extends AppCompatActivity {
     private static final String TAG = "isiKonfirmasiKasir";
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    List<ProductIsiKonfirmasiKasir> productList;
 
-    private String mPostNoNota = null;
-    private String mPostKaryawan = null;
-    private String mPostIdPenjualan = null;
     private String mPostTanggal = null;
-    private String mPostBiaya = null;
+    private String mPostWaktu = null;
+    private String mPostNoNota = null;
+    private String mPostIdPenjualan = null;
     private String mPostNamaPelanggan = null;
+    private String mPostNamaKaryawan = null;
+    private String mPostNamaPengambil = null;
     private String mPostNoTelp = null;
     private String mPostAlamat = null;
+    List<ProductPenjualanBarang> mPostListBarang = new ArrayList<>();
+    private String mPostBiaya = null;
+
+
     private TextView nonota;
     private TextView tanggal;
-    private TextView total_harga;
+    private TextView waktu;
     private TextView karyawan;
+    private TextView pengambil;
     private TextView nama_pelanggan;
+    private TextView total_harga;
     private TextView no_telp;
     private TextView alamat;
     private TextView error;
@@ -64,11 +72,11 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(isiKonfirmasiKasir.this));
 
-        productList = new ArrayList<>();
-
         nonota = findViewById(R.id.nonota);
         tanggal = findViewById(R.id.tanggal);
+        waktu = findViewById(R.id.waktu);
         karyawan = findViewById(R.id.karyawan);
+        pengambil = findViewById(R.id.pengabil);
         nama_pelanggan = findViewById(R.id.nama_pelanggan);
         total_harga = findViewById(R.id.total_harga);
         no_telp = findViewById(R.id.no_telp);
@@ -78,26 +86,43 @@ public class isiKonfirmasiKasir extends AppCompatActivity {
         Locale localeID = new Locale("in", "ID");
         formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
+        mPostTanggal = getIntent().getExtras().getString("tanggal");
+        mPostWaktu = getIntent().getExtras().getString("waktu");
         mPostNoNota = getIntent().getExtras().getString("no_nota");
         mPostIdPenjualan = getIntent().getExtras().getString("id_penjualan");
-        mPostKaryawan = getIntent().getExtras().getString("nama_karyawan");
-        mPostTanggal = getIntent().getExtras().getString("tanggal");
-        mPostBiaya = getIntent().getExtras().getString("total_harga");
         mPostNamaPelanggan = getIntent().getExtras().getString("nama_pelanggan");
+        mPostNamaKaryawan = getIntent().getExtras().getString("nama_karyawan");
+        mPostNamaPengambil = getIntent().getExtras().getString("nama_pengambil");
         mPostNoTelp = getIntent().getExtras().getString("no_telp");
         mPostAlamat = getIntent().getExtras().getString("alamat");
+        mPostListBarang = (List<ProductPenjualanBarang>) getIntent().getSerializableExtra("barang");
+        mPostBiaya = getIntent().getExtras().getString("total_harga");
+
 
         double hargabarang1 = Double.parseDouble(mPostBiaya);
         total_harga.setText(formatRupiah.format((double)hargabarang1));
 
         nonota.setText(mPostNoNota);
         tanggal.setText(mPostTanggal);
-        karyawan.setText(mPostKaryawan);
+        waktu.setText(mPostWaktu);
+        karyawan.setText(mPostNamaKaryawan);
+        pengambil.setText(mPostNamaPengambil);
         nama_pelanggan.setText(mPostNamaPelanggan);
-        no_telp.setText(mPostNoTelp);
-        alamat.setText(mPostAlamat);
+
+        no_telp.setText(mPostNoTelp.isEmpty()? "-" : mPostNoTelp);
+        alamat.setText(mPostAlamat.isEmpty()? "-" : mPostAlamat);
 
         loadProducts();
+
+        Log.d(TAG, "onCreate: " + mPostListBarang.get(0).getNamaBarang());
+
+
+        PenjualanTambahAdapter adapter = new PenjualanTambahAdapter(isiKonfirmasiKasir.this, mPostListBarang);
+        recyclerView.setAdapter(adapter);
+
+        progressBar.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+        error.setVisibility(View.VISIBLE);
     }
 
     private void loadProducts() {

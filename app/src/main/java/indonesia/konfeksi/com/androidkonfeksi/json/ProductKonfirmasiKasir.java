@@ -1,6 +1,9 @@
 package indonesia.konfeksi.com.androidkonfeksi.json;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductKonfirmasiKasir {
 
     private String id_penjualan;
@@ -8,6 +11,8 @@ public class ProductKonfirmasiKasir {
     private String nama_karyawan;
     private String id_pelanggan;
     private String nama_pelanggan;
+    private String alamat_pelanggan;
+    private String no_tlp_pelanggan;
     private String date;
     private String time;
     private String no_nota;
@@ -16,8 +21,11 @@ public class ProductKonfirmasiKasir {
     private String biaya_debit;
     private String selisih;
     private String id_karyawan_pengambil;
+    private String nama_karyawan_pengambil;
     private String status;
     private String tgl_jatuh_tempo;
+
+    List<ProductPenjualanBarang> listBarang  = new ArrayList<>();
 
 
     public ProductKonfirmasiKasir(
@@ -26,6 +34,8 @@ public class ProductKonfirmasiKasir {
             String nama_karyawan,
             String id_pelanggan,
             String nama_pelanggan,
+            String alamat_pelanggan,
+            String no_tlp_pelanggan,
             String date,
             String time,
             String no_nota,
@@ -34,13 +44,17 @@ public class ProductKonfirmasiKasir {
             String biaya_debit,
             String selisih,
             String id_karyawan_pengambil,
+            String nama_karyawan_pengambil,
             String status,
-            String tgl_jatuh_tempo) {
+            String tgl_jatuh_tempo,
+            List<ProductPenjualanBarang> listBarang) {
         this.id_penjualan = id_penjualan;
         this.id_karyawan = id_karyawan;
         this.nama_karyawan = nama_karyawan;
         this.id_pelanggan = id_pelanggan;
         this.nama_pelanggan = nama_pelanggan;
+        this.alamat_pelanggan= alamat_pelanggan;
+        this.no_tlp_pelanggan= no_tlp_pelanggan;
         this.date = date;
         this.time = time;
         this.no_nota = no_nota;
@@ -49,8 +63,10 @@ public class ProductKonfirmasiKasir {
         this.biaya_debit = biaya_debit;
         this.selisih = selisih;
         this.id_karyawan_pengambil = id_karyawan_pengambil;
+        this.nama_karyawan_pengambil = nama_karyawan_pengambil;
         this.status = status;
         this.tgl_jatuh_tempo = tgl_jatuh_tempo;
+        this.listBarang  = listBarang;
     }
 
     public String getId_penjualan() {
@@ -71,6 +87,14 @@ public class ProductKonfirmasiKasir {
 
     public String getNama_pelanggan() {
         return nama_pelanggan;
+    }
+
+    public String getAlamat_pelanggan() {
+        return alamat_pelanggan;
+    }
+
+    public String getNo_tlp_pelanggan() {
+        return no_tlp_pelanggan;
     }
 
     public String getDate() {
@@ -105,12 +129,20 @@ public class ProductKonfirmasiKasir {
         return id_karyawan_pengambil;
     }
 
+    public String getNama_karyawan_pengambil() {
+        return nama_karyawan_pengambil;
+    }
+
     public String getStatus() {
         return status;
     }
 
     public String getTgl_jatuh_tempo(){
         return tgl_jatuh_tempo;
+    }
+
+    public List<ProductPenjualanBarang> getListBarang(){
+        return this.listBarang;
     }
 }
 

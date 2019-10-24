@@ -1,6 +1,10 @@
 package indonesia.konfeksi.com.androidkonfeksi.json;
 
-public class ProductPenjualanBarang {
+import android.os.Parcel;
+import android.os.Parcelable;
+import java.io.Serializable;
+
+public class ProductPenjualanBarang  implements Serializable {
 
     private String kodeBarcodeVarian;
     private String kodeBarang;
@@ -44,6 +48,22 @@ public class ProductPenjualanBarang {
         this.qty = qty;
         this.subTotal = subTotal;
         this.stokGudang = stokGudang;
+    }
+
+    protected ProductPenjualanBarang(Parcel in) {
+        kodeBarcodeVarian = in.readString();
+        kodeBarang = in.readString();
+        namaBarang = in.readString();
+        satuan = in.readString();
+        meter = in.readString();
+        hargaAwal = in.readString();
+        harga = in.readString();
+        warna = in.readString();
+        idVarianHarga = in.readString();
+        idBarang = in.readString();
+        qty = in.readInt();
+        subTotal = in.readInt();
+        stokGudang = in.readString();
     }
 
     public String getKodeBarcodeVarian() {

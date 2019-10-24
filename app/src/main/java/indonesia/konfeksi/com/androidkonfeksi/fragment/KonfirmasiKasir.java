@@ -34,6 +34,7 @@ import indonesia.konfeksi.com.androidkonfeksi.adapter.KonfirmasiKasirAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.adapter.ProductsAdapter;
 import indonesia.konfeksi.com.androidkonfeksi.json.Product;
 import indonesia.konfeksi.com.androidkonfeksi.json.ProductKonfirmasiKasir;
+import indonesia.konfeksi.com.androidkonfeksi.json.ProductPenjualanBarang;
 import indonesia.konfeksi.com.androidkonfeksi.konfigurasi.konfigurasi;
 
 public class KonfirmasiKasir extends Fragment {
@@ -75,14 +76,37 @@ public class KonfirmasiKasir extends Fragment {
                             //Log.d(TAG, "onResponse: " + array.toString(4));
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject data = array.getJSONObject(i);
-                                //int harga = Integer.parseInt(product.getString("harga_barang"));
-                                //if(harga > 10000)
+
+
+                                JSONArray barang = data.getJSONArray("barang");
+                                List<ProductPenjualanBarang> listBarang = new ArrayList<>();
+                                for(int j = 0 ; j < barang.length(); j++){
+                                    JSONObject dataBarang = barang.getJSONObject(j);
+                                    listBarang.add(new ProductPenjualanBarang(
+                                            dataBarang.getString("kode_barcode_varian"),
+                                            dataBarang.getString("kode_barang"),
+                                            dataBarang.getString("nama_barang"),
+                                            dataBarang.getString("satuan"),
+                                            dataBarang.getString("meter"),
+                                            dataBarang.getString("harga_asli"),
+                                            dataBarang.getString("harga_jual"),
+                                            dataBarang.getString("warna"),
+                                            dataBarang.getString("id_varian_harga"),
+                                            dataBarang.getString("id_barang"),
+                                            Integer.parseInt(dataBarang.getString("qty")),
+                                            Integer.parseInt(dataBarang.getString("total_harga")),
+                                            null
+                                    ));
+                                }
+
                                 productList.add(new ProductKonfirmasiKasir(
                                         data.getString("id_penjualan"),
                                         data.getString("id_karyawan"),
                                         data.getString("nama_karyawan"),
                                         data.getString("id_pelanggan"),
                                         data.getString("nama_pelanggan"),
+                                        data.getString("alamat"),
+                                        data.getString("no_telp"),
                                         data.getString("date"),
                                         data.getString("time"),
                                         data.getString("no_nota"),
@@ -91,8 +115,10 @@ public class KonfirmasiKasir extends Fragment {
                                         data.getString("biaya_debit"),
                                         data.getString("selisih"),
                                         data.getString("id_karyawan_pengambil"),
+                                        data.getString("nama_pengambil"),
                                         data.getString("status"),
-                                        data.getString("tgl_jatuh_tempo")
+                                        data.getString("tgl_jatuh_tempo"),
+                                        listBarang
                                 ));
                             }
 
@@ -103,7 +129,7 @@ public class KonfirmasiKasir extends Fragment {
                             progressBar.setVisibility(View.INVISIBLE);
 
                         } catch (JSONException e) {
-                            Log.d(TAG, "onResponse: " + e);
+                            Log.d(TAG, "error: " + e);
                             e.printStackTrace();
                             progressBar.setVisibility(View.INVISIBLE);
                         }
